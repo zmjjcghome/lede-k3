@@ -1,3 +1,9 @@
 [submodule "zmjjcg/k3screenctrl_build"]
 	path = zmjjcg/k3screenctrl_build
 	url = https://github.com/lwz322/k3screenctrl_build
+[submodule "zmjjcg/luci-app-k3screenctrl"]
+	path = zmjjcg/luci-app-k3screenctrl
+	url = https://github.com/lwz322/luci-app-k3screenctrl
+[submodule "zmjjcg/luci-app-serverchan"]
+	path = zmjjcg/luci-app-serverchan
+	url = https://github.com/tty228/luci-app-serverchan.git
