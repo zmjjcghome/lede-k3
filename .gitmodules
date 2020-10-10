@@ -7,3 +7,6 @@
 [submodule "zmjjcg/luci-app-serverchan"]
 	path = zmjjcg/luci-app-serverchan
 	url = https://github.com/tty228/luci-app-serverchan.git
+[submodule "zmjjcg/luci-app-koolproxyR"]
+	path = zmjjcg/luci-app-koolproxyR
+	url = https://github.com/jefferymvp/luci-app-koolproxyR
