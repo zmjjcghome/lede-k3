@@ -1,0 +1,3 @@
+[submodule "zmjjcg/k3screenctrl_build"]
+	path = zmjjcg/k3screenctrl_build
+	url = https://github.com/lwz322/k3screenctrl_build
