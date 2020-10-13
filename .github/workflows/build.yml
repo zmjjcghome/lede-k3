@@ -6,7 +6,6 @@
 # 
 # <https://github.com/KFERMercer/OpenWrt-CI>
 #
-
 name: build-lede-k3
 
 on:
