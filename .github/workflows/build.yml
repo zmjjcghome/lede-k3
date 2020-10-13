@@ -88,6 +88,8 @@ jobs:
 
       - name: Generate configuration file
         run: |
+          ls -l
+          cd lede
           rm -f ./.config*
           cp -rf ../zmjjcg package/
           cp ../config-k3 ./.config
@@ -107,12 +109,16 @@ jobs:
 
       - name: Make download
         run: |
+          ls -l
+          cd lede
           make download -j8 || make download -j1 V=s
           rm -rf $(find ./dl/ -size -1024c)
           df -h
 
       - name: Compile firmware
         run: |
+          ls -l
+          cd lede
           make -j$(nproc) || make -j1 V=s
           echo "======================="
           echo "Space usage:"
@@ -128,10 +134,10 @@ jobs:
           mkdir -p ./artifact/firmware
           mkdir -p ./artifact/package
           mkdir -p ./artifact/buildinfo
-          rm -rf $(find ./bin/targets/ -type d -name "packages")
-          cp -rf $(find ./bin/targets/ -type f) ./artifact/firmware/
-          cp -rf $(find ./bin/packages/ -type f -name "*.ipk") ./artifact/package/
-          cp -rf $(find ./bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
+          rm -rf $(find ./lede/bin/targets/ -type d -name "packages")
+          cp -rf $(find ./lede/bin/targets/ -type f) ./artifact/firmware/
+          cp -rf $(find ./lede/bin/packages/ -type f -name "*.ipk") ./artifact/package/
+          cp -rf $(find ./lede/bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
 
       - name: Deliver buildinfo
         uses: actions/upload-artifact@v2
@@ -149,7 +155,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: OpenWrt_firmware
-          path: ./bin/targets/
+          path: ./lede/bin/targets/
 
       - name: Upload release asset
         if: github.event == 'release'
@@ -165,11 +171,15 @@ jobs:
 #      run: go test -v .
       - name: Upload firmware to cowtransfer
         run: |
+          ls -l
+          cd lede
           curl -fsSL git.io/file-transfer | sh
           ./transfer cow --block 2621440 -s -p 64 --no-progress $FILETARNAME 2>&1 | tee cowtransfer.log
           echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
       - name: Upload firmware to WeTransfer
         run: |
+          ls -l
+          cd lede
           curl -fsSL git.io/file-transfer | sh
           ./transfer wet -s -p 16 --no-progress $FILETARNAME 2>&1 | tee wetransfer.log
           echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
