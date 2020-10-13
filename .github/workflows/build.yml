@@ -76,22 +76,21 @@ jobs:
           # ln -s /mnt/openwrt/dl ./dl
           # ln -s /mnt/openwrt/feeds ./feeds
           # ln -s /mnt/openwrt/staging_dir ./staging_dir
-          
+          ls -l
           df -h
 
       - name: Update feeds
         run: |
-          ls -l
           cd lede
-          ls -l
           ./scripts/feeds update -a
           ./scripts/feeds install -a
+          ls -l
 
       - name: Generate configuration file
         run: |
           rm -f ./.config*
-          cp -rf ../lede-k3/zmjjcg package/
-          cp ../lede-k3/config-k3 ./.config
+          cp -rf ../zmjjcg package/
+          cp ../config-k3 ./.config
 
           #
           # 在 cat >> .config <<EOF 到 EOF 之间粘贴你的编译配置, 需注意缩进关系
@@ -104,7 +103,7 @@ jobs:
           # 
 
           sed -i 's/^[ \t]*//g' ./.config
-          make defconfig
+          #make defconfig
 
       - name: Make download
         run: |
