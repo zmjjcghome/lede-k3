@@ -7,7 +7,7 @@
 # <https://github.com/KFERMercer/OpenWrt-CI>
 #
 
-name: OpenWrt-CI
+name: build-lede-k3
 
 on:
   push:
@@ -16,7 +16,8 @@ on:
   # schedule:
   #   - cron: 0 20 * * *
   release:
-    types: [published]
+    types: [published]OpenWrt-CI
+    
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
