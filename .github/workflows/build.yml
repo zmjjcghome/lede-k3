@@ -11,9 +11,9 @@ name: build-lede-k3
 on:
   push:
     branches: 
-      - master
+      - main
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
   # schedule:
   #   - cron: 0 20 * * *
   #release:
@@ -21,7 +21,7 @@ on:
     
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
-  REPO_BRANCH: master
+  REPO_BRANCH: main
 #  FEEDS_CONF: feeds.conf.default
 #  CONFIG_FILE: .config
 #  DIY_P1_SH: diy-part1.sh
@@ -49,7 +49,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          ref: master
+          ref: main
 
       - name: Space cleanup
         env:
