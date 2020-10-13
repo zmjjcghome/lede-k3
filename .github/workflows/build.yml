@@ -15,8 +15,8 @@ on:
       - master
   # schedule:
   #   - cron: 0 20 * * *
-  release:
-    types: [published]OpenWrt-CI
+  #release:
+  #  types: [published]OpenWrt-CI
     
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
