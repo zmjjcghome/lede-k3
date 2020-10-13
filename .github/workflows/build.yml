@@ -13,6 +13,8 @@ on:
   push:
     branches: 
       - master
+  pull_request:
+    branches: [ master ]
   # schedule:
   #   - cron: 0 20 * * *
   #release:
@@ -35,7 +37,7 @@ env:
 
 jobs:
 
-  build_openwrt:
+  build:
 
     name: Build OpenWrt firmware
 
