@@ -93,6 +93,7 @@ jobs:
           rm -f ./.config*
           cp -rf ../zmjjcg package/
           cp ../config-k3 ./.config
+          cp ../vermagic ./vermagic
           sed -i 's#grep.*vermagic.*#cp $(TOPDIR)/vermagic $(LINUX_DIR)/.vermagic#g' ./include/kernel-defaults.mk 
 
           #
