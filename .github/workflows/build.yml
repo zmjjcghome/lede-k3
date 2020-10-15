@@ -83,13 +83,14 @@ jobs:
         run: |
           cd lede
           ./scripts/feeds update -a
-          ./scripts/feeds install -a
+          #./scripts/feeds install -a
           ls -l
 
       - name: Generate configuration file
         run: |
           ls -l
           cd lede
+          ./scripts/feeds install -a
           rm -f ./.config*
           cp -rf ../zmjjcg package/
           cp ../config-k3 ./.config
@@ -121,6 +122,7 @@ jobs:
         run: |
           ls -l
           cd lede
+          echo "make -j$(nproc) || make -j1 V=s"
           make -j$(nproc) || make -j1 V=s
           echo "======================="
           echo "Space usage:"
@@ -128,7 +130,7 @@ jobs:
           df -h
           echo "======================="
           du -h ./ --max-depth=1
-          du -h /mnt/openwrt/ --max-depth=1 || true
+          #du -h /mnt/openwrt/ --max-depth=1 || true
           tar -czf $FILETARNAME bin
 
       - name: Prepare artifact
