@@ -28,9 +28,10 @@ env:
 #  DIY_P2_SH: diy-part2.sh
 #  SSH_ACTIONS: false
 #  UPLOAD_BIN_DIR: false
-#  UPLOAD_FIRMWARE: true
-#  UPLOAD_COWTRANSFER: false
-#  UPLOAD_WETRANSFER: false
+#  UPLOAD_FIRMWARE: false
+  UPLOAD_COWTRANSFER: true
+  UPLOAD_WETRANSFER: true
+  UPLOAD_ARTIFACT: false
   SSH_ACTIONS: false
   FILETARNAME: lede-k3.tar.gz
   TZ: Asia/Shanghai
@@ -143,6 +144,7 @@ jobs:
           tar -czf $FILETARNAME bin
 
       - name: Prepare artifact
+        if: env.UPLOAD_ARTIFACT == 'true' || contains(github.event.action, 'ssh')
         run: |
           mkdir -p ./artifact/firmware
           mkdir -p ./artifact/package
@@ -154,18 +156,21 @@ jobs:
 
       - name: Deliver buildinfo
         uses: actions/upload-artifact@v2
+        if: env.UPLOAD_ARTIFACT == 'true' || contains(github.event.action, 'ssh')
         with:
           name: OpenWrt_buildinfo
           path: ./artifact/buildinfo/
 
       - name: Deliver package
         uses: actions/upload-artifact@v2
+        if: env.UPLOAD_ARTIFACT == 'true' || contains(github.event.action, 'ssh')
         with:
           name: OpenWrt_package
           path: ./artifact/package/
 
       - name: Deliver firmware
         uses: actions/upload-artifact@v2
+        if: env.UPLOAD_ARTIFACT == 'true' || contains(github.event.action, 'ssh')
         with:
           name: OpenWrt_firmware
           path: ./lede/bin/targets/
@@ -183,6 +188,7 @@ jobs:
 #    - name: Test
 #      run: go test -v .
       - name: Upload firmware to cowtransfer
+        if: env.UPLOAD_COWTRANSFER == 'true' || contains(github.event.action, 'ssh')
         run: |
           ls -l
           cd lede
@@ -190,6 +196,7 @@ jobs:
           ./transfer cow --block 2621440 -s -p 64 --no-progress $FILETARNAME 2>&1 | tee cowtransfer.log
           echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
       - name: Upload firmware to WeTransfer
+        if: env.UPLOAD_WETRANSFER == 'true' || contains(github.event.action, 'ssh')
         run: |
           ls -l
           cd lede
