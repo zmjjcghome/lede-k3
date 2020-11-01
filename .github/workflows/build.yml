@@ -98,6 +98,9 @@ jobs:
           cp ../config-k3 ./.config
           cp ../vermagic ./vermagic
           sed -i 's#grep.*vermagic.*#cp $(TOPDIR)/vermagic $(LINUX_DIR)/.vermagic#g' ./include/kernel-defaults.mk 
+          sed -i 's#Package/k3screenctrl#Package/k3screenctrll#g' ./package/zmjjcg/k3screenctrl_build/Makefile
+          sed -i 's#BuildPackage,k3screenctrl#BuildPackage,k3screenctrll#g' ./package/zmjjcg/k3screenctrl_build/Makefile
+          sed -i 's#DEPENDS:=+k3screenctrl#DEPENDS:=+k3screenctrll#g' ./package/zmjjcg/luci-app-k3screenctrl/Makefile
 
           #
           # 在 cat >> .config <<EOF 到 EOF 之间粘贴你的编译配置, 需注意缩进关系
