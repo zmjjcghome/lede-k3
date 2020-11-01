@@ -31,6 +31,7 @@ env:
 #  UPLOAD_FIRMWARE: true
 #  UPLOAD_COWTRANSFER: false
 #  UPLOAD_WETRANSFER: false
+  SSH_ACTIONS: false
   FILETARNAME: lede-k3.tar.gz
   TZ: Asia/Shanghai
 
@@ -66,8 +67,9 @@ jobs:
       - name: Clone source code
         run: |
           df -hT $PWD
-          git clone --depth 1 $REPO_URL -b $REPO_BRANCH lede
-
+          git clone $REPO_URL -b $REPO_BRANCH lede
+          git submodule update --init --recursive
+          
           # sudo mkdir -p -m 777 /mnt/openwrt/bin /mnt/openwrt/build_dir/host /mnt/openwrt/build_dir/hostpkg /mnt/openwrt/dl /mnt/openwrt/feeds /mnt/openwrt/staging_dir
           # ln -s /mnt/openwrt/bin ./bin
           # mkdir -p ./build_dir
@@ -112,6 +114,7 @@ jobs:
           
       - name: SSH connection to Actions
         uses: mxschmitt/action-tmate@v3
+        if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'ssh')
 
       - name: Make download
         run: |
