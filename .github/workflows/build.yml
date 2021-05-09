@@ -141,6 +141,7 @@ jobs:
           echo "======================="
           du -h ./ --max-depth=1
           #du -h /mnt/openwrt/ --max-depth=1 || true
+          cp .config bin/
           tar -czf $FILETARNAME bin
 
       - name: Prepare artifact
