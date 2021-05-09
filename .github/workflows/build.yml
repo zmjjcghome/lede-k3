@@ -93,6 +93,9 @@ jobs:
       - name: kernel test
         if: env.KERNEL_TEST == 'true'
         run: |
+          git clone https://github.com/openwrt/openwrt
+          rm ./lede/target/linux/bcm53xx/patches-5.4/*
+          cp ./openwrt/target/linux/bcm53xx/patches-5.4/* ./lede/target/linux/bcm53xx/patches-5.4/
           cd lede
           sed -i 's#KERNEL_PATCHVER:=4.19#KERNEL_PATCHVER:=5.4#g' ./target/linux/bcm53xx/Makefile
 
