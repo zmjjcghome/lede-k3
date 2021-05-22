@@ -32,8 +32,8 @@ env:
   UPLOAD_COWTRANSFER: true
   UPLOAD_WETRANSFER: true
   UPLOAD_ARTIFACT: false
-  SSH_ACTIONS: true
-  KERNEL_TEST: false
+  SSH_ACTIONS: false
+  KERNEL_TEST: true
   FILETARNAME: lede-k3.tar.gz
   TZ: Asia/Shanghai
 
@@ -71,6 +71,7 @@ jobs:
           df -hT $PWD
           git clone $REPO_URL -b $REPO_BRANCH lede
           git submodule update --init --recursive
+          git submodule foreach git checkout master
           ls -lh zmjjcg
           # sudo mkdir -p -m 777 /mnt/openwrt/bin /mnt/openwrt/build_dir/host /mnt/openwrt/build_dir/hostpkg /mnt/openwrt/dl /mnt/openwrt/feeds /mnt/openwrt/staging_dir
           # ln -s /mnt/openwrt/bin ./bin
