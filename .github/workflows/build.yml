@@ -100,7 +100,7 @@ jobs:
           cp ./openwrt/target/linux/generic/backport-5.10/*v5.13* ./lede/target/linux/generic/backport-5.10/
           cp ./openwrt/target/linux/bcm53xx/config-5.10 ./lede/target/linux/bcm53xx/
           
-          rm ./lede/target/linux/generic/pending-5.10/110*
+          #rm ./lede/target/linux/generic/pending-5.10/110*
           cd lede
           sed -i 's#KERNEL_PATCHVER:=5.4#KERNEL_PATCHVER:=5.10#g' ./target/linux/bcm53xx/Makefile
 
