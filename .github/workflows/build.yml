@@ -33,7 +33,7 @@ env:
   UPLOAD_WETRANSFER: true
   UPLOAD_ARTIFACT: false
   SSH_ACTIONS: false
-  KERNEL_TEST: test
+  KERNEL_TEST: false
   FILETARNAME: lede-k3.tar.gz
   TZ: Asia/Shanghai
 
@@ -136,7 +136,9 @@ jobs:
           # 
 
           sed -i 's/^[ \t]*//g' ./.config
-          #make defconfig
+          make defconfig
+          cp ../config-k3 ./.config
+          sed -i 's/^[ \t]*//g' ./.config
           
       - name: SSH connection to Actions
         uses: mxschmitt/action-tmate@v3
