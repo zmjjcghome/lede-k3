@@ -32,8 +32,8 @@ env:
   UPLOAD_COWTRANSFER: true
   UPLOAD_WETRANSFER: true
   UPLOAD_ARTIFACT: false
-  SSH_ACTIONS: true
-  KERNEL_TEST: false
+  SSH_ACTIONS: false
+  KERNEL_TEST: true
   FILETARNAME: lede-k3.tar.gz
   TZ: Asia/Shanghai
 
@@ -115,9 +115,9 @@ jobs:
         run: |
           ls -l
           cd lede
-          ./scripts/feeds install -a
           rm -f ./.config*
           cp -rf ../zmjjcg package/
+          ./scripts/feeds install -a
           cp ../config-k3 ./.config
           cp ../vermagic ./vermagic
           sed -i 's#grep.*vermagic.*#cp $(TOPDIR)/vermagic $(LINUX_DIR)/.vermagic#g' ./include/kernel-defaults.mk 
@@ -137,8 +137,6 @@ jobs:
 
           sed -i 's/^[ \t]*//g' ./.config
           make defconfig
-          cp ../config-k3 ./.config
-          sed -i 's/^[ \t]*//g' ./.config
           
       - name: SSH connection to Actions
         uses: mxschmitt/action-tmate@v3
