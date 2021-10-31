@@ -32,8 +32,8 @@ env:
   UPLOAD_COWTRANSFER: true
   UPLOAD_WETRANSFER: true
   UPLOAD_ARTIFACT: false
-  SSH_ACTIONS: false
-  KERNEL_TEST: true
+  SSH_ACTIONS: true
+  KERNEL_TEST: false
   FILETARNAME: lede-k3.tar.gz
   TZ: Asia/Shanghai
 
