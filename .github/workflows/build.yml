@@ -97,7 +97,7 @@ jobs:
           git clone https://github.com/openwrt/openwrt
           rm -rf ./lede/target/linux/bcm53xx/*
           cp -rf ./openwrt/target/linux/bcm53xx/* ./lede/target/linux/bcm53xx/
-          rm ./lede/target/linux/generic/*
+          rm -rf ./lede/target/linux/generic/*
           cp -rf ./openwrt/target/linux/generic/* ./lede/target/linux/generic/
           #rm ./lede/target/linux/bcm53xx/patches-5.10/*
           #cp ./openwrt/target/linux/bcm53xx/patches-5.10/* ./lede/target/linux/bcm53xx/patches-5.10/
