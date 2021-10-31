@@ -68,12 +68,14 @@ CONFIG_TARGET_bcm53xx_generic=y
 # CONFIG_TARGET_bcm53xx_generic_DEVICE_netgear-r8000 is not set
 # CONFIG_TARGET_bcm53xx_generic_DEVICE_smartrg-sr400ac is not set
 CONFIG_TARGET_bcm53xx_generic_DEVICE_phicomm-k3=y
+CONFIG_TARGET_bcm53xx_generic_DEVICE_phicomm_k3=y
 # CONFIG_TARGET_bcm53xx_generic_DEVICE_tenda-ac9 is not set
 CONFIG_HAS_SUBTARGETS=y
 CONFIG_HAS_DEVICES=y
 CONFIG_TARGET_BOARD="bcm53xx"
 CONFIG_TARGET_SUBTARGET="generic"
 CONFIG_TARGET_PROFILE="DEVICE_phicomm-k3"
+CONFIG_TARGET_PROFILE="DEVICE_phicomm_k3"
 CONFIG_TARGET_ARCH_PACKAGES="arm_cortex-a9"
 CONFIG_DEFAULT_TARGET_OPTIMIZATION="-Os -pipe"
 CONFIG_CPU_TYPE="cortex-a9"
