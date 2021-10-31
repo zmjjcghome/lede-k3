@@ -201,7 +201,7 @@ jobs:
           file_glob: true
 
 
-#    - name: Test
+#    - name: Test 
 #      run: go test -v .
       - name: Upload firmware to cowtransfer
         if: env.UPLOAD_COWTRANSFER == 'true' || contains(github.event.action, 'ssh')
