@@ -33,7 +33,7 @@ env:
   UPLOAD_WETRANSFER: true
   UPLOAD_ARTIFACT: false
   SSH_ACTIONS: false
-  KERNEL_TEST: false
+  KERNEL_TEST: test
   FILETARNAME: lede-k3.tar.gz
   TZ: Asia/Shanghai
 
@@ -95,10 +95,10 @@ jobs:
         if: env.KERNEL_TEST == 'true'
         run: |
           git clone https://github.com/openwrt/openwrt
-          rm -rf ./lede/target/linux/bcm53xx/*
-          cp -rf ./openwrt/target/linux/bcm53xx/* ./lede/target/linux/bcm53xx/
-          rm -rf ./lede/target/linux/generic/*
-          cp -rf ./openwrt/target/linux/generic/* ./lede/target/linux/generic/
+          cp -rf ./lede/package/lean ./openwrt/package/
+          rm -rf ./lede
+          mv openwrt lede
+          
           #rm ./lede/target/linux/bcm53xx/patches-5.10/*
           #cp ./openwrt/target/linux/bcm53xx/patches-5.10/* ./lede/target/linux/bcm53xx/patches-5.10/
           #cp ./openwrt/target/linux/generic/backport-5.10/*v5.13* ./lede/target/linux/generic/backport-5.10/
@@ -107,6 +107,9 @@ jobs:
           ##rm ./lede/target/linux/generic/pending-5.10/110*
           cd lede
           sed -i 's#KERNEL_PATCHVER:=5.4#KERNEL_PATCHVER:=5.10#g' ./target/linux/bcm53xx/Makefile
+          ./scripts/feeds update -a
+          #./scripts/feeds install -a
+          ls -l
 
       - name: Generate configuration file
         run: |
