@@ -100,7 +100,8 @@ jobs:
           cp -rf ./lede/tools/upx ./openwrt/tools/
           rm -rf ./lede
           mv openwrt lede
-          
+          sed -i 's/.*-sfe/#/g' ./config-k3
+
           #rm ./lede/target/linux/bcm53xx/patches-5.10/*
           #cp ./openwrt/target/linux/bcm53xx/patches-5.10/* ./lede/target/linux/bcm53xx/patches-5.10/
           #cp ./openwrt/target/linux/generic/backport-5.10/*v5.13* ./lede/target/linux/generic/backport-5.10/
