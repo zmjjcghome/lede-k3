@@ -102,7 +102,8 @@ jobs:
           mv openwrt lede
           sed -i 's/.*-sfe/#/g' ./config-k3
           sed -i 's/.*shortcut-fe/#/g' ./config-k3
-
+          cat config-k3 |grep -sfe
+          cat config-k3 |grep shortcut
           #rm ./lede/target/linux/bcm53xx/patches-5.10/*
           #cp ./openwrt/target/linux/bcm53xx/patches-5.10/* ./lede/target/linux/bcm53xx/patches-5.10/
           #cp ./openwrt/target/linux/generic/backport-5.10/*v5.13* ./lede/target/linux/generic/backport-5.10/
@@ -143,7 +144,9 @@ jobs:
 
           sed -i 's/^[ \t]*//g' ./.config
           make defconfig
-          
+          cat .config |grep -sfe
+          cat .config |grep shortcut
+
       - name: SSH connection to Actions
         uses: mxschmitt/action-tmate@v3
         if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'ssh')
