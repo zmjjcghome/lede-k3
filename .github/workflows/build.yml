@@ -100,6 +100,8 @@ jobs:
           cp -rf ./lede/tools/upx ./openwrt/tools/
           cp -rf ./lede/target/linux/generic/hack-5.10/95* ./openwrt/target/linux/generic/hack-5.10/
           cp -rf ./lede/target/linux/generic/hack-5.10/99* ./openwrt/target/linux/generic/hack-5.10/
+          cp -rf ./lede/target/linux/generic/hack-5.10/601* ./openwrt/target/linux/generic/hack-5.10/
+          
           mv lede baklede
           mv openwrt lede
           #sed -i 's/.*-sfe/#/g' ./config-k3
