@@ -98,9 +98,10 @@ jobs:
           #git clone https://github.com/openwrt/openwrt
           #cp -rf ./openwrt/target/linux/bcm53xx/config-5.10 ./lede/target/linux/bcm53xx/
           cd lede
-          cp -rf target/linux/bcm53xx/patches-5.4/035-v5.13-0001-ARM-dts-BCM5301X-fix-reg-formatting-in-memory-node.patch target/linux/bcm53xx/patches-5.10/
-          cp -rf target/linux/bcm53xx/patches-5.4/320-ARM-dts-* target/linux/bcm53xx/patches-5.10/
-          sed -i 's#KERNEL_PATCHVER:=5.4#KERNEL_PATCHVER:=5.10#g' ./target/linux/bcm53xx/Makefile
+          #cp -rf target/linux/bcm53xx/patches-5.4/035-v5.13-0001-ARM-dts-BCM5301X-fix-reg-formatting-in-memory-node.patch target/linux/bcm53xx/patches-5.10/
+          #cp -rf target/linux/bcm53xx/patches-5.4/320-ARM-dts-* target/linux/bcm53xx/patches-5.10/
+          #sed -i 's#KERNEL_PATCHVER:=5.4#KERNEL_PATCHVER:=5.10#g' ./target/linux/bcm53xx/Makefile
+          sed -i 's#=5.4#=5.10#g' ./target/linux/bcm53xx/Makefile
           #sed -i 's/TARGET_DEVICES/#TARGET_DEVICES/g' ./target/linux/bcm53xx/image/Makefile
           #sed -i 's/#TARGET_DEVICES += phicomm_k3/TARGET_DEVICES += phicomm_k3/g' ./target/linux/bcm53xx/image/Makefile
           #cat ./target/linux/bcm53xx/Makefile
