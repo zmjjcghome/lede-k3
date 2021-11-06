@@ -99,7 +99,7 @@ jobs:
           cp -rf ./openwrt/target/linux/bcm53xx/config-5.10 ./lede/target/linux/bcm53xx/
           #rm -rf ./lede/target/linux/bcm53xx/patches-5.10/*
           #cp -rf ./openwrt/target/linux/bcm53xx/patches-5.10/* ./lede/target/linux/bcm53xx/patches-5.10/
-          cp -rf ./openwrt/target/linux/bcm53xx/patches-5.10/304-ARM-dts-BCM5301X-Specify-switch-ports-for-remaining-.patch ./lede/target/linux/bcm53xx/patches-5.10/
+          #cp -rf ./openwrt/target/linux/bcm53xx/patches-5.10/304-ARM-dts-BCM5301X-Specify-switch-ports-for-remaining-.patch ./lede/target/linux/bcm53xx/patches-5.10/
           cd lede
           #sed -i 's#KERNEL_PATCHVER:=5.4#KERNEL_PATCHVER:=5.10#g' ./target/linux/bcm53xx/Makefile
           sed -i 's#=5.4#=5.10#g' ./target/linux/bcm53xx/Makefile
