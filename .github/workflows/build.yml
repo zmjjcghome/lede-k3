@@ -97,7 +97,7 @@ jobs:
         run: |
           git clone https://github.com/openwrt/openwrt
           #cp -rf ./openwrt/target/linux/bcm53xx/config-5.10 ./lede/target/linux/bcm53xx/
-          
+          sed -i 's#ioremap_nocache#ioremap#g' ./lede/target/linux/generic/hack-5.10/773-bgmac-add-srab-switch.patch
           #rm -rf ./lede/target/linux/bcm53xx/patches-5.10/*
           #cp -rf ./openwrt/target/linux/bcm53xx/patches-5.10/* ./lede/target/linux/bcm53xx/patches-5.10/
           #cp -rf ./openwrt/target/linux/bcm53xx/patches-5.10/304-ARM-dts-BCM5301X-Specify-switch-ports-for-remaining-.patch ./lede/target/linux/bcm53xx/patches-5.10/
