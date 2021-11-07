@@ -146,7 +146,7 @@ jobs:
       - name: Generate configuration file
         run: |
           ls -l
-          sed -i 's#define Build/append-dtb#define Build/append-dtb\nls -l $(KDIR)#g' ./lede/include/image-commands.mk
+          sed -i 's#define Build/append-dtb#define Build/append-dtb\nls -l $(KDIR)/\n#g' ./lede/include/image-commands.mk
           cd lede
           sed -i 's/TARGET_DEVICES/#TARGET_DEVICES/g' ./target/linux/bcm53xx/image/Makefile
           sed -i 's/#TARGET_DEVICES += phicomm_k3/TARGET_DEVICES += phicomm_k3/g' ./target/linux/bcm53xx/image/Makefile
@@ -193,7 +193,7 @@ jobs:
           ls -l
           cd lede
           echo "make -j$(nproc) || make -j1 V=s"
-          make -j4 || make -j1 V=s
+          make -j8 || make -j1 V=s
           #make -j1 V=s
           echo "======================="
           echo "Space usage:"
