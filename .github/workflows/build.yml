@@ -33,7 +33,7 @@ env:
   UPLOAD_WETRANSFER: true
   UPLOAD_ARTIFACT: false
   SSH_ACTIONS: false
-  KERNEL_TEST: true
+  KERNEL_TEST: false
   KERNEL_OP_TEST: false
   FILETARNAME: lede-k3.tar.gz
   TZ: Asia/Shanghai
@@ -145,6 +145,7 @@ jobs:
       - name: Generate configuration file
         run: |
           ls -l
+          sed -i 's#define Build/append-dtb#define Build/append-dtb\nls -l $(KDIR)#g' ./lede/include/image-commands.mk
           cd lede
           sed -i 's/TARGET_DEVICES/#TARGET_DEVICES/g' ./target/linux/bcm53xx/image/Makefile
           sed -i 's/#TARGET_DEVICES += phicomm_k3/TARGET_DEVICES += phicomm_k3/g' ./target/linux/bcm53xx/image/Makefile
