@@ -34,7 +34,7 @@ env:
   UPLOAD_ARTIFACT: false
   SSH_ACTIONS: false
   KERNEL_TEST: false
-  KERNEL_OP_TEST: true
+  KERNEL_OP_TEST: false
   FILETARNAME: lede-k3.tar.gz
   TZ: Asia/Shanghai
 
@@ -148,8 +148,8 @@ jobs:
           ls -l
           sed -i 's#define Build/append-dtb$#define Build/append-dtb\nls -l $(KDIR)/\n#g' ./lede/include/image-commands.mk
           cd lede
-          sed -i 's/TARGET_DEVICES/#TARGET_DEVICES/g' ./target/linux/bcm53xx/image/Makefile
-          sed -i 's/#TARGET_DEVICES += phicomm_k3/TARGET_DEVICES += phicomm_k3/g' ./target/linux/bcm53xx/image/Makefile
+          #sed -i 's/TARGET_DEVICES/#TARGET_DEVICES/g' ./target/linux/bcm53xx/image/Makefile
+          #sed -i 's/#TARGET_DEVICES += phicomm_k3/TARGET_DEVICES += phicomm_k3/g' ./target/linux/bcm53xx/image/Makefile
           
           rm -f ./.config*
           cp -rf ../zmjjcg package/
@@ -202,6 +202,7 @@ jobs:
           echo "======================="
           du -h ./ --max-depth=1
           #du -h /mnt/openwrt/ --max-depth=1 || true
+           ls -l /home/runner/work/lede-k3/lede-k3/lede/build_dir/target-arm_cortex-a9_musl_eabi/linux-bcm53xx_generic/
           cp .config bin/
           tar -czf $FILETARNAME bin
 
