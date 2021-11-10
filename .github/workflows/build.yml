@@ -33,7 +33,7 @@ env:
   UPLOAD_WETRANSFER: true
   UPLOAD_ARTIFACT: false
   SSH_ACTIONS: false
-  KERNEL_TEST: test
+  KERNEL_TEST: true
   KERNEL_OP_TEST: false
   FILETARNAME: lede-k3.tar.gz
   TZ: Asia/Shanghai
