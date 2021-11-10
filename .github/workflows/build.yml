@@ -98,7 +98,7 @@ jobs:
           git clone https://github.com/openwrt/openwrt
           cp -rf ./openwrt/target/linux/bcm53xx/config-5.10 ./lede/target/linux/bcm53xx/
           sed -i 's#ioremap_nocache#ioremap#g' ./lede/target/linux/generic/hack-5.10/773-bgmac-add-srab-switch.patch
-          #sed -i 's#DEVICE_VENDOR := PHICOMM#\nDEVICE_DTS := bcm47094-phicomm-k3\n  DEVICE_VENDOR := PHICOMM#g' ./lede/target/linux/bcm53xx/image/Makefile
+          sed -i 's#DEVICE_VENDOR := PHICOMM#\nDEVICE_DTS := bcm47094-phicomm-k3\n  DEVICE_VENDOR := PHICOMM#g' ./lede/target/linux/bcm53xx/image/Makefile
           
           #rm -rf ./lede/target/linux/bcm53xx/patches-5.10/*
           #cp -rn ./openwrt/target/linux/bcm53xx/patches-5.10/* ./lede/target/linux/bcm53xx/patches-5.10/
