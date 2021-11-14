@@ -33,8 +33,8 @@ env:
   UPLOAD_WETRANSFER: true
   UPLOAD_ARTIFACT: false
   SSH_ACTIONS: false
-  KERNEL_TEST: true
-  KERNEL_OP_TEST: false
+  KERNEL_TEST: false
+  KERNEL_OP_TEST: true
   FILETARNAME: lede-k3.tar.gz
   TZ: Asia/Shanghai
 
@@ -198,7 +198,7 @@ jobs:
           ls -l
           cd lede
           echo "make -j$(nproc) || make -j1 V=s"
-          make -j8 || make -j1 V=s
+          make -j4 || make -j1 V=s
           #make -j1 V=s
           echo "======================="
           echo "Space usage:"
