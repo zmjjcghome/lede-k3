@@ -33,7 +33,7 @@ env:
   UPLOAD_WETRANSFER: true
   UPLOAD_ARTIFACT: false
   SSH_ACTIONS: false
-  KERNEL_TEST: true
+  KERNEL_TEST: false
   KERNEL_OP_TEST: false
   FILETARNAME: lede-k3.tar.gz
   TZ: Asia/Shanghai
@@ -208,7 +208,7 @@ jobs:
           echo "======================="
           du -h ./ --max-depth=1
           #du -h /mnt/openwrt/ --max-depth=1 || true
-           ls -l /home/runner/work/lede-k3/lede-k3/lede/build_dir/target-arm_cortex-a9_musl_eabi/linux-bcm53xx_generic/
+          # ls -l /home/runner/work/lede-k3/lede-k3/lede/build_dir/target-arm_cortex-a9_musl_eabi/linux-bcm53xx_generic/
           cp .config bin/
           tar -czf $FILETARNAME bin
 
