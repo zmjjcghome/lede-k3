@@ -35,6 +35,7 @@ env:
   SSH_ACTIONS: false
   KERNEL_TEST: false
   KERNEL_OP_TEST: false
+  KERNEL_SCREEN: true
   FILETARNAME: lede-k3.tar.gz
   TZ: Asia/Shanghai
 
@@ -85,6 +86,13 @@ jobs:
           ls -l
           df -h
           
+      - name: KERNEL_SCREEN
+        if: env.KERNEL_SCREEN == 'true'
+        run: |
+          cd lede
+          git checkout 937f01b
+        
+        
       - name: Update feeds
         run: |
           cd lede
