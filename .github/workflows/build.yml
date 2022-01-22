@@ -35,7 +35,7 @@ env:
   SSH_ACTIONS: false
   KERNEL_TEST: false
   KERNEL_OP_TEST: false
-  KERNEL_SCREEN: true
+  KERNEL_SCREEN: false
   FILETARNAME: lede-k3.tar.gz
   TZ: Asia/Shanghai
 
