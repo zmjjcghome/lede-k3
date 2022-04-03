@@ -32,11 +32,12 @@ env:
   UPLOAD_COWTRANSFER: false
   UPLOAD_WETRANSFER: true
   UPLOAD_ARTIFACT: false
-  SSH_ACTIONS: true
+  SSH_ACTIONS: false
   KERNEL_TEST: false
   KERNEL_OP_TEST: false
   KERNEL_SCREEN: false
   ONLY_K3: true
+  BUILD_GO: false
   FILETARNAME: lede-k3.tar.gz
   TZ: Asia/Shanghai
 
@@ -170,7 +171,14 @@ jobs:
           cd lede
           sed -i 's/TARGET_DEVICES/#TARGET_DEVICES/g' ./target/linux/bcm53xx/image/Makefile
           sed -i 's/#TARGET_DEVICES += phicomm_k3/TARGET_DEVICES += phicomm_k3/g' ./target/linux/bcm53xx/image/Makefile
-
+      
+      - name: BUILD_GO
+        if: env.BUILD_GO == 'true'
+        run: |
+          ls -l
+          echo 'CONFIG_PACKAGE_transfer=m' >> ./config-k3
+          echo 'CONFIG_TRANSFER_COMPRESS_UPX=y' >>  ./config-k3
+          
       - name: Generate configuration file
         run: |
           ls -l
