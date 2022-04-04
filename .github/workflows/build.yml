@@ -38,6 +38,7 @@ env:
   KERNEL_SCREEN: false
   ONLY_K3: true
   BUILD_GO: true
+  BUILD_ALL: false
   FILETARNAME: lede-k3.tar.gz
   TZ: Asia/Shanghai
 
@@ -223,13 +224,31 @@ jobs:
           rm -rf $(find ./dl/ -size -1024c)
           df -h
 
-      - name: Compile firmware
+      - name: Compile firmware ALL
+        if: env.BUILD_ALL == 'true'
         run: |
           ls -l
           cd lede
           echo "make -j$(nproc) || make -j1 V=s"
           make -j$(nproc) || make -j1 V=s
-          #make -j1 V=s
+
+      - name: Compile firmware single
+        if: env.BUILD_ALL == 'false'
+        run: |
+          ls -l
+          cd lede
+          echo "make -j$(nproc) || make -j1 V=s"
+          make tools/install -j$(nproc) 
+          make toolchain/install -j$(nproc) 
+          make target/compile -j$(nproc) 
+          make  package/transfer/compile -j$(nproc) 
+          
+
+
+      - name: Compress tar file
+        run: |
+          ls -l
+          cd lede
           echo "======================="
           echo "Space usage:"
           echo "======================="
