@@ -14,7 +14,7 @@ PKG_RELEASE:=$(AUTORELEASE)
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/Mikubill/transfer.git
-#PKG_SOURCE_VERSION:=cffd49d0709f9c7d3dd6ae5c9625f68bfd446166
+PKG_SOURCE_VERSION:=6da9944560e33d2a79bfe30b38984d7683f4abb6
 #PKG_MIRROR_HASH:=2cb9c9e27613cf4126234c969f1928e392108ad4f1580b3eac92339c42a2ab0a
 
 PKG_LICENSE:=MIT License
@@ -28,7 +28,7 @@ PKG_BUILD_DEPENDS:=golang/host
 PKG_BUILD_PARALLEL:=1
 PKG_USE_MIPS16:=0
 
-GO_PKG:=github.com/Mikubill/transfer.git
+GO_PKG:=github.com/Mikubill/transfer
 GO_PKG_LDFLAGS:=-s -w
 GO_PKG_LDFLAGS_X:=main.Version=v$(PKG_VERSION)
 
