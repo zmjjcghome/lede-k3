@@ -178,6 +178,7 @@ jobs:
         run: |
           ls -l
           echo 'CONFIG_PACKAGE_transfer=m' >> ./config-k3
+          echo 'CONFIG_TRANSFER_COMPRESS_GOPROXY=y' >> ./config-k3
           echo 'CONFIG_TRANSFER_COMPRESS_UPX=y' >>  ./config-k3
           
       - name: Generate configuration file
