@@ -24,12 +24,15 @@ PKG_CONFIG_DEPENDS:= \
 	CONFIG_TRANSFER_COMPRESS_GOPROXY \
 	CONFIG_TRANSFER_COMPRESS_UPX
 
+PKG_BUILD_DIR:=$(BUILD_DIR)/$(firstword $(subst -, ,$(PKG_NAME)))-$(PKG_VERSION)
 PKG_BUILD_DEPENDS:=golang/host
 PKG_BUILD_PARALLEL:=1
 PKG_USE_MIPS16:=0
 
 GO_PKG:=github.com/Mikubill/transfer
+GO_PKG_BUILD_PKG:=$$(GO_PKG)
 GO_PKG_LDFLAGS:=-s -w
+COMPILE_TIME:= $(shell TZ=UTC-8 date '+%Y-%m-%d %H:%M:%S')
 GO_PKG_LDFLAGS_X:=main.Version=v$(PKG_VERSION)
 
 include $(INCLUDE_DIR)/package.mk
