@@ -38,7 +38,7 @@ env:
   KERNEL_SCREEN: false
   ONLY_K3: true
   BUILD_GO: true
-  BUILD_ALL: false
+  BUILD_ALL: true
   FILETARNAME: lede-k3.tar.gz
   TZ: Asia/Shanghai
 
@@ -321,3 +321,5 @@ jobs:
           curl -fsSL git.io/file-transfer | sh
           ./transfer wet -s -p 16 --no-progress $FILETARNAME 2>&1 | tee wetransfer.log
           echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
+          ./transfer fic -s -p 16 --no-progress $FILETARNAME 2>&1 | tee fic.log
+          echo "::warning file=1fichier.com::$(cat fic.log | grep https)"
