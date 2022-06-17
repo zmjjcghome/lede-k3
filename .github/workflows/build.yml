@@ -197,7 +197,7 @@ jobs:
           sed -i 's#DEPENDS:=+k3screenctrl#DEPENDS:=+k3screenctrll#g' ./package/zmjjcg/luci-app-k3screenctrl/Makefile
           sed -i 's#192.168.1.1#192.168.50.1#g' ./package/base-files/files/bin/config_generate
           #打开dnsmasq的记录日志功能
-          sed -i '/log-facility/d' ./package/lean/default-settings/files/zzz-default-settings
+          #sed -i '/log-facility/d' ./package/lean/default-settings/files/zzz-default-settings
           #
           # 在 cat >> .config <<EOF 到 EOF 之间粘贴你的编译配置, 需注意缩进关系
           # 例如:
