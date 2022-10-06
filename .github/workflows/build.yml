@@ -33,7 +33,7 @@ env:
   UPLOAD_WETRANSFER: true
   UPLOAD_ARTIFACT: false
   SSH_ACTIONS: false
-  KERNEL_TEST: false
+  KERNEL_TEST: fasle
   KERNEL_OP_TEST: false
   KERNEL_SCREEN: false
   ONLY_K3: true
@@ -41,7 +41,7 @@ env:
   BUILD_ALL: true
   FILETARNAME: lede-k3.tar.gz
   TZ: Asia/Shanghai
-
+ 
 jobs:
 
   build:
