@@ -33,8 +33,8 @@ env:
   UPLOAD_WETRANSFER: true
   UPLOAD_ARTIFACT: false
   SSH_ACTIONS: false
-  KERNEL_TEST: true
-  KERNEL_OP_TEST: false
+  KERNEL_TEST: false
+  KERNEL_OP_TEST: true
   KERNEL_SCREEN: false
   ONLY_K3: true
   BUILD_GO: true
@@ -142,10 +142,11 @@ jobs:
           cp -rf ./lede/package/lean ./openwrt/package/
           cp -rf ./lede/tools/ucl ./openwrt/tools/
           cp -rf ./lede/tools/upx ./openwrt/tools/
-          cp -rf ./lede/target/linux/generic/hack-5.10/95* ./openwrt/target/linux/generic/hack-5.10/
-          cp -rf ./lede/target/linux/generic/hack-5.10/99* ./openwrt/target/linux/generic/hack-5.10/
-          cp -rf ./lede/target/linux/generic/hack-5.10/601* ./openwrt/target/linux/generic/hack-5.10/
-          #cp -rf ./openwrt/target/linux/bcm53xx/config-5.10 ./lede/target/linux/bcm53xx/
+          #cp -rf ./lede/target/linux/generic/hack-5.10/95* ./openwrt/target/linux/generic/hack-5.10/
+          #cp -rf ./lede/target/linux/generic/hack-5.10/99* ./openwrt/target/linux/generic/hack-5.10/
+          #cp -rf ./lede/target/linux/generic/hack-5.10/601* ./openwrt/target/linux/generic/hack-5.10/
+          
+#cp -rf ./openwrt/target/linux/bcm53xx/config-5.10 ./lede/target/linux/bcm53xx/
           mv lede baklede
           mv openwrt lede
           #sed -i 's/.*-sfe/#/g' ./config-k3
