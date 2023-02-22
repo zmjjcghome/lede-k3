@@ -139,7 +139,7 @@ jobs:
         if: env.KERNEL_OP_TEST == 'true'
         run: |
           git clone https://github.com/openwrt/openwrt
-          cp -rf ./lede/package/lean ./openwrt/package/
+          #cp -rf ./lede/package/lean ./openwrt/package/
           #cp -rf ./lede/tools/ucl ./openwrt/tools/
           #cp -rf ./lede/tools/upx ./openwrt/tools/
           #cp -rf ./lede/target/linux/generic/hack-5.10/95* ./openwrt/target/linux/generic/hack-5.10/
