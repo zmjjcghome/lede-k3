@@ -164,7 +164,7 @@ jobs:
           
           ##rm ./lede/target/linux/generic/pending-5.15/110*
           cd lede
-          #sed -i 's#KERNEL_PATCHVER:=5.4#KERNEL_PATCHVER:=5.10#g' ./target/linux/bcm53xx/Makefile
+          sed -i 's#KERNEL_PATCHVER:=5.4#KERNEL_PATCHVER:=5.15#g' ./target/linux/bcm53xx/Makefile
           #sed -i 's#zlib zstd#zlib zstd ucl upx#g' ./tools/Makefile
           #sed -i 's#$(curdir)/bison/compile := $(curdir)/flex/compile#$(curdir)/bison/compile := $(curdir)/flex/compile\n$(curdir)/upx/compile := $(curdir)/ucl/compile#g' ./tools/Makefile
           ./scripts/feeds update -a
