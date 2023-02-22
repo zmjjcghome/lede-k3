@@ -195,7 +195,7 @@ jobs:
           cd lede
          
           rm -f ./.config*
-          cp -rf ../zmjjcg package/
+          #cp -rf ../zmjjcg package/
           ./scripts/feeds install -a
           cp ../config-k3 ./.config
           cp ../vermagic ./vermagic
