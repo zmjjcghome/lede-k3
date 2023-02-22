@@ -139,7 +139,7 @@ jobs:
         if: env.KERNEL_OP_TEST == 'true'
         run: |
           git clone https://github.com/openwrt/openwrt
-          #cp -rf ./lede/package/lean ./openwrt/package/
+          cp -rf ./lede/package/lean ./openwrt/package/
           #cp -rf ./lede/tools/ucl ./openwrt/tools/
           #cp -rf ./lede/tools/upx ./openwrt/tools/
           #cp -rf ./lede/target/linux/generic/hack-5.10/95* ./openwrt/target/linux/generic/hack-5.10/
@@ -153,8 +153,8 @@ jobs:
           #cp -rf ./openwrt/target/linux/bcm53xx/config-5.10 ./lede/target/linux/bcm53xx/
           mv lede baklede
           mv openwrt lede
-          sed -i 's/.*-sfe/#/g' ./config-k3
-          sed -i 's/.*shortcut-fe/#/g' ./config-k3
+          sed -i 's/.*-sfe.*/#/g' ./config-k3
+          sed -i 's/.*shortcut-fe.*/#/g' ./config-k3
           #cat config-k3 |grep sfe
           #cat config-k3 |grep short
           #rm ./lede/target/linux/bcm53xx/patches-5.10/*
@@ -195,7 +195,7 @@ jobs:
           cd lede
          
           rm -f ./.config*
-          #cp -rf ../zmjjcg package/
+          cp -rf ../zmjjcg package/
           ./scripts/feeds install -a
           cp ../config-k3 ./.config
           cp ../vermagic ./vermagic
