@@ -146,6 +146,9 @@ jobs:
           #cp -rf ./lede/target/linux/generic/hack-5.10/99* ./openwrt/target/linux/generic/hack-5.10/
           #cp -rf ./lede/target/linux/generic/hack-5.10/601* ./openwrt/target/linux/generic/hack-5.10/
           
+          git clone https://github.com/MeIsReallyBa/Openwrt-sfe-flowoffload-linux-5.4/ sfe
+          mkdir ./lede/package/lean/shortcut-fe/shortcut-fe/patches
+          cp -rf ./sfe/9* ./lede/package/lean/shortcut-fe/shortcut-fe/patches/
           #cp -rf ./openwrt/target/linux/bcm53xx/config-5.10 ./lede/target/linux/bcm53xx/
           mv lede baklede
           mv openwrt lede
