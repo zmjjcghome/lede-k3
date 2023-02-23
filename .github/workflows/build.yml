@@ -34,7 +34,7 @@ env:
   UPLOAD_ARTIFACT: false
   SSH_ACTIONS: false
   KERNEL_TEST: false
-  KERNEL_OP_TEST: false
+  KERNEL_OP_TEST: true
   KERNEL_SCREEN: false
   ONLY_K3: true
   BUILD_GO: true
@@ -148,13 +148,13 @@ jobs:
           
           git clone https://github.com/MeIsReallyBa/Openwrt-sfe-flowoffload-linux-5.4/ sfe
           mkdir ./lede/package/lean/shortcut-fe/shortcut-fe/patches
-          cp -rf ./sfe/9* ./lede/package/lean/shortcut-fe/shortcut-fe/patches/
-          cp -rf ./sfe/9* ./lede/target/linux/bcm53xx/patches-5.10/
+          cp -rf ./sfe/9* ./openwrt/package/lean/shortcut-fe/shortcut-fe/patches/
+          cp -rf ./sfe/9* ./openwrt/target/linux/bcm53xx/patches-5.10/
           #cp -rf ./openwrt/target/linux/bcm53xx/config-5.10 ./lede/target/linux/bcm53xx/
           mv lede baklede
           mv openwrt lede
-          sed -i 's/.*-sfe.*/#/g' ./config-k3
-          sed -i 's/.*shortcut-fe.*/#/g' ./config-k3
+          #sed -i 's/.*-sfe.*/#/g' ./config-k3
+          #sed -i 's/.*shortcut-fe.*/#/g' ./config-k3
           #cat config-k3 |grep sfe
           #cat config-k3 |grep short
           #rm ./lede/target/linux/bcm53xx/patches-5.10/*
@@ -164,7 +164,7 @@ jobs:
           
           ##rm ./lede/target/linux/generic/pending-5.15/110*
           cd lede
-          sed -i 's#KERNEL_PATCHVER:=5.4#KERNEL_PATCHVER:=5.15#g' ./target/linux/bcm53xx/Makefile
+          sed -i 's#KERNEL_PATCHVER:=5.4#KERNEL_PATCHVER:=5.10#g' ./target/linux/bcm53xx/Makefile
           #sed -i 's#zlib zstd#zlib zstd ucl upx#g' ./tools/Makefile
           #sed -i 's#$(curdir)/bison/compile := $(curdir)/flex/compile#$(curdir)/bison/compile := $(curdir)/flex/compile\n$(curdir)/upx/compile := $(curdir)/ucl/compile#g' ./tools/Makefile
           ./scripts/feeds update -a
