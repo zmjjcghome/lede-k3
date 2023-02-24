@@ -32,7 +32,7 @@ env:
   UPLOAD_COWTRANSFER: false
   UPLOAD_WETRANSFER: true
   UPLOAD_ARTIFACT: false
-  SSH_ACTIONS: false
+  SSH_ACTIONS: true
   KERNEL_TEST: false
   KERNEL_OP_TEST: true
   KERNEL_SCREEN: false
@@ -155,8 +155,8 @@ jobs:
           mv openwrt lede
           sed -i 's/.*-sfe/#/g' ./config-k3
           sed -i 's/.*shortcut-fe/#/g' ./config-k3
-          cat config-k3 |grep sfe
-          cat config-k3 |grep short
+          #cat config-k3 |grep sfe
+          #cat config-k3 |grep short
           #rm ./lede/target/linux/bcm53xx/patches-5.10/*
           #cp ./openwrt/target/linux/bcm53xx/patches-5.10/* ./lede/target/linux/bcm53xx/patches-5.10/
           #cp ./openwrt/target/linux/generic/backport-5.10/*v5.13* ./lede/target/linux/generic/backport-5.10/
