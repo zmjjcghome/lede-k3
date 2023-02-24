@@ -146,6 +146,7 @@ jobs:
           #cp -rf ./lede/target/linux/generic/hack-5.10/99* ./openwrt/target/linux/generic/hack-5.10/
           #cp -rf ./lede/target/linux/generic/hack-5.10/601* ./openwrt/target/linux/generic/hack-5.10/
           cp ./lede/target/linux/generic/hack-5.10/953-net-patch-linux-kernel-to-support-shortcut-fe.patch ./openwrt/target/linux/generic/hack-5.10/953-net-patch-linux-kernel-to-support-shortcut-fe.patch
+          cp ./lede/target/linux/generic/hack-5.15/953-net-patch-linux-kernel-to-support-shortcut-fe.patch ./openwrt/target/linux/generic/hack-5.15/953-net-patch-linux-kernel-to-support-shortcut-fe.patch
           
           #git clone https://github.com/MeIsReallyBa/Openwrt-sfe-flowoffload-linux-5.4/ sfe
           #mkdir ./openwrt/package/lean/shortcut-fe/shortcut-fe/patches
@@ -154,7 +155,7 @@ jobs:
           #cp -rf ./openwrt/target/linux/bcm53xx/config-5.10 ./lede/target/linux/bcm53xx/
           mv lede baklede
           mv openwrt lede
-          #rm -rf ./openwrot/package/lean/shortcut-fe
+          #rm -rf ./lede/package/lean/shortcut-fe
           #sed -i 's/.*-sfe/#/g' ./config-k3
           #sed -i 's/.*shortcut-fe/#/g' ./config-k3
           #cat config-k3 |grep sfe
@@ -166,7 +167,7 @@ jobs:
           
           #rm ./lede/target/linux/generic/pending-5.15/110*
           cd lede
-          sed -i 's#KERNEL_PATCHVER:=5.4#KERNEL_PATCHVER:=5.10#g' ./target/linux/bcm53xx/Makefile
+          sed -i 's#KERNEL_PATCHVER:=5.4#KERNEL_PATCHVER:=5.15#g' ./target/linux/bcm53xx/Makefile
           #sed -i 's#zlib zstd#zlib zstd ucl upx#g' ./tools/Makefile
           #sed -i 's#$(curdir)/bison/compile := $(curdir)/flex/compile#$(curdir)/bison/compile := $(curdir)/flex/compile\n$(curdir)/upx/compile := $(curdir)/ucl/compile#g' ./tools/Makefile
           ./scripts/feeds update -a
