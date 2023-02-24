@@ -145,8 +145,9 @@ jobs:
           #cp -rf ./lede/target/linux/generic/hack-5.10/95* ./openwrt/target/linux/generic/hack-5.10/
           #cp -rf ./lede/target/linux/generic/hack-5.10/99* ./openwrt/target/linux/generic/hack-5.10/
           #cp -rf ./lede/target/linux/generic/hack-5.10/601* ./openwrt/target/linux/generic/hack-5.10/
-          cp ./lede/target/linux/generic/hack-5.10/953-net-patch-linux-kernel-to-support-shortcut-fe.patch ./openwrt/target/linux/generic/hack-5.10/953-net-patch-linux-kernel-to-support-shortcut-fe.patch
-          cp ./lede/target/linux/generic/hack-5.15/953-net-patch-linux-kernel-to-support-shortcut-fe.patch ./openwrt/target/linux/generic/hack-5.15/953-net-patch-linux-kernel-to-support-shortcut-fe.patch
+          
+          #cp ./lede/target/linux/generic/hack-5.10/953-net-patch-linux-kernel-to-support-shortcut-fe.patch ./openwrt/target/linux/generic/hack-5.10/953-net-patch-linux-kernel-to-support-shortcut-fe.patch
+          #cp ./lede/target/linux/generic/hack-5.15/953-net-patch-linux-kernel-to-support-shortcut-fe.patch ./openwrt/target/linux/generic/hack-5.15/953-net-patch-linux-kernel-to-support-shortcut-fe.patch
           
           #git clone https://github.com/MeIsReallyBa/Openwrt-sfe-flowoffload-linux-5.4/ sfe
           #mkdir ./openwrt/package/lean/shortcut-fe/shortcut-fe/patches
@@ -155,7 +156,7 @@ jobs:
           #cp -rf ./openwrt/target/linux/bcm53xx/config-5.10 ./lede/target/linux/bcm53xx/
           mv lede baklede
           mv openwrt lede
-          #rm -rf ./lede/package/lean/shortcut-fe
+          rm -rf ./lede/package/lean/shortcut-fe
           #sed -i 's/.*-sfe/#/g' ./config-k3
           #sed -i 's/.*shortcut-fe/#/g' ./config-k3
           #cat config-k3 |grep sfe
