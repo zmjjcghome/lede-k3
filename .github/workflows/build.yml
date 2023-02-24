@@ -149,12 +149,12 @@ jobs:
           git clone https://github.com/MeIsReallyBa/Openwrt-sfe-flowoffload-linux-5.4/ sfe
           mkdir ./openwrt/package/lean/shortcut-fe/shortcut-fe/patches
           #cp -rf ./sfe/95* ./openwrt/package/lean/shortcut-fe/shortcut-fe/patches/
-          cp -rf ./sfe/99* ./openwrt/target/linux/bcm53xx/patches-5.10/
+          #cp -rf ./sfe/99* ./openwrt/target/linux/bcm53xx/patches-5.10/
           #cp -rf ./openwrt/target/linux/bcm53xx/config-5.10 ./lede/target/linux/bcm53xx/
           mv lede baklede
           mv openwrt lede
-          #sed -i 's/.*-sfe.*/#/g' ./config-k3
-          #sed -i 's/.*shortcut-fe.*/#/g' ./config-k3
+          sed -i 's/.*-sfe.*/#/g' ./config-k3
+          sed -i 's/.*shortcut-fe.*/#/g' ./config-k3
           #cat config-k3 |grep sfe
           #cat config-k3 |grep short
           #rm ./lede/target/linux/bcm53xx/patches-5.10/*
