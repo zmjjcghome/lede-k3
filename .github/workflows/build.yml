@@ -144,8 +144,8 @@ jobs:
           
           cp -rf ./lede/package/lean/ucl ./openwrt/tools/
           cp -rf ./lede/package/lean/upx ./openwrt/tools/
-          #sed -i 's#sstrip#sstrip ucl upx#g' ./openwrt/tools/Makefile
-          #sed -i 's#$(curdir)/bison/compile := $(curdir)/flex/compile#$(curdir)/upx/compile := $(curdir)/ucl/compile\n$(curdir)/bison/compile := $(curdir)/flex/compile#g' ./openwrt/tools/Makefile
+          sed -i 's#sstrip#sstrip ucl upx#g' ./openwrt/tools/Makefile
+          sed -i 's#$(curdir)/bison/compile := $(curdir)/flex/compile#$(curdir)/upx/compile := $(curdir)/ucl/compile\n$(curdir)/bison/compile := $(curdir)/flex/compile#g' ./openwrt/tools/Makefile
           #cat ./openwrt/tools/Makefile | grep upx
           
           #cp -rf ./lede/target/linux/generic/hack-5.10/95* ./openwrt/target/linux/generic/hack-5.10/
@@ -250,7 +250,8 @@ jobs:
           cd lede
           echo "make -j$(nproc) || make -j1 V=s"
           #make -j$(nproc) || make -j1 V=s
-          make -j4 || make -j1 V=s
+          #make -j4 || 
+          make -j1 V=s
 
       - name: Compile firmware single
         if: env.BUILD_ALL == 'false'
