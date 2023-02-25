@@ -37,7 +37,7 @@ env:
   KERNEL_OP_TEST: true
   KERNEL_SCREEN: false
   ONLY_K3: true
-  BUILD_GO: true
+  BUILD_GO: false
   BUILD_ALL: true
   FILETARNAME: lede-k3.tar.gz
   TZ: Asia/Shanghai
@@ -249,8 +249,7 @@ jobs:
           cd lede
           echo "make -j$(nproc) || make -j1 V=s"
           #make -j$(nproc) || make -j1 V=s
-          #make -j3 || 
-          make -j1 V=s
+          make -j4 || make -j1 V=s
 
       - name: Compile firmware single
         if: env.BUILD_ALL == 'false'
