@@ -146,8 +146,8 @@ jobs:
           #cp -rf ./lede/target/linux/generic/hack-5.10/99* ./openwrt/target/linux/generic/hack-5.10/
           #cp -rf ./lede/target/linux/generic/hack-5.10/601* ./openwrt/target/linux/generic/hack-5.10/
           
-          #cp ./lede/target/linux/generic/hack-5.10/953-net-patch-linux-kernel-to-support-shortcut-fe.patch ./openwrt/target/linux/generic/hack-5.10/953-net-patch-linux-kernel-to-support-shortcut-fe.patch
-          cp ./lede/target/linux/generic/hack-5.15/953-net-patch-linux-kernel-to-support-shortcut-fe.patch ./openwrt/target/linux/generic/hack-5.15/953-net-patch-linux-kernel-to-support-shortcut-fe.patch
+          cp ./lede/target/linux/generic/hack-5.10/95* ./openwrt/target/linux/generic/hack-5.10/
+          cp ./lede/target/linux/generic/hack-5.15/95* ./openwrt/target/linux/generic/hack-5.15/
           
           #git clone https://github.com/MeIsReallyBa/Openwrt-sfe-flowoffload-linux-5.4/ sfe
           #mkdir ./openwrt/package/lean/shortcut-fe/shortcut-fe/patches
@@ -222,8 +222,11 @@ jobs:
 
           sed -i 's/^[ \t]*//g' ./.config
           make defconfig
-          cat ./.config |grep sfe
-          cat ./.config |grep shortcut
+          
+      - name: cat configuration file
+        run: |
+          cd lede
+          cat ./.config
 
       - name: SSH connection to Actions
         uses: mxschmitt/action-tmate@v3
@@ -243,7 +246,8 @@ jobs:
           ls -l
           cd lede
           echo "make -j$(nproc) || make -j1 V=s"
-          make -j$(nproc) || make -j1 V=s
+          #make -j$(nproc) || make -j1 V=s
+          make -j3 || make -j1 V=s
 
       - name: Compile firmware single
         if: env.BUILD_ALL == 'false'
