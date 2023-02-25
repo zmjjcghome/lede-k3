@@ -159,6 +159,8 @@ jobs:
           #rm -rf ./lede/package/lean/shortcut-fe
           #sed -i 's/.*-sfe/#/g' ./config-k3
           #sed -i 's/.*shortcut-fe/#/g' ./config-k3
+          sed -i 's/.*CONFIG_PACKAGE_kmod-scsi/#/g' ./config-k3
+          
           #cat config-k3 |grep sfe
           #cat config-k3 |grep short
           #rm ./lede/target/linux/bcm53xx/patches-5.10/*
