@@ -32,7 +32,7 @@ env:
   UPLOAD_COWTRANSFER: false
   UPLOAD_WETRANSFER: true
   UPLOAD_ARTIFACT: false
-  SSH_ACTIONS: true
+  SSH_ACTIONS: false
   KERNEL_TEST: false
   KERNEL_OP_TEST: true
   KERNEL_SCREEN: false
@@ -193,7 +193,7 @@ jobs:
           ls -l
           echo 'CONFIG_PACKAGE_transfer=m' >> ./config-k3
           echo 'CONFIG_TRANSFER_COMPRESS_GOPROXY=y' >> ./config-k3
-          #echo 'CONFIG_TRANSFER_COMPRESS_UPX=y' >>  ./config-k3
+          echo 'CONFIG_TRANSFER_COMPRESS_UPX=y' >>  ./config-k3
           
       - name: Generate configuration file
         run: |
