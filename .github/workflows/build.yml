@@ -32,9 +32,9 @@ env:
   UPLOAD_COWTRANSFER: false
   UPLOAD_WETRANSFER: true
   UPLOAD_ARTIFACT: false
-  SSH_ACTIONS: false
-  KERNEL_TEST: true
-  KERNEL_OP_TEST: false
+  SSH_ACTIONS: true
+  KERNEL_TEST: false
+  KERNEL_OP_TEST: true
   KERNEL_SCREEN: false
   ONLY_K3: true
   BUILD_GO: true
@@ -161,7 +161,7 @@ jobs:
           #rm -rf ./lede/package/lean/shortcut-fe
           #sed -i 's/.*-sfe/#/g' ./config-k3
           #sed -i 's/.*shortcut-fe/#/g' ./config-k3
-          sed -i 's/.*CONFIG_PACKAGE_kmod-scsi/#/g' ./config-k3
+          #sed -i 's/.*CONFIG_PACKAGE_kmod-scsi/#/g' ./config-k3
           
           #cat config-k3 |grep sfe
           #cat config-k3 |grep short
@@ -172,7 +172,7 @@ jobs:
           
           #rm ./lede/target/linux/generic/pending-5.15/110*
           cd lede
-          sed -i 's#KERNEL_PATCHVER:=5.10#KERNEL_PATCHVER:=5.15#g' ./target/linux/bcm53xx/Makefile
+          #sed -i 's#KERNEL_PATCHVER:=5.10#KERNEL_PATCHVER:=5.15#g' ./target/linux/bcm53xx/Makefile
           
           ./scripts/feeds update -a
           #./scripts/feeds install -a
