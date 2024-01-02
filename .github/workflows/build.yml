@@ -341,7 +341,11 @@ jobs:
           ls -l
           cd lede
           curl -fsSL git.io/file-transfer | sh
-          ./transfer wet -s -p 16 --no-progress $FILETARNAME 2>&1 | tee wetransfer.log
+          #./transfer wet -s -p 16 --no-progress $FILETARNAME 2>&1 | tee wetransfer.log
+          ./transfer wet --no-progress $FILETARNAME 2>&1 | tee wetransfer.log
           echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
-          ./transfer fic -s -p 16 --no-progress $FILETARNAME 2>&1 | tee fic.log
+          ./transfer fic --no-progress $FILETARNAME 2>&1 | tee fic.log
           echo "::warning file=1fichier.com::$(cat fic.log | grep https)"
+          ./transfer muse --no-progress $FILETARNAME 2>&1 | tee muse.log
+          echo "::warning file=musetransfer.com muse.log | grep https)"
+
