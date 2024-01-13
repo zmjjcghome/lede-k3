@@ -32,7 +32,7 @@ env:
   UPLOAD_COWTRANSFER: false
   UPLOAD_WETRANSFER: true
   UPLOAD_ARTIFACT: false
-  SSH_ACTIONS: true
+  SSH_ACTIONS: false
   KERNEL_TEST: false
   KERNEL_OP_TEST: true
   KERNEL_SCREEN: false
@@ -180,7 +180,7 @@ jobs:
           #sed -i 's/.*CONFIG_PACKAGE_kmod-scsi/#/g' ./config-k3
           #sed -i 's#CONFIG_PACKAGE_ipv6helper=y#CONFIG_PACKAGE_ipv6helper=m#g' ./config-k3
           sed -i 's#CONFIG_PACKAGE_autocore-arm=y#CONFIG_PACKAGE_autocore-arm=m#g' ./config-k3
-          #sed -i 's#CONFIG_PACKAGE_default-settings=y#CONFIG_PACKAGE_default-settings=m#g' ./config-k3
+          sed -i 's#CONFIG_PACKAGE_default-settings=y#CONFIG_PACKAGE_default-settings=m#g' ./config-k3
 
           #cat config-k3 |grep sfe
           #cat config-k3 |grep short
