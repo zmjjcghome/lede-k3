@@ -32,7 +32,7 @@ env:
   UPLOAD_COWTRANSFER: false
   UPLOAD_WETRANSFER: true
   UPLOAD_ARTIFACT: false
-  SSH_ACTIONS: true
+  SSH_ACTIONS: false
   KERNEL_TEST: false
   KERNEL_OP_TEST: true
   KERNEL_SCREEN: false
@@ -245,14 +245,14 @@ jobs:
           sed -i 's/^[ \t]*//g' ./.config
           make defconfig
           
+      - name: SSH connection to Actions
+        uses: mxschmitt/action-tmate@v3
+        if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'ssh')
+
       - name: cat configuration file
         run: |
           cd lede
           cat ./.config
-
-      - name: SSH connection to Actions
-        uses: mxschmitt/action-tmate@v3
-        if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'ssh')
 
       - name: Make download
         run: |
