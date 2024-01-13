@@ -143,7 +143,8 @@ jobs:
           cd lede
           ./scripts/feeds update -a
           cd ..
-          cp -rf ./lede/package/lean ./openwrt/package/
+          mkdir openwrt/package/lean
+          #cp -rf ./lede/package/lean ./openwrt/package/
           cp -arf lede/feeds/luci/applications/luci-app-adbyby-plus/ openwrt/package/lean/
           cp -arf lede/feeds/luci/applications/luci-app-vlmcsd/ openwrt/package/lean/
           sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-adbyby-plus/Makefile
@@ -171,9 +172,9 @@ jobs:
           #sed -i 's/.*-sfe/#/g' ./config-k3
           #sed -i 's/.*shortcut-fe/#/g' ./config-k3
           #sed -i 's/.*CONFIG_PACKAGE_kmod-scsi/#/g' ./config-k3
-          sed -i 's#CONFIG_PACKAGE_ipv6helper=y#CONFIG_PACKAGE_ipv6helper=m#g' ./config-k3
+          #sed -i 's#CONFIG_PACKAGE_ipv6helper=y#CONFIG_PACKAGE_ipv6helper=m#g' ./config-k3
           sed -i 's#CONFIG_PACKAGE_autocore-arm=y#CONFIG_PACKAGE_autocore-arm=m#g' ./config-k3
-          sed -i 's#CONFIG_PACKAGE_default-settings=y#CONFIG_PACKAGE_default-settings=m#g' ./config-k3
+          #sed -i 's#CONFIG_PACKAGE_default-settings=y#CONFIG_PACKAGE_default-settings=m#g' ./config-k3
 
           #cat config-k3 |grep sfe
           #cat config-k3 |grep short
