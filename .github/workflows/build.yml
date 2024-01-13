@@ -37,7 +37,7 @@ env:
   KERNEL_OP_TEST: true
   KERNEL_SCREEN: false
   ONLY_K3: true
-  BUILD_GO: false
+  BUILD_GO: true
   BUILD_ALL: true
   FILETARNAME: lede-k3.tar.gz
   TZ: Asia/Shanghai
@@ -165,9 +165,9 @@ jobs:
           
           cp -rf ./lede/package/lean/ucl ./openwrt/tools/
           cp -rf ./lede/package/lean/upx ./openwrt/tools/
-          #sed -i 's#sstrip#sstrip ucl upx#g' ./openwrt/tools/Makefile
-          #sed -i 's#$(curdir)/bison/compile := $(curdir)/flex/compile#$(curdir)/upx/compile := $(curdir)/ucl/compile\n$(curdir)/bison/compile := $(curdir)/flex/compile#g' ./openwrt/tools/Makefile
-          #cat ./openwrt/tools/Makefile | grep upx
+          sed -i 's#sstrip#sstrip ucl upx#g' ./openwrt/tools/Makefile
+          sed -i 's#$(curdir)/bison/compile := $(curdir)/flex/compile#$(curdir)/upx/compile := $(curdir)/ucl/compile\n$(curdir)/bison/compile := $(curdir)/flex/compile#g' ./openwrt/tools/Makefile
+          cat ./openwrt/tools/Makefile | grep upx
           
           #cp -rf ./lede/target/linux/generic/hack-5.10/95* ./openwrt/target/linux/generic/hack-5.10/
           #cp -rf ./lede/target/linux/generic/hack-5.10/99* ./openwrt/target/linux/generic/hack-5.10/
