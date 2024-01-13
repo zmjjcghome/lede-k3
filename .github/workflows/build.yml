@@ -178,9 +178,9 @@ jobs:
           #sed -i 's#$(curdir)/bison/compile := $(curdir)/flex/compile#$(curdir)/upx/compile := $(curdir)/ucl/compile\n$(curdir)/bison/compile := $(curdir)/flex/compile#g' ./openwrt/tools/Makefile
           #cat ./openwrt/tools/Makefile | grep upx
           echo "--------------4"
-          #cp -rf ./lede/target/linux/generic/hack-5.15/95* ./openwrt/target/linux/generic/hack-5.15/
-          #cp -rf ./lede/target/linux/generic/hack-5.15/98* ./openwrt/target/linux/generic/hack-5.15/
-          #cp -rf ./lede/target/linux/generic/hack-5.15/601* ./openwrt/target/linux/generic/hack-5.15/
+          cp -rf ./lede/target/linux/generic/hack-5.15/95* ./openwrt/target/linux/generic/hack-5.15/
+          cp -rf ./lede/target/linux/generic/hack-5.15/98* ./openwrt/target/linux/generic/hack-5.15/
+          cp -rf ./lede/target/linux/generic/hack-5.15/601* ./openwrt/target/linux/generic/hack-5.15/
           
           #cp ./lede/target/linux/generic/hack-5.10/95* ./openwrt/target/linux/generic/hack-5.10/
           #cp ./lede/target/linux/generic/hack-5.15/95* ./openwrt/target/linux/generic/hack-5.15/
