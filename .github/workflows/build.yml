@@ -167,24 +167,24 @@ jobs:
           cp -arf lede/feeds/packages/net/vlmcsd/ openwrt/package/lean/
           #网易云音乐
           git clone https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic
+          echo "--------------1"
           cp -arf luci-app-unblockneteasemusic openwrt/package/lean/
-          
+          echo "--------------2"
           sed -i 's/dnsmasq/dnsmasq-full/g' openwrt/include/target.mk
-          
+          echo "--------------3"
           cp -rf ./lede/package/lean/ucl ./openwrt/tools/
           cp -rf ./lede/package/lean/upx ./openwrt/tools/
           #sed -i 's#sstrip#sstrip ucl upx#g' ./openwrt/tools/Makefile
           #sed -i 's#$(curdir)/bison/compile := $(curdir)/flex/compile#$(curdir)/upx/compile := $(curdir)/ucl/compile\n$(curdir)/bison/compile := $(curdir)/flex/compile#g' ./openwrt/tools/Makefile
-          cat ./openwrt/tools/Makefile | grep upx
-          
+          #cat ./openwrt/tools/Makefile | grep upx
+          echo "--------------4"
           #cp -rf ./lede/target/linux/generic/hack-5.10/95* ./openwrt/target/linux/generic/hack-5.10/
           #cp -rf ./lede/target/linux/generic/hack-5.10/99* ./openwrt/target/linux/generic/hack-5.10/
           #cp -rf ./lede/target/linux/generic/hack-5.10/601* ./openwrt/target/linux/generic/hack-5.10/
           
           #cp ./lede/target/linux/generic/hack-5.10/95* ./openwrt/target/linux/generic/hack-5.10/
           #cp ./lede/target/linux/generic/hack-5.15/95* ./openwrt/target/linux/generic/hack-5.15/
-          
-          
+          echo "--------------5"
           mv lede baklede
           mv openwrt lede
           #rm -rf ./lede/package/lean/shortcut-fe
