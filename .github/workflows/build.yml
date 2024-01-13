@@ -37,7 +37,7 @@ env:
   KERNEL_OP_TEST: true
   KERNEL_SCREEN: false
   ONLY_K3: true
-  BUILD_GO: true
+  BUILD_GO: false
   BUILD_ALL: true
   FILETARNAME: lede-k3.tar.gz
   TZ: Asia/Shanghai
@@ -159,9 +159,9 @@ jobs:
           sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-turboacc/Makefile
           
           #cp lede/target/linux/generic/hack-5.15/953-net-patch-linux-kernel-to-support-shortcut-fe.patch openwrt/target/linux/generic/hack-5.15/953-net-patch-linux-kernel-to-support-shortcut-fe.patch
-          #echo 'CONFIG_DEFAULT_luci-app-turboacc=y' >> ./config-k3
-          #echo 'CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_SHORTCUT_FE=y' >> ./config-k3
-          #echo 'CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_BBR_CCA=y' >> ./config-k3
+          echo 'CONFIG_DEFAULT_luci-app-turboacc=y' >> ./config-k3
+          echo 'CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_SHORTCUT_FE=y' >> ./config-k3
+          echo 'CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_BBR_CCA=y' >> ./config-k3
           
           cp -arf lede/package/lean/adbyby/ openwrt/package/lean/
           cp -arf lede/feeds/packages/net/vlmcsd/ openwrt/package/lean/
@@ -178,9 +178,9 @@ jobs:
           #sed -i 's#$(curdir)/bison/compile := $(curdir)/flex/compile#$(curdir)/upx/compile := $(curdir)/ucl/compile\n$(curdir)/bison/compile := $(curdir)/flex/compile#g' ./openwrt/tools/Makefile
           #cat ./openwrt/tools/Makefile | grep upx
           echo "--------------4"
-          #cp -rf ./lede/target/linux/generic/hack-5.10/95* ./openwrt/target/linux/generic/hack-5.10/
-          #cp -rf ./lede/target/linux/generic/hack-5.10/99* ./openwrt/target/linux/generic/hack-5.10/
-          #cp -rf ./lede/target/linux/generic/hack-5.10/601* ./openwrt/target/linux/generic/hack-5.10/
+          cp -rf ./lede/target/linux/generic/hack-5.15/95* ./openwrt/target/linux/generic/hack-5.15/
+          cp -rf ./lede/target/linux/generic/hack-5.15/98* ./openwrt/target/linux/generic/hack-5.15/
+          cp -rf ./lede/target/linux/generic/hack-5.15/601* ./openwrt/target/linux/generic/hack-5.15/
           
           #cp ./lede/target/linux/generic/hack-5.10/95* ./openwrt/target/linux/generic/hack-5.10/
           #cp ./lede/target/linux/generic/hack-5.15/95* ./openwrt/target/linux/generic/hack-5.15/
