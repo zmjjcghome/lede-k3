@@ -36,7 +36,7 @@ COMPILE_TIME:= $(shell TZ=UTC-8 date '+%Y-%m-%d %H:%M:%S')
 GO_PKG_LDFLAGS_X:=main.Version=v$(PKG_VERSION)
 
 include $(INCLUDE_DIR)/package.mk
-include ../../../../feeds/packages/lang/golang/golang-package.mk
+include ../../../feeds/packages/lang/golang/golang-package.mk
 
 define Package/transfer
   TITLE:=Large file transfer tool with multiple file transfer services support
