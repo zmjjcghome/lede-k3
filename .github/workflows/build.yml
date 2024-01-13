@@ -32,7 +32,7 @@ env:
   UPLOAD_COWTRANSFER: false
   UPLOAD_WETRANSFER: true
   UPLOAD_ARTIFACT: false
-  SSH_ACTIONS: true
+  SSH_ACTIONS: false
   KERNEL_TEST: false
   KERNEL_OP_TEST: true
   KERNEL_SCREEN: false
@@ -140,8 +140,13 @@ jobs:
         if: env.KERNEL_OP_TEST == 'true'
         run: |
           git clone https://github.com/openwrt/openwrt
+
+          cp config-k3-op config-k3
+
           cd lede
+
           ./scripts/feeds update -a
+
           cd ..
           mkdir openwrt/package/lean
           #cp -rf ./lede/package/lean ./openwrt/package/
@@ -179,8 +184,9 @@ jobs:
           #sed -i 's/.*shortcut-fe/#/g' ./config-k3
           #sed -i 's/.*CONFIG_PACKAGE_kmod-scsi/#/g' ./config-k3
           #sed -i 's#CONFIG_PACKAGE_ipv6helper=y#CONFIG_PACKAGE_ipv6helper=m#g' ./config-k3
-          sed -i 's#CONFIG_PACKAGE_autocore-arm=y#CONFIG_PACKAGE_autocore-arm=m#g' ./config-k3
-          sed -i 's#CONFIG_PACKAGE_default-settings=y#CONFIG_PACKAGE_default-settings=m#g' ./config-k3
+          #sed -i 's#CONFIG_PACKAGE_autocore-arm=y#CONFIG_PACKAGE_autocore-arm=m#g' ./config-k3
+          #sed -i 's#CONFIG_PACKAGE_default-settings=y#CONFIG_PACKAGE_default-settings=m#g' ./config-k3
+          echo 'CONFIG_PACKAGE_my-op-default-settings=y' >> ./config-k3
 
           #cat config-k3 |grep sfe
           #cat config-k3 |grep short
@@ -232,6 +238,7 @@ jobs:
           sed -i 's#192.168.1.1#192.168.50.1#g' ./package/base-files/files/bin/config_generate
           #打开dnsmasq的记录日志功能
           sed -i '/log-facility/d' ./package/lean/default-settings/files/zzz-default-settings
+
           #
           # 在 cat >> .config <<EOF 到 EOF 之间粘贴你的编译配置, 需注意缩进关系
           # 例如:
