@@ -162,6 +162,7 @@ jobs:
           cd openwrt
           ##### other turboacc start
           curl -sSL https://raw.githubusercontent.com/chenmozhijin/turboacc/luci/add_turboacc.sh -o add_turboacc.sh && bash add_turboacc.sh
+          cd ..
           ##### other turboacc end
           
           ##### lede turboacc start
