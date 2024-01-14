@@ -158,21 +158,28 @@ jobs:
           sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-vlmcsd/Makefile
           sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-turboacc/Makefile
 
-          ls -l openwrt/target/linux/generic/hack-5.15/9*
-          cp lede/target/linux/generic/hack-5.15/952-add-net-conntrack-events-support-multiple-registrant.patch openwrt/target/linux/generic/hack-5.15/952-add-net-conntrack-events-support-multiple-registrant.patch
-          cp lede/target/linux/generic/hack-5.15/953-net-patch-linux-kernel-to-support-shortcut-fe.patch openwrt/target/linux/generic/hack-5.15/953-net-patch-linux-kernel-to-support-shortcut-fe.patch
+          ##  add turboacc
+          cd openwrt
+          ##### other turboacc start
+          curl -sSL https://raw.githubusercontent.com/chenmozhijin/turboacc/luci/add_turboacc.sh -o add_turboacc.sh && bash add_turboacc.sh
+          ##### other turboacc end
           
-          cp -rf ./lede/target/linux/generic/hack-5.15/98* ./openwrt/target/linux/generic/hack-5.15/
-          ls -l openwrt/target/linux/generic/hack-5.15/9*
-          cp -rf ./lede/target/linux/generic/pending-5.15/613-netfilter_optional_tcp_window_check.patch ./openwrt/target/linux/generic/pending-5.15/
-   
+          ##### lede turboacc start
+          #ls -l openwrt/target/linux/generic/hack-5.15/9*
+          #cp lede/target/linux/generic/hack-5.15/952-add-net-conntrack-events-support-multiple-registrant.patch openwrt/target/linux/generic/hack-5.15/952-add-net-conntrack-events-support-multiple-registrant.patch
+          #cp lede/target/linux/generic/hack-5.15/953-net-patch-linux-kernel-to-support-shortcut-fe.patch openwrt/target/linux/generic/hack-5.15/953-net-patch-linux-kernel-to-support-shortcut-fe.patch
+          
+          #cp -rf ./lede/target/linux/generic/hack-5.15/98* ./openwrt/target/linux/generic/hack-5.15/
+          #ls -l openwrt/target/linux/generic/hack-5.15/9*
+          #cp -rf ./lede/target/linux/generic/pending-5.15/613-netfilter_optional_tcp_window_check.patch ./openwrt/target/linux/generic/pending-5.15
+          ##### lede turboacc end
           echo 'CONFIG_DEFAULT_luci-app-turboacc=y' >> ./config-k3
           echo 'CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_SHORTCUT_FE=y' >> ./config-k3
           echo 'CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_BBR_CCA=y' >> ./config-k3
           echo 'CONFIG_PACKAGE_kmod-ipt-conntrack=y' >> ./config-k3
           echo 'CONFIG_PACKAGE_kmod-ipt-conntrack-extra=y' >> ./config-k3
           echo 'CONFIG_PACKAGE_kmod-ipt-conntrack-label=y' >> ./config-k3
-          
+          #############
           cp -arf lede/package/lean/adbyby/ openwrt/package/lean/
           cp -arf lede/feeds/packages/net/vlmcsd/ openwrt/package/lean/
           #网易云音乐
