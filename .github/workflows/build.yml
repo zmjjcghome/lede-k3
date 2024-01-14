@@ -34,7 +34,7 @@ env:
   UPLOAD_ARTIFACT: false
   SSH_ACTIONS: false
   KERNEL_TEST: false
-  KERNEL_OP_TEST: false
+  KERNEL_OP_TEST: true
   KERNEL_SCREEN: false
   ONLY_K3: true
   BUILD_GO: true
@@ -157,8 +157,13 @@ jobs:
           sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-adbyby-plus/Makefile
           sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-vlmcsd/Makefile
           sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-turboacc/Makefile
-          
+
+          ls -l openwrt/target/linux/generic/hack-5.15/9*
+          cp lede/target/linux/generic/hack-5.15/952-add-net-conntrack-events-support-multiple-registrant.patch openwrt/target/linux/generic/hack-5.15/952-add-net-conntrack-events-support-multiple-registrant.patch
           cp lede/target/linux/generic/hack-5.15/953-net-patch-linux-kernel-to-support-shortcut-fe.patch openwrt/target/linux/generic/hack-5.15/953-net-patch-linux-kernel-to-support-shortcut-fe.patch
+          
+          cp -rf ./lede/target/linux/generic/hack-5.15/98* ./openwrt/target/linux/generic/hack-5.15/
+          ls -l openwrt/target/linux/generic/hack-5.15/9*
           #echo 'CONFIG_DEFAULT_luci-app-turboacc=y' >> ./config-k3
           #echo 'CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_SHORTCUT_FE=y' >> ./config-k3
           #echo 'CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_BBR_CCA=y' >> ./config-k3
