@@ -34,7 +34,7 @@ env:
   UPLOAD_ARTIFACT: false
   SSH_ACTIONS: false
   KERNEL_TEST: false
-  KERNEL_OP_TEST: false
+  KERNEL_OP_TEST: true
   KERNEL_SCREEN: false
   ONLY_K3: true
   BUILD_GO: true
@@ -164,6 +164,8 @@ jobs:
           
           cp -rf ./lede/target/linux/generic/hack-5.15/98* ./openwrt/target/linux/generic/hack-5.15/
           ls -l openwrt/target/linux/generic/hack-5.15/9*
+          cp -rf ./lede/target/linux/generic/pending-5.15/613-netfilter_optional_tcp_window_check.patch ./openwrt/target/linux/generic/pending-5.15/
+   
           echo 'CONFIG_DEFAULT_luci-app-turboacc=y' >> ./config-k3
           echo 'CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_SHORTCUT_FE=y' >> ./config-k3
           echo 'CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_BBR_CCA=y' >> ./config-k3
