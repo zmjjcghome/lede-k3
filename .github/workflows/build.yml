@@ -289,7 +289,8 @@ jobs:
           cd lede
           echo "make -j$(nproc) || make -j1 V=s"
           #make -j$(nproc) || make -j1 V=s
-          make -j4 || make -j1 V=s
+          #make -j4 || make -j1 V=s
+          make -j1 V=s
 
       - name: Compile firmware single
         if: env.BUILD_ALL == 'false'
