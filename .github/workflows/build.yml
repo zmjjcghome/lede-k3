@@ -32,7 +32,7 @@ env:
   UPLOAD_COWTRANSFER: false
   UPLOAD_WETRANSFER: true
   UPLOAD_ARTIFACT: false
-  SSH_ACTIONS: true
+  SSH_ACTIONS: false
   KERNEL_TEST: false
   KERNEL_OP_TEST: true
   KERNEL_SCREEN: false
@@ -163,6 +163,7 @@ jobs:
           ##### other turboacc start
           curl -sSL https://raw.githubusercontent.com/chenmozhijin/turboacc/luci/add_turboacc.sh -o add_turboacc.sh && bash add_turboacc.sh
           cd ..
+          rm -rf ./openwrt/package/lean/shortcut-fe
           ##### other turboacc end
           
           ##### lede turboacc start
