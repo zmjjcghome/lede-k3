@@ -260,10 +260,12 @@ jobs:
           cp ../config-k3 ./.config
           cp ../vermagic ./vermagic
           sed -i 's#grep.*vermagic.*#cp $(TOPDIR)/vermagic $(LINUX_DIR)/.vermagic#g' ./include/kernel-defaults.mk 
-          sed -i 's#Package/k3screenctrl#Package/k3screenctrll#g' ./package/zmjjcg/k3screenctrl_build/Makefile
-          sed -i 's#BuildPackage,k3screenctrl#BuildPackage,k3screenctrll#g' ./package/zmjjcg/k3screenctrl_build/Makefile
-          sed -i 's#DEPENDS:=+k3screenctrl#DEPENDS:=+k3screenctrll#g' ./package/zmjjcg/luci-app-k3screenctrl/Makefile
+          #sed -i 's#Package/k3screenctrl#Package/k3screenctrll#g' ./package/zmjjcg/k3screenctrl_build/Makefile
+          #sed -i 's#BuildPackage,k3screenctrl#BuildPackage,k3screenctrll#g' ./package/zmjjcg/k3screenctrl_build/Makefile
+          #sed -i 's#DEPENDS:=+k3screenctrl#DEPENDS:=+k3screenctrll#g' ./package/zmjjcg/luci-app-k3screenctrl/Makefile
           sed -i 's#192.168.1.1#192.168.50.1#g' ./package/base-files/files/bin/config_generate
+          #sed -i 's/.*k3screenctrl/#/g' ./config-k3
+          
           #打开dnsmasq的记录日志功能
           sed -i '/log-facility/d' ./package/lean/default-settings/files/zzz-default-settings
 
