@@ -80,6 +80,9 @@ jobs:
           git clone $REPO_URL -b $REPO_BRANCH lede
           git submodule update --init --recursive
           git submodule foreach git checkout master
+          git clone https://github.com/coolsnowwolf/routing
+          cd routing
+          git checkout 422aca11320aabfa4ec554a163dd0bf24d6991ec
           ls -lh zmjjcg
           # sudo mkdir -p -m 777 /mnt/openwrt/bin /mnt/openwrt/build_dir/host /mnt/openwrt/build_dir/hostpkg /mnt/openwrt/dl /mnt/openwrt/feeds /mnt/openwrt/staging_dir
           # ln -s /mnt/openwrt/bin ./bin
@@ -104,6 +107,7 @@ jobs:
           cd lede
           ./scripts/feeds update -a
           #./scripts/feeds install -a
+          cp -rf ../routing/batman-adv/patches/99* ./feeds/routing/batman-adv/patches/
           ls -l
           
       - name: kernel test
