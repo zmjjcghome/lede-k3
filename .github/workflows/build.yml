@@ -82,7 +82,8 @@ jobs:
           git submodule foreach git checkout master
           git clone https://github.com/coolsnowwolf/routing
           cd routing
-          git checkout 422aca11320aabfa4ec554a163dd0bf24d6991ec
+          git checkout 160eae1216c166153f1c0d303f41f33ca0032c2c
+          #422aca11320aabfa4ec554a163dd0bf24d6991ec
           cd ..
           ls -lh zmjjcg
           # sudo mkdir -p -m 777 /mnt/openwrt/bin /mnt/openwrt/build_dir/host /mnt/openwrt/build_dir/hostpkg /mnt/openwrt/dl /mnt/openwrt/feeds /mnt/openwrt/staging_dir
@@ -108,10 +109,11 @@ jobs:
           cd lede
           ./scripts/feeds update -a
           #./scripts/feeds install -a
-          #cp -rf ../routing/batman-adv/patches/99* ./feeds/routing/batman-adv/patches/
+          rm -rf ./feeds/routing/batman-adv
+          cp -rf ../routing/batman-adv ./feeds/routing/
           ls -l
           cd ./feeds/routing
-          git checkout 160eae1216c166153f1c0d303f41f33ca0032c2c
+          #git checkout 160eae1216c166153f1c0d303f41f33ca0032c2c
           ls -l ./batman-adv/patches/
       - name: kernel test
         if: env.KERNEL_TEST == 'true'
