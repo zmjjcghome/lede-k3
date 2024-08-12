@@ -196,6 +196,7 @@ jobs:
           #############
           cp -arf lede/package/lean/adbyby/ openwrt/package/lean/
           cp -arf lede/feeds/packages/net/vlmcsd/ openwrt/package/lean/
+          cp -arf lede/feeds/packages/net/shadowsocks-libev/ openwrt/package/lean/
           #网易云音乐
           git clone https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic
           echo "--------------1"
@@ -241,6 +242,7 @@ jobs:
           
           ./scripts/feeds update -a
           #./scripts/feeds install -a
+          
           ls -l
 
       - name: ONLY_K3
