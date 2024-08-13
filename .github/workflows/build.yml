@@ -239,6 +239,7 @@ jobs:
           #sed -i 's#CONFIG_PACKAGE_default-settings=y#CONFIG_PACKAGE_default-settings=m#g' ./config-k3
           echo 'CONFIG_PACKAGE_my-op-default-settings=y' >> ./config-k3
           sed -i 's/.*k3screenctrll/#/g' ./config-k3
+          sed -i 's/.*v2ray/#/g' ./config-k3
 
           #cat config-k3 |grep sfe
           #cat config-k3 |grep short
