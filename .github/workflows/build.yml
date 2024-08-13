@@ -160,6 +160,8 @@ jobs:
           mkdir openwrt/package/lean
           cp -rf ./lede/package/lean ./openwrt/package/
           cp -rf ./lede/package/libs/pcre ./openwrt/package/libs/
+          rm -rf ./openwrt/package/libs/mbedtls
+          cp -rf ./lede/package/libs/mbedtls ./openwrt/package/libs/
           #cp -arf lede/package/lean/default-settings openwrt/package/lean/
           cp -arf lede/feeds/luci/applications/luci-app-adbyby-plus/ openwrt/package/lean/
           cp -arf lede/feeds/luci/applications/luci-app-vlmcsd/ openwrt/package/lean/
