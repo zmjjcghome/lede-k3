@@ -149,7 +149,9 @@ jobs:
         if: env.KERNEL_OP_TEST == 'true'
         run: |
           git clone https://github.com/openwrt/openwrt
-
+          cd openwrt
+          git checkout openwrt-23.05
+          cd ..
           cp config-k3-op config-k3
 
           cd lede
@@ -159,10 +161,14 @@ jobs:
           cd ..
           mkdir openwrt/package/lean
           cp -rf ./lede/package/lean ./openwrt/package/
-          cp -rf ./lede/package/libs/pcre ./openwrt/package/libs/
-          #rm -rf ./openwrt/package/libs/mbedtls
-          #cp -rf ./lede/package/libs/mbedtls ./openwrt/package/libs/
-          cp ./999-fix-MBEDTLS_CIPHER_MODE_CFB.patch ./openwrt/package/libs/mbedtls/patches/
+          ###fix openwrt main branch drop packages/net/shadowsocks-libev  start
+          ##cp -rf ./lede/package/libs/pcre ./openwrt/package/libs/  
+          ##rm -rf ./openwrt/package/libs/mbedtls
+          ##cp -rf ./lede/package/libs/mbedtls ./openwrt/package/libs/
+          
+          #cp ./999-fix-MBEDTLS_CIPHER_MODE_CFB.patch ./openwrt/package/libs/mbedtls/patches/
+          #cp -arf lede/feeds/packages/net/shadowsocks-libev/ openwrt/package/lean/ 
+          ###fix openwrt main branch drop packages/net/shadowsocks-libev  startend
           
           #cp -arf lede/package/lean/default-settings openwrt/package/lean/
           cp -arf lede/feeds/luci/applications/luci-app-adbyby-plus/ openwrt/package/lean/
@@ -201,7 +207,7 @@ jobs:
           #############
           cp -arf lede/package/lean/adbyby/ openwrt/package/lean/
           cp -arf lede/feeds/packages/net/vlmcsd/ openwrt/package/lean/
-          cp -arf lede/feeds/packages/net/shadowsocks-libev/ openwrt/package/lean/
+          
           #网易云音乐
           git clone https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic
           echo "--------------1"
