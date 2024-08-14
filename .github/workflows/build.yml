@@ -149,7 +149,10 @@ jobs:
         if: env.KERNEL_OP_TEST == 'true'
         run: |
           git clone https://github.com/openwrt/openwrt
+          git clone https://github.com/openwrt/packages
           cd openwrt
+          #git checkout openwrt-23.05
+          cd ../packages
           git checkout openwrt-23.05
           cd ..
           cp -rf config-k3-op config-k3
@@ -166,9 +169,9 @@ jobs:
           ##rm -rf ./openwrt/package/libs/mbedtls
           ##cp -rf ./lede/package/libs/mbedtls ./openwrt/package/libs/
           
-          #cp ./999-fix-MBEDTLS_CIPHER_MODE_CFB.patch ./openwrt/package/libs/mbedtls/patches/
-          #cp -arf lede/feeds/packages/net/shadowsocks-libev/ openwrt/package/lean/ 
-          ###fix openwrt main branch drop packages/net/shadowsocks-libev  startend
+          cp -arf packages/net/shadowsocks-libev/ openwrt/feeds/packages/net/
+          cp ./999-fix-MBEDTLS_CIPHER_MODE_CFB.patch .openwrt/feeds/packages/net/shadowsocks-libev/patches
+          ###fix openwrt main branch drop packages/net/shadowsocks-libev  end
           
           #cp -arf lede/package/lean/default-settings openwrt/package/lean/
           cp -arf lede/feeds/luci/applications/luci-app-adbyby-plus/ openwrt/package/lean/
