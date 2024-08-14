@@ -169,8 +169,10 @@ jobs:
           ##rm -rf ./openwrt/package/libs/mbedtls
           ##cp -rf ./lede/package/libs/mbedtls ./openwrt/package/libs/
           
-          cp -arf packages/net/shadowsocks-libev/ openwrt/feeds/packages/net/
-          cp ./999-fix-MBEDTLS_CIPHER_MODE_CFB.patch .openwrt/feeds/packages/net/shadowsocks-libev/patches
+          cp -arf packages/net/shadowsocks-libev/ openwrt/package/lean/
+          #openwrt/feeds/packages/net/
+          cp ./999-fix-MBEDTLS_CIPHER_MODE_CFB.patch openwrt/package/lean/shadowsocks-libev/patches
+          #openwrt/feeds/packages/net/shadowsocks-libev/patches
           ###fix openwrt main branch drop packages/net/shadowsocks-libev  end
           
           #cp -arf lede/package/lean/default-settings openwrt/package/lean/
@@ -437,10 +439,12 @@ jobs:
           #echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
           #./transfer fic --no-progress $FILETARNAME 2>&1 | tee fic.log
           #echo "::warning file=1fichier.com::$(cat fic.log | grep https)"
-          ./transfer muse --no-progress $FILETARNAME 2>&1 | tee muse.log
-          echo "::warning file=musetransfer.com::$(cat muse.log | grep https)"
+          #./transfer muse --no-progress $FILETARNAME 2>&1 | tee muse.log
+          #echo "::warning file=musetransfer.com::$(cat muse.log | grep https)"
           ./transfer null --no-progress $FILETARNAME 2>&1 | tee null.log
           echo "::warning file=0x0.st::$(cat null.log | grep https)"
-          ./transfer gg --no-progress $FILETARNAME 2>&1 | tee gg.log
-          echo "::warning file=download.gg::$(cat gg.log | grep https)"
-
+          #./transfer gg --no-progress $FILETARNAME 2>&1 | tee gg.log
+          #echo "::warning file=download.gg::$(cat gg.log | grep https)"
+          ./transfer arp --no-progress $FILETARNAME 2>&1 | tee arp.log
+          echo "::warning file=arp::$(cat arp.log | grep https)"
+          
