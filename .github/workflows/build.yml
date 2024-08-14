@@ -151,7 +151,7 @@ jobs:
           git clone https://github.com/openwrt/openwrt
           git clone https://github.com/openwrt/packages
           cd openwrt
-          #git checkout openwrt-23.05
+          git checkout openwrt-23.05
           cd ../packages
           git checkout openwrt-23.05
           cd ..
@@ -169,9 +169,9 @@ jobs:
           ##rm -rf ./openwrt/package/libs/mbedtls
           ##cp -rf ./lede/package/libs/mbedtls ./openwrt/package/libs/
           
-          cp -arf packages/net/shadowsocks-libev/ openwrt/package/lean/
+          #cp -arf packages/net/shadowsocks-libev/ openwrt/package/lean/
           #openwrt/feeds/packages/net/
-          cp ./999-fix-MBEDTLS_CIPHER_MODE_CFB.patch openwrt/package/lean/shadowsocks-libev/patches
+          #cp ./999-fix-MBEDTLS_CIPHER_MODE_CFB.patch openwrt/package/lean/shadowsocks-libev/patches
           #openwrt/feeds/packages/net/shadowsocks-libev/patches
           ###fix openwrt main branch drop packages/net/shadowsocks-libev  end
           
@@ -435,8 +435,8 @@ jobs:
           cd lede
           curl -fsSL git.io/file-transfer | sh
           #./transfer wet -s -p 16 --no-progress $FILETARNAME 2>&1 | tee wetransfer.log
-          #./transfer wet --no-progress $FILETARNAME 2>&1 | tee wetransfer.log
-          #echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
+          ./transfer wss --no-progress $FILETARNAME 2>&1 | tee wss.log
+          echo "::warning file=wss::$(cat wss.log | grep https)"
           #./transfer fic --no-progress $FILETARNAME 2>&1 | tee fic.log
           #echo "::warning file=1fichier.com::$(cat fic.log | grep https)"
           #./transfer muse --no-progress $FILETARNAME 2>&1 | tee muse.log
@@ -445,6 +445,4 @@ jobs:
           echo "::warning file=0x0.st::$(cat null.log | grep https)"
           #./transfer gg --no-progress $FILETARNAME 2>&1 | tee gg.log
           #echo "::warning file=download.gg::$(cat gg.log | grep https)"
-          ./transfer arp --no-progress $FILETARNAME 2>&1 | tee arp.log
-          echo "::warning file=arp::$(cat arp.log | grep https)"
-          
+                    
