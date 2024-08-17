@@ -6,7 +6,7 @@
 # 
 # <https://github.com/KFERMercer/OpenWrt-CI>
 # build
-name: build-lede-k3
+name: build-op-lede-k3
 
 on:
   workflow_dispatch:
