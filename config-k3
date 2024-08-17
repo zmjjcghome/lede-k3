@@ -3329,6 +3329,13 @@ CONFIG_PACKAGE_kmod-macvlan=y
 # CONFIG_PACKAGE_kmod-atm is not set
 # CONFIG_PACKAGE_kmod-ax25 is not set
 CONFIG_PACKAGE_kmod-batman-adv=y
+CONFIG_BATMAN_ADV_BATMAN_V=y
+CONFIG_BATMAN_ADV_BLA=y
+CONFIG_BATMAN_ADV_DAT=y
+CONFIG_BATMAN_ADV_NC=y
+CONFIG_BATMAN_ADV_MCAST=y
+# CONFIG_BATMAN_ADV_DEBUG is not set
+# CONFIG_BATMAN_ADV_TRACING is not set
 # CONFIG_PACKAGE_kmod-bonding is not set
 # CONFIG_PACKAGE_kmod-bpf-test is not set
 CONFIG_PACKAGE_kmod-dnsresolver=y
@@ -6975,10 +6982,10 @@ CONFIG_DRIVER_11AC_SUPPORT=y
 # CONFIG_PACKAGE_wpa-supplicant-p2p is not set
 # CONFIG_PACKAGE_wpa-supplicant-wolfssl is not set
 # CONFIG_PACKAGE_wpad is not set
-CONFIG_PACKAGE_wpad-basic=y
+CONFIG_PACKAGE_wpad-basic=m
 # CONFIG_PACKAGE_wpad-basic-openssl is not set
 # CONFIG_PACKAGE_wpad-basic-wolfssl is not set
-# CONFIG_PACKAGE_wpad-mesh-openssl is not set
+CONFIG_PACKAGE_wpad-mesh-openssl=y
 # CONFIG_PACKAGE_wpad-mesh-wolfssl is not set
 # CONFIG_PACKAGE_wpad-mini is not set
 # CONFIG_PACKAGE_wpad-openssl is not set
