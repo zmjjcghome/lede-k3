@@ -32,7 +32,7 @@ env:
 #  UPLOAD_FIRMWARE: false
   UPLOAD_COWTRANSFER: false
   UPLOAD_WETRANSFER: true
-  UPLOAD_ARTIFACT: true
+  UPLOAD_ARTIFACT: false
   SSH_ACTIONS: false
   KERNEL_TEST: false
   KERNEL_OP_TEST: false
@@ -420,6 +420,13 @@ jobs:
           name: OpenWrt_firmware
           path: ./lede/bin/targets/
 
+      - name: Deliver lede.tar.gz
+        uses: actions/upload-artifact@v4
+        with:
+          name: $FILETARNAME
+          path: ./lede/$FILETARNAME
+          compression-level: 0 # no compression
+          
       - name: Upload release asset
         if: github.event == 'release'
         uses: svenstaro/upload-release-action@v2
