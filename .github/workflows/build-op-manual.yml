@@ -152,7 +152,7 @@ jobs:
           git clone https://github.com/openwrt/openwrt
           git clone https://github.com/openwrt/packages
           cd openwrt
-          git checkout openwrt-23.05
+          #git checkout openwrt-23.05
           cd ../packages
           git checkout openwrt-23.05
           cd ..
@@ -170,7 +170,7 @@ jobs:
           ##rm -rf ./openwrt/package/libs/mbedtls
           ##cp -rf ./lede/package/libs/mbedtls ./openwrt/package/libs/
           
-          #cp -arf packages/net/shadowsocks-libev/ openwrt/package/lean/
+          cp -arf packages/net/shadowsocks-libev openwrt/package/lean/
           #openwrt/feeds/packages/net/
           #cp ./999-fix-MBEDTLS_CIPHER_MODE_CFB.patch openwrt/package/lean/shadowsocks-libev/patches
           #openwrt/feeds/packages/net/shadowsocks-libev/patches
