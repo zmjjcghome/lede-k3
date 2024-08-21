@@ -34,7 +34,7 @@ env:
   UPLOAD_WETRANSFER: true
   UPLOAD_ARTIFACT: true
   SSH_ACTIONS: false
-  KERNEL_TEST: true
+  KERNEL_TEST: false
   KERNEL_OP_TEST: false
   KERNEL_SCREEN: false
   ONLY_K3: true
