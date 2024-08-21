@@ -415,7 +415,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: op-k3.tar.gz
-          path: ./lede/${{FILETARNAME}}
+          path: ./lede/lede-k3.tar.gz
           compression-level: 0 # no compression
           
       - name: Upload release asset
