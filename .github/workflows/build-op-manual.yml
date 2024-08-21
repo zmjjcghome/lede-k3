@@ -170,7 +170,7 @@ jobs:
           ##rm -rf ./openwrt/package/libs/mbedtls
           ##cp -rf ./lede/package/libs/mbedtls ./openwrt/package/libs/
           
-          cp -arf packages/net/shadowsocks-libev openwrt/package/lean/
+          #cp -arf packages/net/shadowsocks-libev openwrt/package/lean/
           #openwrt/feeds/packages/net/
           #cp ./999-fix-MBEDTLS_CIPHER_MODE_CFB.patch openwrt/package/lean/shadowsocks-libev/patches
           #openwrt/feeds/packages/net/shadowsocks-libev/patches
@@ -261,6 +261,8 @@ jobs:
           
           ./scripts/feeds update -a
           #./scripts/feeds install -a
+          
+          cp -arf ../packages/net/shadowsocks-libev feeds/packages/net/
           
           ls -l
 
