@@ -423,7 +423,7 @@ jobs:
       - name: Deliver lede.tar.gz
         uses: actions/upload-artifact@v4
         with:
-          name: $FILETARNAME
+          name: lede-k3.tar.gz
           path: ./lede/lede-k3.tar.gz
           compression-level: 0 # no compression
           
