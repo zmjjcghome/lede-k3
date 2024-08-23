@@ -242,7 +242,9 @@ jobs:
           #rm -rf ./lede/package/lean/shortcut-fe
           #sed -i 's/.*-sfe/#/g' ./config-k3
           #sed -i 's/.*shortcut-fe/#/g' ./config-k3
+          
           sed -i 's/.*brcmfmac-firmware-4366c0-pcie/#/g' ./config-k3
+          
           #sed -i 's/.*CONFIG_PACKAGE_kmod-scsi/#/g' ./config-k3
           #sed -i 's#CONFIG_PACKAGE_ipv6helper=y#CONFIG_PACKAGE_ipv6helper=m#g' ./config-k3
           #sed -i 's#CONFIG_PACKAGE_autocore-arm=y#CONFIG_PACKAGE_autocore-arm=m#g' ./config-k3
