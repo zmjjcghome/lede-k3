@@ -152,7 +152,7 @@ jobs:
           git clone https://github.com/openwrt/openwrt
           git clone https://github.com/openwrt/packages
           cd openwrt
-          git checkout openwrt-23.05
+          #git checkout openwrt-23.05
           cd ../packages
           git checkout openwrt-23.05
           cd ..
@@ -170,11 +170,11 @@ jobs:
           ##rm -rf ./openwrt/package/libs/mbedtls
           ##cp -rf ./lede/package/libs/mbedtls ./openwrt/package/libs/
           
-          #cp -arf packages/net/shadowsocks-libev openwrt/package/lean/
+          cp -arf packages/net/shadowsocks-libev openwrt/package/lean/
           
           #openwrt/feeds/packages/net/
           
-          #cp ./999-fix-MBEDTLS_CIPHER_MODE_CFB.patch openwrt/package/lean/shadowsocks-libev/patches
+          cp ./999-fix-MBEDTLS_CIPHER_MODE_CFB.patch openwrt/package/lean/shadowsocks-libev/patches
           
           #openwrt/feeds/packages/net/shadowsocks-libev/patches
           ###fix openwrt main branch drop packages/net/shadowsocks-libev  end
@@ -243,7 +243,7 @@ jobs:
           #sed -i 's/.*-sfe/#/g' ./config-k3
           #sed -i 's/.*shortcut-fe/#/g' ./config-k3
           
-          sed -i 's/.*brcmfmac-firmware-4366c0-pcie/#/g' ./config-k3
+          #sed -i 's/.*brcmfmac-firmware-4366c0-pcie/#/g' ./config-k3
           
           #sed -i 's/.*CONFIG_PACKAGE_kmod-scsi/#/g' ./config-k3
           #sed -i 's#CONFIG_PACKAGE_ipv6helper=y#CONFIG_PACKAGE_ipv6helper=m#g' ./config-k3
