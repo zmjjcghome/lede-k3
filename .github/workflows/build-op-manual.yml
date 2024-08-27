@@ -152,7 +152,7 @@ jobs:
           git clone https://github.com/openwrt/openwrt
           git clone https://github.com/openwrt/packages
           cd openwrt
-          #git checkout openwrt-23.05
+          git checkout openwrt-23.05
           cd ../packages
           git checkout openwrt-23.05
           cd ..
@@ -264,7 +264,7 @@ jobs:
           #rm ./lede/target/linux/generic/pending-5.15/110*
           cd lede
           #sed -i 's#KERNEL_PATCHVER:=5.10#KERNEL_PATCHVER:=5.15#g' ./target/linux/bcm53xx/Makefile
-          sed -i 's/brcmfmac-firmware-4366c0-pcie/k3wifi/g' ./target/linux/bcm53xx/image/Makefile
+          #sed -i 's/brcmfmac-firmware-4366c0-pcie/k3wifi/g' ./target/linux/bcm53xx/image/Makefile
           ./scripts/feeds update -a
           #./scripts/feeds install -a
           
@@ -325,7 +325,7 @@ jobs:
           #sed -i 's/CONFIG_NFS_KERNEL_SERVER_V4=y/#CONFIG_NFS_KERNEL_SERVER_V4=y/g' ./.config
           #sed -i 's/CONFIG_PACKAGE_nfs/#CONFIG_PACKAGE_nfs/g' ./.config
 
-          #sed -i 's/CONFIG_PACKAGE_kmod-usb-storage-uas/#CONFIG_PACKAGE_kmod-usb-storage-uas/g' ./.config
+          sed -i 's/CONFIG_PACKAGE_kmod-usb-storage-uas/#CONFIG_PACKAGE_kmod-usb-storage-uas/g' ./.config
 
           sed -i 's/^[ \t]*//g' ./.config
           make defconfig
