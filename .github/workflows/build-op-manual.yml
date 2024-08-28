@@ -128,7 +128,7 @@ jobs:
           cd ..
           mkdir openwrt/package/lean
           cp -rf ./lede/package/lean ./openwrt/package/
-          cp -arf packages/net/shadowsocks-libev openwrt/package/lean/
+          #cp -arf packages/net/shadowsocks-libev openwrt/package/lean/
           cp -rf config-k3-op config-k3
           cd lede
           ./scripts/feeds update -a
