@@ -34,8 +34,8 @@ env:
   UPLOAD_WETRANSFER: true
   UPLOAD_ARTIFACT: false
   SSH_ACTIONS: false
-  KERNEL_TEST: false
-  KERNEL_OP_TEST: true
+  KERNEL_TEST: true
+  KERNEL_OP_TEST: false
   KERNEL_SCREEN: false
   ONLY_K3: true
   BUILD_GO: true
@@ -116,43 +116,30 @@ jobs:
           cd ./feeds/routing
           #git checkout 160eae1216c166153f1c0d303f41f33ca0032c2c
           ls -l ./batman-adv/patches/
-      - name: kernel test
+      - name: kernel 5.15 openwrt23.05
         if: env.KERNEL_TEST == 'true'
         run: |
-          #git clone https://github.com/openwrt/openwrt
-          #cp -rf ./openwrt/target/linux/bcm53xx/config-5.10 ./lede/target/linux/bcm53xx/
-          #sed -i 's#ioremap_nocache#ioremap#g' ./lede/target/linux/generic/hack-5.10/773-bgmac-add-srab-switch.patch
-          #cp -rf ./openwrt/target/linux/generic/hack-5.10/*add-srab-switch.patch ./lede/target/linux/generic/hack-5.10/
-          #sed -i 's#DEVICE_VENDOR := PHICOMM#\nDEVICE_DTS := bcm47094-phicomm-k3\n  DEVICE_VENDOR := PHICOMM#g' ./lede/target/linux/bcm53xx/image/Makefile
-          
-          #rm -rf ./lede/target/linux/bcm53xx/patches-5.10/*
-          #cp -rn ./openwrt/target/linux/bcm53xx/patches-5.10/* ./lede/target/linux/bcm53xx/patches-5.10/
-          
-          #cp -rf ./openwrt/target/linux/bcm53xx/patches-5.10/304-ARM-dts-BCM5301X-Specify-switch-ports-for-remaining-.patch ./lede/target/linux/bcm53xx/patches-5.10/
-          #cp -rn ./openwrt/target/linux/generic/backport-5.10/* ./lede/target/linux/generic/backport-5.10/
-          #cp -rn ./openwrt/target/linux/generic/hack-5.10/* ./lede/target/linux/generic/hack-5.10/
-          #cp -rn ./openwrt/target/linux/generic/pending-5.10/* ./lede/target/linux/generic/pending-5.10/
-          
-          #sed -i 's#CONFIG_LINUX_5_4#CONFIG_LINUX_5_10#g' ./config-k3
-          #sed -i 's#CONFIG_KERNEL_BLK_DEV_BSG=y#CONFIG_KERNEL_BLK_DEV_BSG=y\nCONFIG_BLK_DEV_BSG=y\nCONFIG_BLK_DEV_BSGLIB=y\nCONFIG_BLK_DEV_BSG_COMMON=y#g' ./config-k3
+          git clone https://github.com/openwrt/openwrt
+          git clone https://github.com/openwrt/packages
+          cd openwrt
+          git checkout openwrt-23.05
+          cd ../packages
+          git checkout openwrt-23.05
+          cd ..
+          mkdir openwrt/package/lean
+          cp -rf ./lede/package/lean ./openwrt/package/
+          cp -arf packages/net/shadowsocks-libev openwrt/package/lean/
+          cp -rf config-k3-op config-k3
           cd lede
-          #sed -i 's#KERNEL_PATCHVER:=5.4#KERNEL_PATCHVER:=5.15#g' ./target/linux/bcm53xx/Makefile
-          
-          sed -i 's#KERNEL_PATCHVER:=5.4#KERNEL_PATCHVER:=5.10#g' ./target/linux/bcm53xx/Makefile
-          #sed -i 's/TARGET_DEVICES/#TARGET_DEVICES/g' ./target/linux/bcm53xx/image/Makefile
-          #sed -i 's/#TARGET_DEVICES += phicomm_k3/TARGET_DEVICES += phicomm_k3/g' ./target/linux/bcm53xx/image/Makefile
-          #cat ./target/linux/bcm53xx/Makefile
           ./scripts/feeds update -a
-          #./scripts/feeds install -a
-          ls -l
-
+          
       - name: kernel op test
         if: env.KERNEL_OP_TEST == 'true'
         run: |
           git clone https://github.com/openwrt/openwrt
           git clone https://github.com/openwrt/packages
           cd openwrt
-          git checkout openwrt-23.05
+          #git checkout openwrt-23.05
           cd ../packages
           git checkout openwrt-23.05
           cd ..
@@ -171,14 +158,15 @@ jobs:
           ##cp -rf ./lede/package/libs/mbedtls ./openwrt/package/libs/
           
           cp -arf packages/net/shadowsocks-libev openwrt/package/lean/
-          
           #openwrt/feeds/packages/net/
           
           cp ./999-fix-MBEDTLS_CIPHER_MODE_CFB.patch openwrt/package/lean/shadowsocks-libev/patches
           
           #openwrt/feeds/packages/net/shadowsocks-libev/patches
           ###fix openwrt main branch drop packages/net/shadowsocks-libev  end
-          
+      
+      - name: copy lede software
+        run: |
           #cp -arf lede/package/lean/default-settings openwrt/package/lean/
           cp -arf lede/feeds/luci/applications/luci-app-adbyby-plus/ openwrt/package/lean/
           cp -arf lede/feeds/luci/applications/luci-app-vlmcsd/ openwrt/package/lean/
