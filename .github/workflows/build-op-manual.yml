@@ -123,17 +123,20 @@ jobs:
           git clone https://github.com/openwrt/packages
           cd openwrt
           git checkout openwrt-23.05
-          cd ../packages
-          git checkout openwrt-23.05
+          #cd ../packages
+          #git checkout openwrt-23.05
           cd ..
           mkdir openwrt/package/lean
           cp -rf ./lede/package/lean ./openwrt/package/
           cp -arf packages/net/shadowsocks-libev openwrt/package/lean/
-          rm -rf openwrt/feeds/packages/lang/golang
-          cp -arf lede/feeds/packages/lang/golang openwrt/feeds/packages/lang/golang
           cp -rf config-k3-op config-k3
           cd lede
           ./scripts/feeds update -a
+          cd ../openwrt
+          ./scripts/feeds update -a
+          cd ..
+          rm -rf openwrt/feeds/packages/lang/golang
+          cp -arf lede/feeds/packages/lang/golang openwrt/feeds/packages/lang/golang
           
       - name: kernel op test
         if: env.KERNEL_OP_TEST == 'true'
