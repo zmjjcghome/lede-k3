@@ -37,7 +37,7 @@ env:
   KERNEL_TEST: false
   KERNEL_OP_TEST: false
   KERNEL_SCREEN: false
-  ONLY_K3: true
+  ONLY_K3: false
   BUILD_GO: true
   BUILD_ALL: true
   FILETARNAME: lede-newifid1.tar.gz
@@ -112,20 +112,6 @@ jobs:
         run: |
           cd lede
           ./scripts/feeds update -a
-          #./scripts/feeds install -a
-          rm -rf ./feeds/routing/batman-adv
-          cp -rf ../routing/batman-adv ./feeds/routing/
-          ls -l
-          cd ./feeds/routing
-          #git checkout 160eae1216c166153f1c0d303f41f33ca0032c2c
-          ls -l ./batman-adv/patches/
-          #######fix umdns start#######
-          #ubus_call_umdns()=ubus.c@1385 Failed to look up test object for umdns
-          ##package/network/services/umdns/files下的umdns.json和umdns.init
-          cd ../../
-          cp ../openwrt/package/network/services/umdns/files/umdns.json ./package/network/services/umdns/files/umdns.json
-          cp ../openwrt/package/network/services/umdns/files/umdns.init ./package/network/services/umdns/files/umdns.init
-          #######fix umdns end#######
           
       - name: kernel test
         if: env.KERNEL_TEST == 'true'
@@ -304,11 +290,11 @@ jobs:
           cp ../config-d1 ./.config
           cp ../vermagic ./vermagic
           sed -i 's#grep.*vermagic.*#cp $(TOPDIR)/vermagic $(LINUX_DIR)/.vermagic#g' ./include/kernel-defaults.mk 
-          sed -i 's#Package/k3screenctrl#Package/k3screenctrll#g' ./package/zmjjcg/k3screenctrl_build/Makefile
-          sed -i 's#BuildPackage,k3screenctrl#BuildPackage,k3screenctrll#g' ./package/zmjjcg/k3screenctrl_build/Makefile
+          #sed -i 's#Package/k3screenctrl#Package/k3screenctrll#g' ./package/zmjjcg/k3screenctrl_build/Makefile
+          #sed -i 's#BuildPackage,k3screenctrl#BuildPackage,k3screenctrll#g' ./package/zmjjcg/k3screenctrl_build/Makefile
           #sed -i 's#DEPENDS:=+k3screenctrl#DEPENDS:=+k3screenctrll#g' ./package/zmjjcg/luci-app-k3screenctrl/Makefile
           sed -i 's#192.168.1.1#192.168.50.1#g' ./package/base-files/files/bin/config_generate
-          #sed -i 's/.*k3screenctrl/#/g' ./config-d1
+          
           
           #打开dnsmasq的记录日志功能
           sed -i '/log-facility/d' ./package/lean/default-settings/files/zzz-default-settings
