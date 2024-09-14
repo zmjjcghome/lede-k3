@@ -33,9 +33,9 @@ env:
   UPLOAD_COWTRANSFER: false
   UPLOAD_WETRANSFER: true
   UPLOAD_ARTIFACT: false
-  SSH_ACTIONS: true
+  SSH_ACTIONS: false
   KERNEL_TEST: false
-  KERNEL_OP_TEST: false
+  KERNEL_OP_TEST: true
   KERNEL_SCREEN: false
   ONLY_K3: false
   BUILD_GO: true
@@ -153,7 +153,7 @@ jobs:
           cd ../packages
           git checkout openwrt-23.05
           cd ..
-          cp -rf config-d1-op config-d1
+          #cp -rf config-d1-op config-d1
 
           cd lede
 
@@ -241,9 +241,9 @@ jobs:
           #sed -i 's#CONFIG_PACKAGE_autocore-arm=y#CONFIG_PACKAGE_autocore-arm=m#g' ./config-d1
           #sed -i 's#CONFIG_PACKAGE_default-settings=y#CONFIG_PACKAGE_default-settings=m#g' ./config-d1
           echo 'CONFIG_PACKAGE_my-op-default-settings=y' >> ./config-d1
-          sed -i 's/.*k3screenctrll/#/g' ./config-d1
-          sed -i 's/.*v2ray/#replaced-v2ray/g' ./config-d1
-          sed -i 's/.*V2ray/#replaced-V2ray/g' ./config-d1
+          
+          #sed -i 's/.*v2ray/#replaced-v2ray/g' ./config-d1
+          #sed -i 's/.*V2ray/#replaced-V2ray/g' ./config-d1
 
           #cat config-d1 |grep sfe
           #cat config-d1 |grep short
