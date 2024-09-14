@@ -146,8 +146,8 @@ jobs:
       - name: kernel op test
         if: env.KERNEL_OP_TEST == 'true'
         run: |
-          git clone https://github.com/openwrt/openwrt
-          git clone https://github.com/openwrt/packages
+          #git clone https://github.com/openwrt/openwrt
+          #git clone https://github.com/openwrt/packages
           cd openwrt
           git checkout openwrt-23.05
           cd ../packages
