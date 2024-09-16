@@ -38,7 +38,7 @@ env:
   KERNEL_OP_TEST: true
   KERNEL_SCREEN: false
   ONLY_K3: false
-  BUILD_GO: false
+  BUILD_GO: true
   BUILD_ALL: true
   FILETARNAME: lede-newifid1.tar.gz
   TZ: Asia/Shanghai
