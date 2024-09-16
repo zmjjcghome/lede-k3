@@ -231,6 +231,15 @@ jobs:
           #cp ./lede/target/linux/generic/hack-5.10/95* ./openwrt/target/linux/generic/hack-5.10/
           #cp ./lede/target/linux/generic/hack-5.15/95* ./openwrt/target/linux/generic/hack-5.15/
           echo "--------------5"
+          
+          cd lede
+          ./scripts/feeds update -a
+          cd ../openwrt
+          ./scripts/feeds update -a
+          cd ..
+          rm -rf openwrt/feeds/packages/lang/golang
+          cp -arf lede/feeds/packages/lang/golang openwrt/feeds/packages/lang/golang
+          
           mv lede baklede
           mv openwrt lede
           #rm -rf ./lede/package/lean/shortcut-fe
