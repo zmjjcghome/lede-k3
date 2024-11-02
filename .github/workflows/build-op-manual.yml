@@ -151,7 +151,7 @@ jobs:
           cp -rf config-k3-op config-k3
 
           cd lede
-          sed -i 's/;openwrt-23.05/g' ./feeds.conf.default
+          sed -i 's/;openwrt-23.05//g' ./feeds.conf.default
 
           ./scripts/feeds update -a
 
