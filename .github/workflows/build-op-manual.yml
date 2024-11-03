@@ -87,14 +87,7 @@ jobs:
           #422aca11320aabfa4ec554a163dd0bf24d6991ec
           cd ..
           ls -lh zmjjcg
-          # sudo mkdir -p -m 777 /mnt/openwrt/bin /mnt/openwrt/build_dir/host /mnt/openwrt/build_dir/hostpkg /mnt/openwrt/dl /mnt/openwrt/feeds /mnt/openwrt/staging_dir
-          # ln -s /mnt/openwrt/bin ./bin
-          # mkdir -p ./build_dir
-          # ln -s -f /mnt/openwrt/build_dir/host ./build_dir/host
-          # ln -s -f /mnt/openwrt/build_dir/hostpkg ./build_dir/hostpkg
-          # ln -s /mnt/openwrt/dl ./dl
-          # ln -s /mnt/openwrt/feeds ./feeds
-          # ln -s /mnt/openwrt/staging_dir ./staging_dir
+          
           ls -l
           df -h
           
@@ -109,13 +102,14 @@ jobs:
         run: |
           cd lede
           ./scripts/feeds update -a
-          #./scripts/feeds install -a
-          rm -rf ./feeds/routing/batman-adv
-          cp -rf ../routing/batman-adv ./feeds/routing/
+          
+          #rm -rf ./feeds/routing/batman-adv
+          #cp -rf ../routing/batman-adv ./feeds/routing/
           ls -l
           cd ./feeds/routing
           #git checkout 160eae1216c166153f1c0d303f41f33ca0032c2c
           ls -l ./batman-adv/patches/
+          
       - name: kernel 5.15 openwrt23.05
         if: env.KERNEL_TEST == 'true'
         run: |
@@ -247,25 +241,13 @@ jobs:
           sed -i 's/.*v2ray/#replaced-v2ray/g' ./config-k3
           sed -i 's/.*V2ray/#replaced-V2ray/g' ./config-k3
 
-          #cat config-k3 |grep sfe
-          #cat config-k3 |grep short
-          #rm ./lede/target/linux/bcm53xx/patches-5.10/*
-          #cp ./openwrt/target/linux/bcm53xx/patches-5.10/* ./lede/target/linux/bcm53xx/patches-5.10/
-          #cp ./openwrt/target/linux/generic/backport-5.10/*v5.13* ./lede/target/linux/generic/backport-5.10/
-          #cp ./openwrt/target/linux/bcm53xx/config-5.10 ./lede/target/linux/bcm53xx/
-          
-          #rm ./lede/target/linux/generic/pending-5.15/110*
           cd lede
-          #sed -i 's#KERNEL_PATCHVER:=5.10#KERNEL_PATCHVER:=5.15#g' ./target/linux/bcm53xx/Makefile
           
           #sed -i 's/brcmfmac-firmware-4366c0-pcie/k3wifi/g' ./target/linux/bcm53xx/image/Makefile
           #sed -i 's/.*brcmfmac-firmware-4366c0-pcie/#/g' ../config-k3
           #sed -i 's/CONFIG_PACKAGE_k3wifi=m/CONFIG_PACKAGE_k3wifi=y/g' ../config-k3
           
           ./scripts/feeds update -a
-          #./scripts/feeds install -a
-          
-          #cp -arf ../packages/net/shadowsocks-libev feeds/packages/net/
           
           ls -l
 
