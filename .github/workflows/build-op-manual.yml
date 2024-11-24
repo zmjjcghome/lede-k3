@@ -148,7 +148,7 @@ jobs:
           sed -i 's/;openwrt-23.05//g' ./feeds.conf.default
 
           ./scripts/feeds update -a
-          sed -i 's/PKG_VERSION:=svn1113/PKG_VERSION:=0.svn1113/g' ./feeds/packages/net/vlmcsd/Makefile
+          sed -i 's/PKG_VERSION:=svn1113/PKG_VERSION:=0.1113/g' ./feeds/packages/net/vlmcsd/Makefile
           
           cd ..
           mkdir openwrt/package/lean
