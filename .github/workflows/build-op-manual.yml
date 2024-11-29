@@ -149,7 +149,7 @@ jobs:
 
           ./scripts/feeds update -a
           #sed -i 's/PKG_VERSION/PKG_VERSIONTMP/g' ./feeds/packages/net/vlmcsd/Makefile
-          sed 's/$(PKG_VERSION)/svn1113/g' ./feeds/packages/net/vlmcsd/Makefile
+          sed -i 's/$(PKG_VERSION)/svn1113/g' ./feeds/packages/net/vlmcsd/Makefile
           sed -i 's/PKG_VERSION:=svn1113/PKG_VERSION:=0.1113/g' ./feeds/packages/net/vlmcsd/Makefile
           cat ./feeds/packages/net/vlmcsd/Makefile
           
