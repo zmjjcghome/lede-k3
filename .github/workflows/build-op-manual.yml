@@ -39,7 +39,7 @@ env:
   KERNEL_SCREEN: false
   ONLY_K3: true
   BUILD_GO: true
-  BUILD_ALL: false
+  BUILD_ALL: true
   FILETARNAME: lede-k3.tar.gz
   TZ: Asia/Shanghai
  
