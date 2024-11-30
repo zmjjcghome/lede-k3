@@ -39,7 +39,7 @@ env:
   KERNEL_SCREEN: false
   ONLY_K3: true
   BUILD_GO: true
-  BUILD_ALL: true
+  BUILD_ALL: false
   FILETARNAME: lede-k3.tar.gz
   TZ: Asia/Shanghai
  
@@ -148,12 +148,12 @@ jobs:
           sed -i 's/;openwrt-23.05//g' ./feeds.conf.default
 
           ./scripts/feeds update -a
-          #######vlmcsd fix#####################
+          #######vlmcsd apk fix#####################
           ##sed -i 's/PKG_VERSION/PKG_VERSIONTMP/g' ./feeds/packages/net/vlmcsd/Makefile
-          #sed -i 's/$(PKG_VERSION)/svn1113/g' ./feeds/packages/net/vlmcsd/Makefile
-          #sed -i 's/PKG_VERSION:=svn1113/PKG_VERSION:=0.1113/g' ./feeds/packages/net/vlmcsd/Makefile
-          #cat ./feeds/packages/net/vlmcsd/Makefile
-          #######vlmcsd fix#####################
+          sed -i 's/$(PKG_VERSION)/svn1113/g' ./feeds/packages/net/vlmcsd/Makefile
+          sed -i 's/PKG_VERSION:=svn1113/PKG_VERSION:=0.1113\n PKG_BUILD_DIR:=$(BUILD_DIR)\/vlmcsd-svn1113/g' ./feeds/packages/net/vlmcsd/Makefile
+          cat ./feeds/packages/net/vlmcsd/Makefile
+          #######vlmcsd apk fix#####################
           
           cd ..
           mkdir openwrt/package/lean
@@ -351,7 +351,7 @@ jobs:
           make tools/install -j$(nproc) 
           make toolchain/install -j$(nproc) 
           make target/compile -j$(nproc) 
-          make  package/transfer/compile -j$(nproc) V=s
+          make  package/vlmcsd/compile -j$(nproc) V=s
           
 
 
