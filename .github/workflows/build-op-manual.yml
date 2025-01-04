@@ -33,7 +33,7 @@ env:
   UPLOAD_COWTRANSFER: false
   UPLOAD_WETRANSFER: true
   UPLOAD_ARTIFACT: false
-  SSH_ACTIONS: false
+  SSH_ACTIONS: true
   KERNEL_TEST: false
   KERNEL_OP_TEST: true
   KERNEL_SCREEN: false
@@ -63,7 +63,7 @@ jobs:
         env:
           DEBIAN_FRONTEND: noninteractive
         run: |
-          docker rmi $(docker images -q)
+          #docker rmi $(docker images -q)
           #`docker images -q`
           sudo -E apt-get -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* mysql* php* android*
           sudo rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/apt/sources.list.d
