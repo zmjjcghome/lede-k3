@@ -187,8 +187,10 @@ jobs:
           #sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-turboacc/Makefile
           sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-accesscontrol/Makefile
 
-          ##  add turboacc
+          ##  add luci-app-accesscontrol
           echo 'CONFIG_DEFAULT_luci-app-accesscontrol=y' >> ./config-k3
+          echo 'CONFIG_PACKAGE_luci-app-accesscontrol=y' >> ./config-k3
+          
           
           ##  add turboacc
           cd openwrt
