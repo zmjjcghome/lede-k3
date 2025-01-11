@@ -179,12 +179,17 @@ jobs:
           cp -arf lede/feeds/luci/applications/luci-app-vlmcsd/ openwrt/package/lean/
           cp -arf lede/feeds/luci/applications/luci-app-easymesh openwrt/package/lean/
           #cp -arf lede/feeds/luci/applications/luci-app-turboacc/ openwrt/package/lean/
+          cp -arf lede/feeds/luci/applications/luci-app-accesscontrol openwrt/package/lean/
           ls -l openwrt/package/lean/
           sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-adbyby-plus/Makefile
           sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-vlmcsd/Makefile
           sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-easymesh/Makefile
           #sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-turboacc/Makefile
+          sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-accesscontrol/Makefile
 
+          ##  add turboacc
+          echo 'CONFIG_DEFAULT_luci-app-accesscontrol=y' >> ./config-k3
+          
           ##  add turboacc
           cd openwrt
           ##### other turboacc start
