@@ -328,6 +328,10 @@ jobs:
           #sed -i 's/CONFIG_NFS_KERNEL_SERVER_V4=y/#CONFIG_NFS_KERNEL_SERVER_V4=y/g' ./.config
           #sed -i 's/CONFIG_PACKAGE_nfs/#CONFIG_PACKAGE_nfs/g' ./.config
 
+          # remove icu
+          sed -i 's/CONFIG_PACKAGE_icu/#CONFIG_PACKAGE_icu/g' ./.config
+
+          
           sed -i 's/CONFIG_PACKAGE_kmod-usb-storage-uas/#CONFIG_PACKAGE_kmod-usb-storage-uas/g' ./.config
 
           sed -i 's/^[ \t]*//g' ./.config
