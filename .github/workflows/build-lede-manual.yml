@@ -337,6 +337,9 @@ jobs:
           sed -i 's/^[ \t]*//g' ./.config
           make defconfig
           
+          # remove icu
+          sed -i 's/CONFIG_PACKAGE_icu/#CONFIG_PACKAGE_icu/g' ./.config
+
       - name: SSH connection to Actions
         uses: mxschmitt/action-tmate@v3
         if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'ssh')
