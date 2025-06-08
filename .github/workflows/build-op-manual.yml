@@ -49,7 +49,7 @@ jobs:
 
     name: Build OpenWrt firmware
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     #ubuntu-22.04 latest
 
     #if: github.event.repository.owner.id == github.event.sender.id
