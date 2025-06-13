@@ -31,7 +31,8 @@ env:
 #  UPLOAD_BIN_DIR: false
 #  UPLOAD_FIRMWARE: false
   UPLOAD_COWTRANSFER: false
-  UPLOAD_WETRANSFER: true
+  UPLOAD_WETRANSFER: false
+  UPLOAD_WSS_BY_PY: true
   UPLOAD_ARTIFACT: false
   SSH_ACTIONS: false
   KERNEL_TEST: false
@@ -430,7 +431,7 @@ jobs:
 
 
 #    - name: Test 
-#      run: go test -v .
+#      run: go test -v .UPLOAD_WSS_BY_PY
       - name: Upload firmware to cowtransfer
         if: env.UPLOAD_COWTRANSFER == 'true' || contains(github.event.action, 'ssh')
         run: |
@@ -456,4 +457,14 @@ jobs:
           echo "::warning file=0x0.st::$(cat null.log | grep https)"
           #./transfer gg --no-progress $FILETARNAME 2>&1 | tee gg.log
           #echo "::warning file=download.gg::$(cat gg.log | grep https)"
-                    
+
+      - name: Upload firmware to wenshushu by py
+        if: env.UPLOAD_WSS_BY_PY == 'true' || contains(github.event.action, 'ssh')
+        run: |
+          ls -l
+          pip install requests base58 pycryptodomex
+          cd lede
+          git clone https://github.com/Aruelius/wenshushu
+          cd wenshushu
+          python wss.py upload ../$FILETARNAME 2>&1 | tee wenshushu.log
+          echo "::warning file=wenshushu.com::$(cat wenshushu.log | grep https)"
