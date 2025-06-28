@@ -113,6 +113,7 @@ jobs:
       - name: Update feeds
         run: |
           cd lede
+          sed -i 's/;openwrt-23.05//g' ./feeds.conf.default
           ./scripts/feeds update -a
           
       - name: kernel test
