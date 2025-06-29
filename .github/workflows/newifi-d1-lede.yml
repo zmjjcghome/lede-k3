@@ -196,23 +196,23 @@ jobs:
           ##  add turboacc
           
           ##### lede turboacc start
-          cp -arf lede/feeds/luci/applications/luci-app-turboacc/ openwrt/package/lean/
-          sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-turboacc/Makefile
+          #cp -arf lede/feeds/luci/applications/luci-app-turboacc/ openwrt/package/lean/
+          #sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-turboacc/Makefile
           
-          #ls -l openwrt/target/linux/generic/hack-5.15/9*
-          #cp lede/target/linux/generic/hack-5.15/952-add-net-conntrack-events-support-multiple-registrant.patch openwrt/target/linux/generic/hack-5.15/952-add-net-conntrack-events-support-multiple-registrant.patch
-          #cp lede/target/linux/generic/hack-5.15/953-net-patch-linux-kernel-to-support-shortcut-fe.patch openwrt/target/linux/generic/hack-5.15/953-net-patch-linux-kernel-to-support-shortcut-fe.patch
+          ##ls -l openwrt/target/linux/generic/hack-5.15/9*
+          ##cp lede/target/linux/generic/hack-5.15/952-add-net-conntrack-events-support-multiple-registrant.patch openwrt/target/linux/generic/hack-5.15/952-add-net-conntrack-events-support-multiple-registrant.patch
+          ##cp lede/target/linux/generic/hack-5.15/953-net-patch-linux-kernel-to-support-shortcut-fe.patch openwrt/target/linux/generic/hack-5.15/953-net-patch-linux-kernel-to-support-shortcut-fe.patch
           
-          #cp -rf ./lede/target/linux/generic/hack-5.15/98* ./openwrt/target/linux/generic/hack-5.15/
-          #ls -l openwrt/target/linux/generic/hack-5.15/9*
-          #cp -rf ./lede/target/linux/generic/pending-5.15/613-netfilter_optional_tcp_window_check.patch ./openwrt/target/linux/generic/pending-5.15
+          ##cp -rf ./lede/target/linux/generic/hack-5.15/98* ./openwrt/target/linux/generic/hack-5.15/
+          ##ls -l openwrt/target/linux/generic/hack-5.15/9*
+          ##cp -rf ./lede/target/linux/generic/pending-5.15/613-netfilter_optional_tcp_window_check.patch ./openwrt/target/linux/generic/pending-5.15
           ##### lede turboacc end
           
           ##### other turboacc start
-          #cd openwrt
-          #curl -sSL https://raw.githubusercontent.com/chenmozhijin/turboacc/luci/add_turboacc.sh -o add_turboacc.sh && bash add_turboacc.sh
-          #cd ..
-          #rm -rf ./openwrt/package/lean/shortcut-fe
+          cd openwrt
+          curl -sSL https://raw.githubusercontent.com/chenmozhijin/turboacc/luci/add_turboacc.sh -o add_turboacc.sh && bash add_turboacc.sh
+          cd ..
+          rm -rf ./openwrt/package/lean/shortcut-fe
           ##### other turboacc end
           
           echo 'CONFIG_DEFAULT_luci-app-turboacc=y' >> ./config-d1
