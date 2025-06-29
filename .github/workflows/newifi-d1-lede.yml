@@ -162,6 +162,13 @@ jobs:
 
           ./scripts/feeds update -a
 
+          #######vlmcsd apk fix#####################
+          ##sed -i 's/PKG_VERSION/PKG_VERSIONTMP/g' ./feeds/packages/net/vlmcsd/Makefile
+          sed -i 's/$(PKG_VERSION)/svn1113/g' ./feeds/packages/net/vlmcsd/Makefile
+          sed -i 's/PKG_VERSION:=svn1113/PKG_VERSION:=0.1113\n PKG_BUILD_DIR:=$(BUILD_DIR)\/vlmcsd-svn1113/g' ./feeds/packages/net/vlmcsd/Makefile
+          cat ./feeds/packages/net/vlmcsd/Makefile
+          #######vlmcsd apk fix#####################
+          
           cd ..
           mkdir openwrt/package/lean
           cp -rf ./lede/package/lean ./openwrt/package/
@@ -213,6 +220,7 @@ jobs:
           #############
           cp -arf lede/package/lean/adbyby/ openwrt/package/lean/
           cp -arf lede/feeds/packages/net/vlmcsd/ openwrt/package/lean/
+          
           
           #网易云音乐
           git clone https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic
