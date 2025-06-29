@@ -225,6 +225,10 @@ jobs:
           cp -arf lede/package/lean/adbyby/ openwrt/package/lean/
           cp -arf lede/feeds/packages/net/vlmcsd/ openwrt/package/lean/
           
+          #####add apk ######
+          echo 'CONFIG_PACKAGE_apk-mbedtls=y' >> ./config-d1
+          CONFIG_PACKAGE_opkg=y
+          sed -i 's/CONFIG_PACKAGE_opkg=y/#CONFIG_PACKAGE_opkg=y/g' ./config-d1
           
           #网易云音乐
           git clone https://github.com/UnblockNeteaseMusic/luci-app-unblockneteasemusic
