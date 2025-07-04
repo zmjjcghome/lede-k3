@@ -184,7 +184,7 @@ jobs:
           cp -arf lede/feeds/luci/applications/luci-app-easymesh openwrt/package/lean/
           #cp -arf lede/feeds/luci/applications/luci-app-turboacc/ openwrt/package/lean/
           cp -arf lede/feeds/luci/applications/luci-app-accesscontrol openwrt/package/lean/
-          cp -arf kiddin9/kwrt-packages/luci-app-passwall openwrt/package/lean/
+          cp -arf kwrt-packages/luci-app-passwall openwrt/package/lean/
           ls -l openwrt/package/lean/
           sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-adbyby-plus/Makefile
           sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-vlmcsd/Makefile
