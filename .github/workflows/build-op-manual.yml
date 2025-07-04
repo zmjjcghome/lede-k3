@@ -194,6 +194,7 @@ jobs:
           sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-passwall/Makefile
           
           ## add luci-app-passwall
+          echo 'CONFIG_DEFAULT_luci-app-passwall=y' >> ./config-k3
           echo 'CONFIG_PACKAGE_luci-app-passwall=y' >> ./config-k3
 
           
