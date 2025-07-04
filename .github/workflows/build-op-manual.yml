@@ -141,6 +141,7 @@ jobs:
         run: |
           git clone https://github.com/openwrt/openwrt
           git clone https://github.com/openwrt/packages
+          git clone https://github.com/kiddin9/kwrt-packages
           cd openwrt
           #git checkout openwrt-23.05
           cd ../packages
@@ -183,13 +184,19 @@ jobs:
           cp -arf lede/feeds/luci/applications/luci-app-easymesh openwrt/package/lean/
           #cp -arf lede/feeds/luci/applications/luci-app-turboacc/ openwrt/package/lean/
           cp -arf lede/feeds/luci/applications/luci-app-accesscontrol openwrt/package/lean/
+          cp -arf kiddin9/kwrt-packages/luci-app-passwall openwrt/package/lean/
           ls -l openwrt/package/lean/
           sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-adbyby-plus/Makefile
           sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-vlmcsd/Makefile
           sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-easymesh/Makefile
           #sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-turboacc/Makefile
           sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-accesscontrol/Makefile
+          sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-passwall/Makefile
+          
+          ## add luci-app-passwall
+          echo 'CONFIG_PACKAGE_luci-app-passwall=y' >> ./config-k3
 
+          
           ##  add luci-app-accesscontrol
           echo 'CONFIG_DEFAULT_luci-app-accesscontrol=y' >> ./config-k3
           echo 'CONFIG_PACKAGE_luci-app-accesscontrol=y' >> ./config-k3
