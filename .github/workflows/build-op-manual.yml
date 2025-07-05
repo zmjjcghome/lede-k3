@@ -182,9 +182,6 @@ jobs:
           cp -arf lede/feeds/luci/applications/luci-app-easymesh openwrt/package/lean/
           #cp -arf lede/feeds/luci/applications/luci-app-turboacc/ openwrt/package/lean/
           cp -arf lede/feeds/luci/applications/luci-app-accesscontrol openwrt/package/lean/
-          cp -arf kwrt-packages/geoview openwrt/package/lean/
-          cp -arf kwrt-packages/trojan-plus openwrt/package/lean/
-          cp -arf kwrt-packages/luci-app-passwall openwrt/package/lean/
           
           ls -l openwrt/package/lean/
           sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-adbyby-plus/Makefile
@@ -192,9 +189,14 @@ jobs:
           sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-easymesh/Makefile
           #sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-turboacc/Makefile
           sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-accesscontrol/Makefile
-          sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-passwall/Makefile
           
-          ## add luci-app-passwall
+          ########## add luci-app-passwall start
+          cp -arf kwrt-packages/geoview openwrt/package/lean/
+          cp -arf kwrt-packages/trojan-plus openwrt/package/lean/
+          cp -arf kwrt-packages/luci-app-passwall openwrt/package/lean/
+          sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-passwall/Makefile
+          sed -i 's/CONFIG_BUSYBOX_CONFIG_UNZIP.*/#/g' ./config-k3
+          
           echo 'CONFIG_DEFAULT_luci-app-passwall=y' >> ./config-k3
           echo 'CONFIG_PACKAGE_luci-app-passwall=y' >> ./config-k3
           # Configuration
@@ -219,6 +221,7 @@ jobs:
           #CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Xray=y
           # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Xray_Plugin is not set
           # end of Configuration
+          ########## add luci-app-passwall end
 
           
           ##  add luci-app-accesscontrol
