@@ -185,6 +185,9 @@ jobs:
           #cp -arf lede/feeds/luci/applications/luci-app-turboacc/ openwrt/package/lean/
           cp -arf lede/feeds/luci/applications/luci-app-accesscontrol openwrt/package/lean/
           cp -arf kwrt-packages/luci-app-passwall openwrt/package/lean/
+          cp -arf kwrt-packages/geoview openwrt/package/lean/
+          cp -arf kwrt-packages/trojan-plus openwrt/package/lean/
+          
           ls -l openwrt/package/lean/
           sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-adbyby-plus/Makefile
           sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-vlmcsd/Makefile
@@ -197,8 +200,8 @@ jobs:
           echo 'CONFIG_DEFAULT_luci-app-passwall=y' >> ./config-k3
           echo 'CONFIG_PACKAGE_luci-app-passwall=y' >> ./config-k3
           # Configuration
-          echo '# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Geoview is not set' >> ./config-k3
-          echo '# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_Plus is not set' >> ./config-k3
+          #echo '# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Geoview is not set' >> ./config-k3
+          #echo '# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_Plus is not set' >> ./config-k3
           # end of Configuration
 
           ##  add luci-app-accesscontrol
