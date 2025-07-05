@@ -148,10 +148,8 @@ jobs:
           git checkout openwrt-23.05
           cd ..
           cp -rf config-k3-op config-k3
-
           cd lede
           sed -i 's/;openwrt-23.05//g' ./feeds.conf.default
-
           ./scripts/feeds update -a
           #######vlmcsd apk fix#####################
           ##sed -i 's/PKG_VERSION/PKG_VERSIONTMP/g' ./feeds/packages/net/vlmcsd/Makefile
@@ -184,9 +182,9 @@ jobs:
           cp -arf lede/feeds/luci/applications/luci-app-easymesh openwrt/package/lean/
           #cp -arf lede/feeds/luci/applications/luci-app-turboacc/ openwrt/package/lean/
           cp -arf lede/feeds/luci/applications/luci-app-accesscontrol openwrt/package/lean/
-          cp -arf kwrt-packages/luci-app-passwall openwrt/package/lean/
           cp -arf kwrt-packages/geoview openwrt/package/lean/
           cp -arf kwrt-packages/trojan-plus openwrt/package/lean/
+          cp -arf kwrt-packages/luci-app-passwall openwrt/package/lean/
           
           ls -l openwrt/package/lean/
           sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-adbyby-plus/Makefile
@@ -200,12 +198,31 @@ jobs:
           echo 'CONFIG_DEFAULT_luci-app-passwall=y' >> ./config-k3
           echo 'CONFIG_PACKAGE_luci-app-passwall=y' >> ./config-k3
           # Configuration
-          #echo '# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Geoview is not set' >> ./config-k3
-          #echo '# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_Plus is not set' >> ./config-k3
+          # CONFIG_PACKAGE_luci-app-passwall_Iptables_Transparent_Proxy is not set
+          #CONFIG_PACKAGE_luci-app-passwall_Nftables_Transparent_Proxy=y
+          echo '# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Geoview is not set' >> ./config-k3
+          # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Haproxy is not set
+          # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Hysteria is not set
+          # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_NaiveProxy is not set
+          #CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Libev_Client=y
+          #CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Libev_Server=y
+          # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Rust_Client is not set
+          # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Rust_Server is not set
+          #CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR_Libev_Client=y
+          # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR_Libev_Server is not set
+          # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadow_TLS is not set
+          #CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Simple_Obfs=y
+          # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_SingBox is not set
+          echo '# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_Plus is not set' >> ./config-k3
+          # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Geodata is not set
+          # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Plugin is not set
+          #CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Xray=y
+          # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Xray_Plugin is not set
           # end of Configuration
 
+          
           ##  add luci-app-accesscontrol
-          echo 'CONFIG_DEFAULT_luci-app-accesscontrol=y' >> ./config-k3' >> ./config-k3
+          echo 'CONFIG_DEFAULT_luci-app-accesscontrol=y' >> ./config-k3
           echo 'CONFIG_PACKAGE_luci-app-accesscontrol=y' >> ./config-k3
           
           
@@ -271,7 +288,6 @@ jobs:
           sed -i 's/.*k3screenctrll/#/g' ./config-k3
           sed -i 's/.*v2ray/#replaced-v2ray/g' ./config-k3
           sed -i 's/.*V2ray/#replaced-V2ray/g' ./config-k3
-
           cd lede
           
           sed -i 's/brcmfmac-firmware-4366c0-pcie/k3wifi/g' ./target/linux/bcm53xx/image/Makefile
@@ -281,7 +297,6 @@ jobs:
           ./scripts/feeds update -a
           
           ls -l
-
       - name: ONLY_K3
         if: env.ONLY_K3 == 'true'
         run: |
@@ -319,24 +334,18 @@ jobs:
           
           #打开dnsmasq的记录日志功能
           sed -i '/log-facility/d' ./package/lean/default-settings/files/zzz-default-settings
-
           #
           # 在 cat >> .config <<EOF 到 EOF 之间粘贴你的编译配置, 需注意缩进关系
           # 例如:
-
           
-
           # 
           # ===============================================================
           # 
-
           # remove nfs-kernel-server
           sed -i 's/CONFIG_PACKAGE_nfs-kernel-server=y/#CONFIG_PACKAGE_nfs-kernel-server=y/g' ./.config
           sed -i 's/CONFIG_NFS_KERNEL_SERVER_V4=y/#CONFIG_NFS_KERNEL_SERVER_V4=y/g' ./.config
           sed -i 's/CONFIG_PACKAGE_nfs/#CONFIG_PACKAGE_nfs/g' ./.config
-
           sed -i 's/CONFIG_PACKAGE_kmod-usb-storage-uas/#CONFIG_PACKAGE_kmod-usb-storage-uas/g' ./.config
-
           sed -i 's/^[ \t]*//g' ./.config
           make defconfig
           
@@ -348,7 +357,6 @@ jobs:
         run: |
           cd lede
           cat ./.config
-
       - name: Make download
         run: |
           ls -l
@@ -356,7 +364,6 @@ jobs:
           make download -j8 || make download -j1 V=s
           rm -rf $(find ./dl/ -size -1024c)
           df -h
-
       - name: Compile firmware ALL
         if: env.BUILD_ALL == 'true'
         run: |
@@ -366,7 +373,6 @@ jobs:
           #make -j$(nproc) || make -j1 V=s
           make -j4 || make -j1 V=s
           #make -j1 V=s
-
       - name: Compile firmware single
         if: env.BUILD_ALL == 'false'
         run: |
@@ -378,8 +384,6 @@ jobs:
           make target/compile -j$(nproc) 
           make  package/vlmcsd/compile -j$(nproc) V=s
           
-
-
       - name: Compress tar file
         run: |
           ls -l
@@ -394,7 +398,6 @@ jobs:
           # ls -l /home/runner/work/lede-k3/lede-k3/lede/build_dir/target-arm_cortex-a9_musl_eabi/linux-bcm53xx_generic/
           cp .config bin/
           tar -czf $FILETARNAME bin
-
       - name: Prepare artifact
         if: env.UPLOAD_ARTIFACT == 'true' || contains(github.event.action, 'ssh')
         run: |
@@ -405,7 +408,6 @@ jobs:
           cp -rf $(find ./lede/bin/targets/ -type f) ./artifact/firmware/
           cp -rf $(find ./lede/bin/packages/ -type f -name "*.ipk") ./artifact/package/
           cp -rf $(find ./lede/bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
-
       - name: Deliver buildinfo
         uses: actions/upload-artifact@v4
         if: env.UPLOAD_ARTIFACT == 'true' || contains(github.event.action, 'ssh')
@@ -471,7 +473,6 @@ jobs:
           echo "::warning file=0x0.st::$(cat null.log | grep https)"
           #./transfer gg --no-progress $FILETARNAME 2>&1 | tee gg.log
           #echo "::warning file=download.gg::$(cat gg.log | grep https)"
-
       - name: Upload firmware to wenshushu by py
         if: env.UPLOAD_WSS_BY_PY == 'true' || contains(github.event.action, 'ssh')
         run: |
