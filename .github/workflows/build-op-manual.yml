@@ -141,7 +141,7 @@ jobs:
         run: |
           git clone https://github.com/openwrt/openwrt
           git clone https://github.com/openwrt/packages
-          git clone https://github.com/kiddin9/kwrt-packages
+          git clone https://github.com/kiddin9/op-packages kwrt-packages
           cd openwrt
           #git checkout openwrt-23.05
           cd ../packages
