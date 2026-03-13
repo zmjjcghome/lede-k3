@@ -6,7 +6,7 @@
 # 
 # <https://github.com/KFERMercer/OpenWrt-CI>
 # build
-name: build-op-k3
+name: build-op-nolede-k3
 
 on:
   workflow_dispatch:
