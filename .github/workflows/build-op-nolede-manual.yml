@@ -114,7 +114,7 @@ jobs:
           git clone https://github.com/openwrt/packages
           git clone https://github.com/kiddin9/op-packages kwrt-packages
           
-          cd ../packages
+          cd packages
           git checkout openwrt-23.05
           cd ..
           cp -rf config-k3-op config-k3
