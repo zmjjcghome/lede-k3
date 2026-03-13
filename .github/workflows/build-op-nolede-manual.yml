@@ -1,0 +1,362 @@
+#
+# This is free software, lisence use MIT.
+# 
+# Copyright (C) 2019 P3TERX <https://p3terx.com>
+# Copyright (C) 2020 KFERMercer <KFER.Mercer@gmail.com>
+# 
+# <https://github.com/KFERMercer/OpenWrt-CI>
+# build
+name: build-op-k3
+
+on:
+  workflow_dispatch:
+#  push:
+#    branches: 
+#      - main
+#  pull_request:
+#    branches: [ main ]
+  # schedule:
+  #   - cron: 0 20 * * *
+  #release:
+  #  types: [published]OpenWrt-CI
+    
+env:
+  REPO_URL: https://github.com/coolsnowwolf/lede
+  REPO_BRANCH: master
+#  FEEDS_CONF: feeds.conf.default
+#  CONFIG_FILE: .config
+#  DIY_P1_SH: diy-part1.sh
+#  DIY_P2_SH: diy-part2.sh
+#  SSH_ACTIONS: false
+#  UPLOAD_BIN_DIR: false
+#  UPLOAD_FIRMWARE: false
+  UPLOAD_COWTRANSFER: false
+  UPLOAD_WETRANSFER: false
+  UPLOAD_WSS_BY_PY: true
+  UPLOAD_ARTIFACT: false
+  SSH_ACTIONS: false
+  KERNEL_OP_TEST: true
+  ONLY_K3: true
+  BUILD_GO: true
+  BUILD_ALL: true
+  FILETARNAME: lede-k3.tar.gz
+  TZ: Asia/Shanghai
+ 
+jobs:
+
+  build:
+
+    name: Build OpenWrt firmware
+
+    runs-on: ubuntu-latest
+    #ubuntu-22.04 latest
+
+    #if: github.event.repository.owner.id == github.event.sender.id
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: main
+
+      - name: Space cleanup
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          #docker rmi $(docker images -q)
+          ##sudo -E apt-get -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* mysql* php* android*
+          #sudo rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/apt/sources.list.d
+          sudo -E apt-get update
+          sudo -E apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3 unzip zlib1g-dev lib32gcc-s1 libc6-dev-i386 subversion flex uglifyjs gcc-multilib g++-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler antlr3 gperf swig
+          sudo -E apt search "iconv"
+          sudo -E apt-get -y install libiconv-hook-dev libc6-dev
+          sudo -E apt-get -y autoremove --purge
+          sudo -E apt-get clean
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf "/usr/local/share/boost"
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+        
+      - name: Clone source code
+        run: |
+          df -hT $PWD
+          git clone $REPO_URL -b $REPO_BRANCH lede
+          git submodule update --init --recursive
+          git submodule foreach git checkout master
+          git clone https://github.com/coolsnowwolf/routing
+          cd routing
+          git checkout 160eae1216c166153f1c0d303f41f33ca0032c2c
+          #422aca11320aabfa4ec554a163dd0bf24d6991ec
+          cd ..
+          ls -lh zmjjcg
+          
+          ls -l
+          df -h
+        
+        
+      - name: Update feeds
+        run: |
+          cd lede
+          ./scripts/feeds update -a
+          
+          #rm -rf ./feeds/routing/batman-adv
+          #cp -rf ../routing/batman-adv ./feeds/routing/
+          ls -l
+          cd ./feeds/routing
+          #git checkout 160eae1216c166153f1c0d303f41f33ca0032c2c
+          ls -l ./batman-adv/patches/
+          
+          
+      - name: kernel op test
+        if: env.KERNEL_OP_TEST == 'true'
+        run: |
+          git clone https://github.com/openwrt/openwrt
+          git clone https://github.com/openwrt/packages
+          git clone https://github.com/kiddin9/op-packages kwrt-packages
+          
+          cd ../packages
+          git checkout openwrt-23.05
+          cd ..
+          cp -rf config-k3-op config-k3
+          cd lede
+          sed -i 's/;openwrt-23.05//g' ./feeds.conf.default
+          ./scripts/feeds update -a
+          #######vlmcsd apk fix#####################
+          ##sed -i 's/PKG_VERSION/PKG_VERSIONTMP/g' ./feeds/packages/net/vlmcsd/Makefile
+          sed -i 's/$(PKG_VERSION)/svn1113/g' ./feeds/packages/net/vlmcsd/Makefile
+          sed -i 's/PKG_VERSION:=svn1113/PKG_VERSION:=0.1113\n PKG_BUILD_DIR:=$(BUILD_DIR)\/vlmcsd-svn1113/g' ./feeds/packages/net/vlmcsd/Makefile
+          cat ./feeds/packages/net/vlmcsd/Makefile
+          #######vlmcsd apk fix#####################
+          
+          cd ..
+          #mkdir openwrt/package/lean
+          #cp -rf ./lede/package/lean ./openwrt/package/
+
+      
+      - name: copy kiddin9 op-packages
+        run: |
+          mv kwrt-packages openwrt/package/kwrt-packages
+
+          ls -l openwrt/package/kwrt-packages/
+          
+          sed -i 's/CONFIG_BUSYBOX_CONFIG_UNZIP.*/#/g' ./config-k3          
+          echo 'CONFIG_DEFAULT_luci-app-passwall=y' >> ./config-k3
+          echo 'CONFIG_PACKAGE_luci-app-passwall=y' >> ./config-k3
+          echo '# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Geoview is not set' >> ./config-k3
+          echo '# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_Plus is not set' >> ./config-k3
+
+          echo 'CONFIG_DEFAULT_luci-app-accesscontrol=y' >> ./config-k3
+          echo 'CONFIG_PACKAGE_luci-app-accesscontrol=y' >> ./config-k3
+          
+          
+          echo 'CONFIG_DEFAULT_luci-app-turboacc=y' >> ./config-k3
+          echo 'CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_SHORTCUT_FE=y' >> ./config-k3
+          echo 'CONFIG_PACKAGE_luci-app-turboacc_INCLUDE_BBR_CCA=y' >> ./config-k3
+          echo 'CONFIG_PACKAGE_kmod-ipt-conntrack=y' >> ./config-k3
+          echo 'CONFIG_PACKAGE_kmod-ipt-conntrack-extra=y' >> ./config-k3
+          echo 'CONFIG_PACKAGE_kmod-ipt-conntrack-label=y' >> ./config-k3
+
+          mv lede baklede
+          mv openwrt lede
+
+          echo 'CONFIG_PACKAGE_my-op-default-settings=y' >> ./config-k3
+          sed -i 's/.*k3screenctrll/#/g' ./config-k3
+          sed -i 's/.*v2ray/#replaced-v2ray/g' ./config-k3
+          sed -i 's/.*V2ray/#replaced-V2ray/g' ./config-k3
+          cd lede
+          
+          sed -i 's/brcmfmac-firmware-4366c0-pcie/k3wifi/g' ./target/linux/bcm53xx/image/Makefile
+          sed -i 's/.*brcmfmac-firmware-4366c0-pcie/#/g' ../config-k3
+          sed -i 's/CONFIG_PACKAGE_k3wifi=m/CONFIG_PACKAGE_k3wifi=y/g' ../config-k3
+          
+          ./scripts/feeds update -a
+          
+          ls -l
+      - name: ONLY_K3
+        if: env.ONLY_K3 == 'true'
+        run: |
+          ls -l
+          #sed -i 's#define Build/append-dtb$#define Build/append-dtb\nls -l $(KDIR)/\nls -l $(DTS_DIR)/\n#g' ./lede/include/image-commands.mk
+          cd lede
+          sed -i 's/TARGET_DEVICES/#TARGET_DEVICES/g' ./target/linux/bcm53xx/image/Makefile
+          sed -i 's/#TARGET_DEVICES += phicomm_k3/TARGET_DEVICES += phicomm_k3/g' ./target/linux/bcm53xx/image/Makefile
+      
+      - name: BUILD_GO
+        if: env.BUILD_GO == 'true'
+        run: |
+          ls -l
+          echo 'CONFIG_PACKAGE_transfer=m' >> ./config-k3
+          echo 'CONFIG_TRANSFER_COMPRESS_GOPROXY=y' >> ./config-k3
+          echo 'CONFIG_TRANSFER_COMPRESS_UPX=y' >>  ./config-k3
+          
+      - name: Generate configuration file
+        run: |
+          ls -l
+
+          cd lede
+         
+          rm -f ./.config*
+          cp -rf ../zmjjcg package/
+          ./scripts/feeds install -a
+          cp ../config-k3 ./.config
+          cp ../vermagic ./vermagic
+          sed -i 's#grep.*vermagic.*#cp $(TOPDIR)/vermagic $(LINUX_DIR)/.vermagic#g' ./include/kernel-defaults.mk 
+          sed -i 's#Package/k3screenctrl#Package/k3screenctrll#g' ./package/zmjjcg/k3screenctrl_build/Makefile
+          sed -i 's#BuildPackage,k3screenctrl#BuildPackage,k3screenctrll#g' ./package/zmjjcg/k3screenctrl_build/Makefile
+          #sed -i 's#DEPENDS:=+k3screenctrl#DEPENDS:=+k3screenctrll#g' ./package/zmjjcg/luci-app-k3screenctrl/Makefile
+          sed -i 's#192.168.1.1#192.168.50.1#g' ./package/base-files/files/bin/config_generate
+          #sed -i 's/.*k3screenctrl/#/g' ./config-k3
+          
+          #打开dnsmasq的记录日志功能
+          sed -i '/log-facility/d' ./package/lean/default-settings/files/zzz-default-settings
+          #
+          # 在 cat >> .config <<EOF 到 EOF 之间粘贴你的编译配置, 需注意缩进关系
+          # 例如:
+          
+          # 
+          # ===============================================================
+          # 
+          # remove nfs-kernel-server
+          #sed -i 's/CONFIG_PACKAGE_nfs-kernel-server=y/#CONFIG_PACKAGE_nfs-kernel-server=y/g' ./.config
+          #sed -i 's/CONFIG_NFS_KERNEL_SERVER_V4=y/#CONFIG_NFS_KERNEL_SERVER_V4=y/g' ./.config
+          #sed -i 's/CONFIG_PACKAGE_nfs/#CONFIG_PACKAGE_nfs/g' ./.config
+          # remove nfs-kernel-server
+          
+          sed -i 's/CONFIG_PACKAGE_kmod-usb-storage-uas/#CONFIG_PACKAGE_kmod-usb-storage-uas/g' ./.config
+          sed -i 's/^[ \t]*//g' ./.config
+          make defconfig
+          
+      - name: SSH connection to Actions
+        uses: mxschmitt/action-tmate@v3
+        if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'ssh')
+
+      - name: cat configuration file
+        run: |
+          cd lede
+          cat ./.config
+      - name: Make download
+        run: |
+          ls -l
+          cd lede
+          make download -j8 || make download -j1 V=s
+          rm -rf $(find ./dl/ -size -1024c)
+          df -h
+      - name: Compile firmware ALL
+        if: env.BUILD_ALL == 'true'
+        run: |
+          ls -l
+          cd lede
+          echo "make -j$(nproc) || make -j1 V=s"
+          #make -j$(nproc) || make -j1 V=s
+          make -j4 || make -j1 V=s
+          #make -j1 V=s
+      - name: Compile firmware single
+        if: env.BUILD_ALL == 'false'
+        run: |
+          ls -l
+          cd lede
+          echo "make -j$(nproc) || make -j1 V=s"
+          make tools/install -j$(nproc) 
+          make toolchain/install -j$(nproc) 
+          make target/compile -j$(nproc) 
+          make  package/vlmcsd/compile -j$(nproc) V=s
+          
+      - name: Compress tar file
+        run: |
+          ls -l
+          cd lede
+          echo "======================="
+          echo "Space usage:"
+          echo "======================="
+          df -h
+          echo "======================="
+          du -h ./ --max-depth=1
+          #du -h /mnt/openwrt/ --max-depth=1 || true
+          # ls -l /home/runner/work/lede-k3/lede-k3/lede/build_dir/target-arm_cortex-a9_musl_eabi/linux-bcm53xx_generic/
+          cp .config bin/
+          tar -czf $FILETARNAME bin
+      - name: Prepare artifact
+        if: env.UPLOAD_ARTIFACT == 'true' || contains(github.event.action, 'ssh')
+        run: |
+          mkdir -p ./artifact/firmware
+          mkdir -p ./artifact/package
+          mkdir -p ./artifact/buildinfo
+          rm -rf $(find ./lede/bin/targets/ -type d -name "packages")
+          cp -rf $(find ./lede/bin/targets/ -type f) ./artifact/firmware/
+          cp -rf $(find ./lede/bin/packages/ -type f -name "*.ipk") ./artifact/package/
+          cp -rf $(find ./lede/bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
+      - name: Deliver buildinfo
+        uses: actions/upload-artifact@v4
+        if: env.UPLOAD_ARTIFACT == 'true' || contains(github.event.action, 'ssh')
+        with:
+          name: OpenWrt_buildinfo
+          path: ./artifact/buildinfo/
+
+      - name: Deliver package
+        uses: actions/upload-artifact@v4
+        if: env.UPLOAD_ARTIFACT == 'true' || contains(github.event.action, 'ssh')
+        with:
+          name: OpenWrt_package
+          path: ./artifact/package/
+
+      - name: Deliver firmware
+        uses: actions/upload-artifact@v4
+        if: env.UPLOAD_ARTIFACT == 'true' || contains(github.event.action, 'ssh')
+        with:
+          name: OpenWrt_firmware
+          path: ./lede/bin/targets/
+          
+      - name: Deliver lede.tar.gz
+        uses: actions/upload-artifact@v4
+        with:
+          name: op-k3.tar.gz
+          path: ./lede/lede-k3.tar.gz
+          compression-level: 0 # no compression
+          
+      - name: Upload release asset
+        if: github.event == 'release'
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.YOURTOKEN }}
+          file: ./artifact/firmware/*
+          tag: ${{ github.ref }}
+          file_glob: true
+
+
+#    - name: Test 
+#      run: go test -v .UPLOAD_WSS_BY_PY
+      - name: Upload firmware to cowtransfer
+        if: env.UPLOAD_COWTRANSFER == 'true' || contains(github.event.action, 'ssh')
+        run: |
+          ls -l
+          cd lede
+          curl -fsSL git.io/file-transfer | sh
+          ./transfer cow --block 2621440 -s -p 64 --no-progress $FILETARNAME 2>&1 | tee cowtransfer.log
+          echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
+      - name: Upload firmware to WeTransfer
+        if: env.UPLOAD_WETRANSFER == 'true' || contains(github.event.action, 'ssh')
+        run: |
+          ls -l
+          cd lede
+          curl -fsSL git.io/file-transfer | sh
+          #./transfer wet -s -p 16 --no-progress $FILETARNAME 2>&1 | tee wetransfer.log
+          ./transfer wss --no-progress $FILETARNAME 2>&1 | tee wss.log
+          echo "::warning file=wss::$(cat wss.log | grep https)"
+          #./transfer fic --no-progress $FILETARNAME 2>&1 | tee fic.log
+          #echo "::warning file=1fichier.com::$(cat fic.log | grep https)"
+          #./transfer muse --no-progress $FILETARNAME 2>&1 | tee muse.log
+          #echo "::warning file=musetransfer.com::$(cat muse.log | grep https)"
+          ./transfer null --no-progress $FILETARNAME 2>&1 | tee null.log
+          echo "::warning file=0x0.st::$(cat null.log | grep https)"
+          #./transfer gg --no-progress $FILETARNAME 2>&1 | tee gg.log
+          #echo "::warning file=download.gg::$(cat gg.log | grep https)"
+      - name: Upload firmware to wenshushu by py
+        if: env.UPLOAD_WSS_BY_PY == 'true' || contains(github.event.action, 'ssh')
+        run: |
+          ls -l
+          pip install requests base58 pycryptodomex
+          cd lede
+          git clone https://github.com/Aruelius/wenshushu
+          cd wenshushu
+          python wss.py upload ../$FILETARNAME 2>&1 | tee wenshushu.log
+          echo "::warning file=wenshushu.com::$(cat wenshushu.log | grep https)"
