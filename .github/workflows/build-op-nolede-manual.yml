@@ -139,6 +139,11 @@ jobs:
 
           ls -l openwrt/package/kwrt-packages/
           
+          # fix sqm-scripts-extra/Makefile pk_version start ####
+          sed -i 's/$(PKG_VERSION)/2016-06-08/g' ./openwrt/package/kwrt-packages/sqm-scripts-extra/Makefile
+          sed -i 's/PKG_VERSION:=2016-06-08/PKG_VERSION:=0.20160608/g' ./openwrt/package/kwrt-packages/sqm-scripts-extra/Makefile
+          # fix sqm-scripts-extra/Makefile pk_version end ####
+          
           sed -i 's/CONFIG_BUSYBOX_CONFIG_UNZIP.*/#/g' ./config-k3          
           echo 'CONFIG_DEFAULT_luci-app-passwall=y' >> ./config-k3
           echo 'CONFIG_PACKAGE_luci-app-passwall=y' >> ./config-k3
