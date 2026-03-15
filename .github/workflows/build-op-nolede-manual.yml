@@ -365,7 +365,7 @@ jobs:
           ls -l
           pip install requests base58 pycryptodomex
           cd lede
-          git clone https://github.com/Aruelius/wenshushu
-          cd wenshushu
+          git clone https://github.com/JIANMOP/wss
+          cd wss
           python wss.py upload ../$FILETARNAME 2>&1 | tee wenshushu.log
           echo "::warning file=wenshushu.com::$(cat wenshushu.log | grep https)"
