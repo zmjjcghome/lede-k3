@@ -354,6 +354,10 @@ jobs:
           sed -i 's/CONFIG_PACKAGE_nfs/#CONFIG_PACKAGE_nfs/g' ./.config
           # remove nfs-kernel-server
           
+          #====rm batctl-full
+          sed -i 's/CONFIG_PACKAGE_batctl-full=y/# CONFIG_PACKAGE_batctl-full is not set/g' .config
+          #====batctl-full end
+          
           sed -i 's/CONFIG_PACKAGE_kmod-usb-storage-uas/#CONFIG_PACKAGE_kmod-usb-storage-uas/g' ./.config
           sed -i 's/^[ \t]*//g' ./.config
           make defconfig
