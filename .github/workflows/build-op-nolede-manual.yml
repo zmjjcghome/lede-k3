@@ -169,10 +169,11 @@ jobs:
           sed -i 's/.*v2ray/#replaced-v2ray/g' ./config-k3
           sed -i 's/.*V2ray/#replaced-V2ray/g' ./config-k3
           cd lede
-          
-          sed -i 's/brcmfmac-firmware-4366c0-pcie/k3wifi/g' ./target/linux/bcm53xx/image/Makefile
-          sed -i 's/.*brcmfmac-firmware-4366c0-pcie/#/g' ../config-k3
-          sed -i 's/CONFIG_PACKAGE_k3wifi=m/CONFIG_PACKAGE_k3wifi=y/g' ../config-k3
+
+          #######op kernel 6.12版本 注释k3wifi，使用原始的看看
+          #sed -i 's/brcmfmac-firmware-4366c0-pcie/k3wifi/g' ./target/linux/bcm53xx/image/Makefile
+          #sed -i 's/.*brcmfmac-firmware-4366c0-pcie/#/g' ../config-k3
+          #sed -i 's/CONFIG_PACKAGE_k3wifi=m/CONFIG_PACKAGE_k3wifi=y/g' ../config-k3
           
           ./scripts/feeds update -a
           
