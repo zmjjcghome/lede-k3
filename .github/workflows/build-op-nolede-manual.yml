@@ -118,7 +118,7 @@ jobs:
           git checkout openwrt-23.05
           cd ..
           cd openwrt
-          git checkout openwrt-25.12
+          #git checkout openwrt-25.12
           cd ..
           cp -rf config-k3-op config-k3
           cd lede
