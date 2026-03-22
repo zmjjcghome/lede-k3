@@ -36,6 +36,7 @@ env:
   UPLOAD_ARTIFACT: false
   SSH_ACTIONS: false
   KERNEL_OP_TEST: true
+  OPENWRT_25_12: true
   ONLY_K3: true
   BUILD_GO: true
   BUILD_ALL: true
@@ -135,6 +136,11 @@ jobs:
           #mkdir openwrt/package/lean
           #cp -rf ./lede/package/lean ./openwrt/package/
 
+      - name: OPENWRT_25_12
+        if: env.OPENWRT_25_12 == 'true'
+        run: |
+          cd openwrt
+          git checkout openwrt-25.12
       
       - name: copy kiddin9 op-packages
         run: |
