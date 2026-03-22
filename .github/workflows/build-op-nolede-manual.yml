@@ -141,6 +141,7 @@ jobs:
         run: |
           cd openwrt
           git checkout openwrt-25.12
+          sed -i 's/;openwrt-25.12//g' ./feeds.conf.default
       
       - name: copy kiddin9 op-packages
         run: |
