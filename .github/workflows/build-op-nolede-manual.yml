@@ -58,7 +58,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          ref: main
+          ref: op-kernel-newest
 
       - name: Space cleanup
         env:
@@ -111,6 +111,8 @@ jobs:
       - name: kernel op test
         if: env.KERNEL_OP_TEST == 'true'
         run: |
+          git branch
+          git checkout op-kernel-newest
           git clone https://github.com/openwrt/openwrt
           git clone https://github.com/openwrt/packages
           git clone https://github.com/kiddin9/op-packages kwrt-packages
