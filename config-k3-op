@@ -6465,7 +6465,7 @@ CONFIG_PACKAGE_luci-app-k3screenctrl=y
 # CONFIG_PACKAGE_luci-app-openthread is not set
 # CONFIG_PACKAGE_luci-app-openvpn-client is not set
 # CONFIG_PACKAGE_luci-app-openvpn-server is not set
-# CONFIG_PACKAGE_luci-app-openvpn-server-client is not set
+CONFIG_PACKAGE_luci-app-openvpn-server-client=y
 # CONFIG_PACKAGE_luci-app-openwebui is not set
 # CONFIG_PACKAGE_luci-app-openwisp is not set
 # CONFIG_PACKAGE_luci-app-oscam is not set
