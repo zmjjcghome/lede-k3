@@ -184,9 +184,9 @@ jobs:
           cd lede
 
           #######op kernel 6.12版本 注释k3wifi，使用原始的看看
-          #sed -i 's/brcmfmac-firmware-4366c0-pcie/k3wifi/g' ./target/linux/bcm53xx/image/Makefile
-          #sed -i 's/.*brcmfmac-firmware-4366c0-pcie/#/g' ../config-k3
-          #sed -i 's/CONFIG_PACKAGE_k3wifi=m/CONFIG_PACKAGE_k3wifi=y/g' ../config-k3
+          sed -i 's/brcmfmac-firmware-4366c0-pcie/k3wifi/g' ./target/linux/bcm53xx/image/Makefile
+          sed -i 's/.*brcmfmac-firmware-4366c0-pcie/#/g' ../config-k3
+          sed -i 's/CONFIG_PACKAGE_k3wifi=m/CONFIG_PACKAGE_k3wifi=y/g' ../config-k3
           
           ./scripts/feeds update -a
           
@@ -373,8 +373,8 @@ jobs:
           #echo "::warning file=1fichier.com::$(cat fic.log | grep https)"
           #./transfer muse --no-progress $FILETARNAME 2>&1 | tee muse.log
           #echo "::warning file=musetransfer.com::$(cat muse.log | grep https)"
-          ./transfer null --no-progress $FILETARNAME 2>&1 | tee null.log
-          echo "::warning file=0x0.st::$(cat null.log | grep https)"
+          #./transfer null --no-progress $FILETARNAME 2>&1 | tee null.log
+          #echo "::warning file=0x0.st::$(cat null.log | grep https)"
           #./transfer gg --no-progress $FILETARNAME 2>&1 | tee gg.log
           #echo "::warning file=download.gg::$(cat gg.log | grep https)"
       - name: Upload firmware to wenshushu by py
