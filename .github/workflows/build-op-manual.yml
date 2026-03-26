@@ -144,6 +144,7 @@ jobs:
           git clone https://github.com/kiddin9/op-packages kwrt-packages
           cd openwrt
           git checkout openwrt-25.12
+          sed -i 's/;openwrt-25.12//g' ./feeds.conf.default
           cd ../packages
           git checkout openwrt-23.05
           cd ..
