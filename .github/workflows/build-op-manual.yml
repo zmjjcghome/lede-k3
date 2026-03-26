@@ -143,7 +143,7 @@ jobs:
           git clone https://github.com/openwrt/packages
           git clone https://github.com/kiddin9/op-packages kwrt-packages
           cd openwrt
-          #git checkout openwrt-23.05
+          git checkout openwrt-25.12
           cd ../packages
           git checkout openwrt-23.05
           cd ..
@@ -161,6 +161,7 @@ jobs:
           cd ..
           mkdir openwrt/package/lean
           cp -rf ./lede/package/lean ./openwrt/package/
+          
           ###fix openwrt main branch drop packages/net/shadowsocks-libev  start
           ##cp -rf ./lede/package/libs/pcre ./openwrt/package/libs/  
           ##rm -rf ./openwrt/package/libs/mbedtls
