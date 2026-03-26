@@ -2788,7 +2788,7 @@ CONFIG_ZABBIX_POSTGRESQL=y
 #
 # Extra packages
 #
-# CONFIG_PACKAGE_autocore is not set
+CONFIG_PACKAGE_autocore=m
 # CONFIG_PACKAGE_automount is not set
 # CONFIG_PACKAGE_autoshare-ksmbd is not set
 CONFIG_PACKAGE_autoshare-samba=y
