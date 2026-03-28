@@ -144,7 +144,7 @@ jobs:
           git clone https://github.com/kiddin9/op-packages kwrt-packages
           cd openwrt
           git checkout openwrt-25.12
-          sed -i 's/;openwrt-25.12//g' ./feeds.conf.default
+          #sed -i 's/;openwrt-25.12//g' ./feeds.conf.default
           cd ../packages
           git checkout openwrt-23.05
           cd ..
@@ -304,6 +304,8 @@ jobs:
           sed -i 's/CONFIG_PACKAGE_k3wifi=m/CONFIG_PACKAGE_k3wifi=y/g' ../config-k3
           
           ./scripts/feeds update -a
+          sed -i 's/--set=llvm.download-ci-llvm=true/--set=llvm.download-ci-llvm=false/g' ./feeds/packages/lang/rust/Makefile
+          
           
           ls -l
       - name: ONLY_K3
