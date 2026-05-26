@@ -36,7 +36,7 @@ env:
   UPLOAD_ARTIFACT: false
   SSH_ACTIONS: false
   KERNEL_OP_TEST: true
-  OPENWRT_25_12: true
+  OPENWRT_25_12: false
   ONLY_K3: true
   BUILD_GO: true
   BUILD_ALL: true
