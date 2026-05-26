@@ -238,7 +238,8 @@ jobs:
           ##  add turboacc
           cd openwrt
           ##### other turboacc start
-          curl -sSL https://raw.githubusercontent.com/chenmozhijin/turboacc/luci/add_turboacc.sh -o add_turboacc.sh && bash add_turboacc.sh
+          # removed due to unsupport kerner 6.18
+          #curl -sSL https://raw.githubusercontent.com/chenmozhijin/turboacc/luci/add_turboacc.sh -o add_turboacc.sh && bash add_turboacc.sh
           cd ..
           rm -rf ./openwrt/package/lean/shortcut-fe
           ##### other turboacc end
