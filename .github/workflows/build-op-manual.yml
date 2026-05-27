@@ -39,7 +39,7 @@ env:
   KERNEL_OP_TEST: true
   KERNEL_SCREEN: false
   ONLY_K3: true
-  BUILD_GO: true
+  BUILD_GO: false
   BUILD_ALL: true
   FILETARNAME: lede-k3.tar.gz
   TZ: Asia/Shanghai
@@ -298,6 +298,8 @@ jobs:
           sed -i 's/.*k3screenctrll/#/g' ./config-k3
           sed -i 's/.*v2ray/#replaced-v2ray/g' ./config-k3
           sed -i 's/.*V2ray/#replaced-V2ray/g' ./config-k3
+
+          sed -i 's/CONFIG_PACKAGE_transfer/#replaced-CONFIG_PACKAGE_transfer/g' ./config-k3
           cd lede
           
           sed -i 's/brcmfmac-firmware-4366c0-pcie/k3wifi/g' ./target/linux/bcm53xx/image/Makefile
