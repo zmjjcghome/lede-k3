@@ -194,13 +194,16 @@ jobs:
           
           ########## add luci-app-passwall start
           cp -arf kwrt-packages/geoview openwrt/package/lean/
-          cp -arf kwrt-packages/trojan-plus openwrt/package/lean/
+          #cp -arf kwrt-packages/trojan-plus openwrt/package/lean/
           cp -arf kwrt-packages/luci-app-passwall openwrt/package/lean/
+          cp -arf kwrt-packages/luci-app-passwall2 openwrt/package/lean/
           sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-passwall/Makefile
+          sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-passwall2/Makefile
           sed -i 's/CONFIG_BUSYBOX_CONFIG_UNZIP.*/#/g' ./config-k3
           
           echo 'CONFIG_DEFAULT_luci-app-passwall=y' >> ./config-k3
           echo 'CONFIG_PACKAGE_luci-app-passwall=y' >> ./config-k3
+          echo 'CONFIG_PACKAGE_luci-app-passwall2=m' >> ./config-k3
           # Configuration
           # CONFIG_PACKAGE_luci-app-passwall_Iptables_Transparent_Proxy is not set
           #CONFIG_PACKAGE_luci-app-passwall_Nftables_Transparent_Proxy=y
