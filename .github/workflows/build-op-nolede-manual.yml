@@ -126,6 +126,8 @@ jobs:
           rm -rf config-k3
           cp -rf config-k3-op config-k3
           echo 'CONFIG_TESTING_KERNEL=y' >> ./config-k3 
+          sed -i 's/.*vlmcsd/#/g' ./config-k3
+          
           cd lede
           sed -i 's/;openwrt-23.05//g' ./feeds.conf.default
           ./scripts/feeds update -a
