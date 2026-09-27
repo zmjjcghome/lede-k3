@@ -34,7 +34,7 @@ env:
   UPLOAD_WETRANSFER: false
   UPLOAD_WSS_BY_PY: true
   UPLOAD_ARTIFACT: false
-  SSH_ACTIONS: false
+  SSH_ACTIONS: true
   OP_23_05: false
   OP_25_12: false
   KERNEL_OP_TEST: true
@@ -426,7 +426,7 @@ jobs:
           make defconfig
           
       - name: SSH connection to Actions
-        uses: mxschmitt/action-tmate@v3
+        uses: mxschmitt/action-tmate@v3.24
         if: env.SSH_ACTIONS == 'true' || contains(github.event.action, 'ssh')
 
       - name: cat configuration file
