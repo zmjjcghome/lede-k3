@@ -189,7 +189,7 @@ jobs:
           #git checkout openwrt-25.12
           #sed -i 's/;openwrt-25.12//g' ./feeds.conf.default
           cd ../packages
-          #git checkout openwrt-23.05
+          git checkout openwrt-23.05
           cd ..
           cp -rf config-k3-op config-k3
           cd lede
