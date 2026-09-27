@@ -35,7 +35,8 @@ env:
   UPLOAD_WSS_BY_PY: true
   UPLOAD_ARTIFACT: false
   SSH_ACTIONS: false
-  KERNEL_TEST: false
+  OP_23_05: false
+  OP_25_12: false
   KERNEL_OP_TEST: true
   KERNEL_SCREEN: false
   KERNEL_TESTING_PATCHVER: false
@@ -116,7 +117,7 @@ jobs:
           ls -l ./batman-adv/patches/
           
       - name: kernel 5.15 openwrt23.05
-        if: env.KERNEL_TEST == 'true'
+        if: env.OP_23_05 == 'true'
         run: |
           git clone https://github.com/openwrt/openwrt
           git clone https://github.com/openwrt/packages
@@ -137,8 +138,8 @@ jobs:
           rm -rf openwrt/feeds/packages/lang/golang
           cp -arf lede/feeds/packages/lang/golang openwrt/feeds/packages/lang/golang
           
-      - name: kernel op test
-        if: env.KERNEL_OP_TEST == 'true'
+      - name: kernel OP_25_12 
+        if: env.OP_25_12 == 'true'
         run: |
           git clone https://github.com/openwrt/openwrt
           git clone https://github.com/openwrt/packages
@@ -152,6 +153,47 @@ jobs:
           cp -rf config-k3-op config-k3
           cd lede
           sed -i 's/;openwrt-23.05//g' ./feeds.conf.default
+          ./scripts/feeds update -a
+          #######vlmcsd apk fix#####################
+          ##sed -i 's/PKG_VERSION/PKG_VERSIONTMP/g' ./feeds/packages/net/vlmcsd/Makefile
+          sed -i 's/$(PKG_VERSION)/svn1113/g' ./feeds/packages/net/vlmcsd/Makefile
+          sed -i 's/PKG_VERSION:=svn1113/PKG_VERSION:=0.1113\n PKG_BUILD_DIR:=$(BUILD_DIR)\/vlmcsd-svn1113/g' ./feeds/packages/net/vlmcsd/Makefile
+          cat ./feeds/packages/net/vlmcsd/Makefile
+          #######vlmcsd apk fix#####################
+          
+          cd ..
+          mkdir openwrt/package/lean
+          cp -rf ./lede/package/lean ./openwrt/package/
+          
+          ###fix openwrt main branch drop packages/net/shadowsocks-libev  start
+          ##cp -rf ./lede/package/libs/pcre ./openwrt/package/libs/  
+          ##rm -rf ./openwrt/package/libs/mbedtls
+          ##cp -rf ./lede/package/libs/mbedtls ./openwrt/package/libs/
+          
+          cp -arf packages/net/shadowsocks-libev openwrt/package/lean/
+          #openwrt/feeds/packages/net/
+          
+          cp ./999-fix-MBEDTLS_CIPHER_MODE_CFB.patch openwrt/package/lean/shadowsocks-libev/patches
+          
+          #openwrt/feeds/packages/net/shadowsocks-libev/patches
+          ###fix openwrt main branch drop packages/net/shadowsocks-libev  end
+      
+          
+      - name: KERNEL_OP_TEST 6.18
+        if: env.KERNEL_OP_TEST == 'true'
+        run: |
+          git clone https://github.com/openwrt/openwrt
+          git clone https://github.com/openwrt/packages
+          git clone https://github.com/kiddin9/op-packages kwrt-packages
+          cd openwrt
+          #git checkout openwrt-25.12
+          #sed -i 's/;openwrt-25.12//g' ./feeds.conf.default
+          cd ../packages
+          #git checkout openwrt-23.05
+          cd ..
+          cp -rf config-k3-op config-k3
+          cd lede
+          #sed -i 's/;openwrt-23.05//g' ./feeds.conf.default
           ./scripts/feeds update -a
           #######vlmcsd apk fix#####################
           ##sed -i 's/PKG_VERSION/PKG_VERSIONTMP/g' ./feeds/packages/net/vlmcsd/Makefile
