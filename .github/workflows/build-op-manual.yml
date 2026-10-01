@@ -278,8 +278,8 @@ jobs:
           # end of Configuration
           
           # rm ssr-plus
-          sed -i 's/CONFIG_PACKAGE_luci-app-ssr-plus.*/#/g' ./config-k3
-          
+          sed -i 's/.*luci-app-ssr-plus.*/#/g' ./config-k3
+          sed -i 's/CONFIG_PACKAGE_simple-obfs.*/#/g' ./config-k3
           ########## add luci-app-passwall end
 
           
