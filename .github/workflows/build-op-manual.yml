@@ -34,7 +34,7 @@ env:
   UPLOAD_WETRANSFER: false
   UPLOAD_WSS_BY_PY: true
   UPLOAD_ARTIFACT: false
-  SSH_ACTIONS: false
+  SSH_ACTIONS: true
   OP_23_05: false
   OP_25_12: false
   KERNEL_OP_TEST: true
@@ -284,6 +284,31 @@ jobs:
           echo '# CONFIG_PACKAGE_simple-obfs-client is not set' >> ./config-k3
           echo '# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Simple_Obfs is not set' >> ./config-k3
           echo '# CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_Simple_Obfs is not set' >> ./config-k3
+
+          #rm Shadowsocks
+          sed -i 's/CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Client=y/# CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Client is not set/g' ./config-k3
+          sed -i 's/CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Server=y/#CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_NONE_Server is not set/g' ./config-k3
+          sed -i 's/CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Libev_Client=y/#CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Libev_Client is not set/g' ./config-k3
+          sed -i 's/CONFIG_PACKAGE_shadowsocks-libev-config=y/#CONFIG_PACKAGE_shadowsocks-libev-config is not set/g' ./config-k3
+          sed -i 's/CONFIG_PACKAGE_shadowsocks-libev-ss-local=y/#CONFIG_PACKAGE_shadowsocks-libev-ss-local is not set/g' ./config-k3
+          sed -i 's/CONFIG_PACKAGE_shadowsocks-libev-ss-redir=y/#CONFIG_PACKAGE_shadowsocks-libev-ss-redir is not set/g' ./config-k3
+          sed -i 's/CONFIG_PACKAGE_shadowsocks-libev-ss-server=y/#CONFIG_PACKAGE_shadowsocks-libev-ss-server is not set/g' ./config-k3
+
+          #shadowsocksr-libev
+          #sed -i 's/CONFIG_PACKAGE_shadowsocksr-libev-ssr-check=y/#CONFIG_PACKAGE_shadowsocksr-libev-ssr-check is not set/g' ./config-k3
+          #sed -i 's/CONFIG_PACKAGE_shadowsocksr-libev-ssr-local=y/# CONFIG_PACKAGE_shadowsocksr-libev-ssr-local is not set/g' ./config-k3
+          #sed -i 's/CONFIG_PACKAGE_shadowsocksr-libev-ssr-redir=y/# CONFIG_PACKAGE_shadowsocksr-libev-ssr-redir is not set/g' ./config-k3
+          #sed -i 's/CONFIG_PACKAGE_shadowsocksr-libev-ssr-server=y/# CONFIG_PACKAGE_shadowsocksr-libev-ssr-server is not set/g' ./config-k3
+          #sed -i 's/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR_Libev_Client=y/# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR_Libev_Client is not set/g' ./config-k3
+          #sed -i 's/CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_ShadowsocksR_Libev_Client=y/# CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_ShadowsocksR_Libev_Client is not set/g' ./config-k3
+
+          #Shadowsocks_Rust
+          #sed -i 's/# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Rust_Client is not set/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Rust_Client=y/g' ./config-k3
+          #sed -i 's/# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Rust_Server is not set/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Rust_Server=y/g' ./config-k3
+          #sed -i 's/# CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_Shadowsocks_Rust_Client is not set/CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_Shadowsocks_Rust_Client=y/g' ./config-k3
+          #sed -i 's/# CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_Shadowsocks_Rust_Server is not set/CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_Shadowsocks_Rust_Server=y/g' ./config-k3
+
+
 
           ########## add luci-app-passwall end
 
