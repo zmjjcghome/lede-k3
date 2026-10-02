@@ -52,8 +52,8 @@ jobs:
 
     name: Build OpenWrt firmware
 
-    runs-on: ubuntu-24.04
-    #ubuntu-22.04 latest ubuntu-26.04
+    runs-on: ubuntu-26.04
+    #ubuntu-22.04 latest ubuntu-24.04 ubuntu-26.04
 
     #if: github.event.repository.owner.id == github.event.sender.id
     steps:
