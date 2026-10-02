@@ -34,7 +34,7 @@ env:
   UPLOAD_WETRANSFER: false
   UPLOAD_WSS_BY_PY: true
   UPLOAD_ARTIFACT: false
-  SSH_ACTIONS: false
+  SSH_ACTIONS: true
   OP_23_05: false
   OP_25_12: false
   KERNEL_OP_TEST: true
@@ -279,8 +279,8 @@ jobs:
           
           # rm ssr-plus
           sed -i 's/.*luci-app-ssr-plus.*/#/g' ./config-k3
-          sed -i 's/CONFIG_PACKAGE_simple-obfs.*/#/g' ./config-k3
-          sed -i 's/.*_Obfs.*/#/g' ./config-k3
+          sed -i 's/.*obfs.*/#/g' ./config-k3
+          sed -i 's/.*Obfs.*/#/g' ./config-k3
           ########## add luci-app-passwall end
 
           
