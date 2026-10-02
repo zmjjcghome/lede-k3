@@ -39,7 +39,7 @@ env:
   OP_25_12: false
   KERNEL_OP_TEST: true
   KERNEL_SCREEN: false
-  KERNEL_TESTING_PATCHVER: true
+  KERNEL_TESTING_PATCHVER: false
   ONLY_K3: true
   BUILD_GO: false
   BUILD_ALL: true
