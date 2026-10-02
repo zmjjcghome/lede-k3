@@ -193,6 +193,7 @@ jobs:
           git clone https://github.com/openwrt/packages
           git clone https://github.com/kiddin9/op-packages kwrt-packages
           cd openwrt
+          sed -i 's/KERNEL_PATCHVER:=6.18/KERNEL_PATCHVER:=6.18\nKERNEL_TESTING_PATCHVER:=6.18/g' ./target/linux/bcm53xx/Makefile
           #git checkout openwrt-25.12
           #sed -i 's/;openwrt-25.12//g' ./feeds.conf.default
           cd ../packages
