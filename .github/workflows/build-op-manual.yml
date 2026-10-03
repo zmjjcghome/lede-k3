@@ -252,9 +252,9 @@ jobs:
           sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-passwall2/Makefile
           sed -i 's/CONFIG_BUSYBOX_CONFIG_UNZIP.*/#/g' ./config-k3
           
-          echo 'CONFIG_DEFAULT_luci-app-passwall=y' >> ./config-k3
-          echo 'CONFIG_PACKAGE_luci-app-passwall=y' >> ./config-k3
-          echo 'CONFIG_PACKAGE_luci-app-passwall2=m' >> ./config-k3
+          echo 'CONFIG_DEFAULT_luci-app-passwall2=y' >> ./config-k3
+          echo 'CONFIG_PACKAGE_luci-app-passwall2=y' >> ./config-k3
+          echo 'CONFIG_PACKAGE_luci-app-passwall=m' >> ./config-k3
           # Configuration
           # CONFIG_PACKAGE_luci-app-passwall_Iptables_Transparent_Proxy is not set
           #CONFIG_PACKAGE_luci-app-passwall_Nftables_Transparent_Proxy=y
@@ -304,11 +304,16 @@ jobs:
           #sed -i 's/CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_ShadowsocksR_Libev_Client=y/# CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_ShadowsocksR_Libev_Client is not set/g' ./config-k3
 
           #Shadowsocks_Rust
-          sed -i 's/# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Rust_Client is not set/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Rust_Client=y/g' ./config-k3
-          sed -i 's/# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Rust_Server is not set/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Rust_Server=y/g' ./config-k3
-          sed -i 's/# CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_Shadowsocks_Rust_Client is not set/CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_Shadowsocks_Rust_Client=y/g' ./config-k3
-          sed -i 's/# CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_Shadowsocks_Rust_Server is not set/CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_Shadowsocks_Rust_Server=y/g' ./config-k3
-
+          #sed -i 's/# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Rust_Client is not set/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Rust_Client=y/g' ./config-k3
+          #sed -i 's/# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Rust_Server is not set/CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Rust_Server=y/g' ./config-k3
+          #sed -i 's/# CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_Shadowsocks_Rust_Client is not set/CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_Shadowsocks_Rust_Client=y/g' ./config-k3
+          #sed -i 's/# CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_Shadowsocks_Rust_Server is not set/CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_Shadowsocks_Rust_Server=y/g' ./config-k3
+          
+          echo 'CONFIG_PACKAGE_shadowsocks-rust-sslocal=m' >> ./config-k3
+          echo 'CONFIG_PACKAGE_shadowsocks-rust-ssmanager=m' >> ./config-k3
+          echo 'CONFIG_PACKAGE_shadowsocks-rust-ssserver=m' >> ./config-k3
+          echo 'CONFIG_PACKAGE_shadowsocks-rust-ssservice=m' >> ./config-k3
+          echo 'CONFIG_PACKAGE_shadowsocks-rust-ssurl=m' >> ./config-k3
 
 
           ########## add luci-app-passwall end
