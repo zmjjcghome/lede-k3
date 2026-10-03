@@ -603,7 +603,7 @@ jobs:
           cd lede
           git clone https://github.com/JIANMOP/wss
           cd wss
-          sed -i 's/chunk_size = 2097152/chunk_size = 1048576/g' ./wss.py
           python wss.py upload ../$FILETARNAME 2>&1 | tee wenshushu.log
+          sed -i 's/chunk_size = 2097152/chunk_size = 204800/g' ./wss.py
           grep -q "失败" wenshushu.log && python wss.py upload ../$FILETARNAME 2>&1 | tee wenshushu.log
           echo "::warning file=wenshushu.com::$(cat wenshushu.log | grep https)"
