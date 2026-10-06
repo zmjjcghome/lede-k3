@@ -32,7 +32,7 @@ env:
 #  UPLOAD_FIRMWARE: false
   UPLOAD_COWTRANSFER: false
   UPLOAD_WETRANSFER: false
-  UPLOAD_WSS_BY_PY: true
+  UPLOAD_WSS_BY_PY: false
   UPLOAD_ARTIFACT: false
   SSH_ACTIONS: false
   OP_23_05: false
@@ -604,6 +604,36 @@ jobs:
           git clone https://github.com/JIANMOP/wss
           cd wss
           sed -i 's/chunk_size = 2097152/chunk_size = 204800/g' ./wss.py
+          
+          python wss.py upload ../$FILETARNAME 2>&1 | tee wenshushu.log
+          #sed -i 's/chunk_size = 2097152/chunk_size = 20480000/g' ./wss.py
+          grep -q "上传失败" wenshushu.log && python wss.py upload ../$FILETARNAME 2>&1 | tee wenshushu.log
+          grep -q "失败" wenshushu.log && exit 1
+          echo "::warning file=wenshushu.com::$(cat wenshushu.log | grep https)"
+
+  upload_to_wenshushu:
+    name: Upload firmware to wenshushu
+    # 配置依赖，必须等固件构建Job执行完成后才会运行
+    needs: build
+    # 开启允许单独重跑的权限，重跑时不会触发前置的构建任务
+    runs-on: ubuntu-26.04
+    # 即使之前运行失败，重跑时也会重新执行该Job，无需额外配置
+    if: always() && needs.build_firmware.result == 'success'
+    steps:
+      - name: 下载前置Job产出的固件Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: op-k3.tar.gz
+          path: ./lede
+
+      - name: Upload firmware to wenshushu by py
+        run: |
+          ls -l
+          pip install requests base58 pycryptodomex
+          cd lede
+          git clone https://github.com/JIANMOP/wss
+          cd wss
+          sed -i 's/chunk_size = 2097152/chunk_size = 20480000/g' ./wss.py
           
           python wss.py upload ../$FILETARNAME 2>&1 | tee wenshushu.log
           #sed -i 's/chunk_size = 2097152/chunk_size = 20480000/g' ./wss.py
