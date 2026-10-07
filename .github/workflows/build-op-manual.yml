@@ -505,6 +505,12 @@ jobs:
           # 是否清理旧缓存中的无用文件（建议开启，节省空间）
           # clean: 'true'
           ccache: true
+      #- name: 缓存staging
+      #  uses: HiGarfield/cachewrtbuild@main
+      #  with:
+      #    ccache: 'true'
+      #    mixkey: ${{ runner.os }}-${{ hashFiles('lede/.config') }}
+      #    prefix: ${{ github.workspace }}/lede
       # --- 核心缓存步骤结束 ---
       
       - name: Make download
