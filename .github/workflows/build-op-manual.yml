@@ -486,11 +486,9 @@ jobs:
         with:
           # 指定 OpenWrt 源码所在的根目录路径
           prefix: 'lede'
-          
           # 混合键：基于操作系统和 .config 文件的哈希值生成唯一标识
           # 只要 .config 不变，就能命中缓存；变了则创建新缓存
           mixkey: ${{ runner.os }}-${{ hashFiles('lede/.config') }}
-          
           # 是否清理旧缓存中的无用文件（建议开启，节省空间）
           clean: true
       # --- 核心缓存步骤结束 ---
