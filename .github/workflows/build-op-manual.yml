@@ -673,5 +673,6 @@ jobs:
           python wss.py upload ../$FILETARNAME 2>&1 | tee wenshushu.log
           #sed -i 's/chunk_size = 2097152/chunk_size = 20480000/g' ./wss.py
           grep -q "上传失败" wenshushu.log && python wss.py upload ../$FILETARNAME 2>&1 | tee wenshushu.log
+          grep -q "上传完成" wenshushu.log && echo "上传成功后，测试秒传" && python wss.py upload ../$FILETARNAME 2>&1 | tee wenshushu.log
           grep -q "失败" wenshushu.log && exit 1
           echo "::warning file=wenshushu.com::$(cat wenshushu.log | grep https)"
