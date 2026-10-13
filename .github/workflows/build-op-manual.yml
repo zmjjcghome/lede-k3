@@ -413,7 +413,7 @@ jobs:
 
           ##  add l2tp packages
           echo 'CONFIG_PACKAGE_xl2tpd=y' >> ../config-k3
-          echo 'CONFIG_PACKAGE_strongswan-full=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan=y' >> ../config-k3
           
           
           
