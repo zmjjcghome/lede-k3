@@ -414,8 +414,91 @@ jobs:
           ##  add l2tp packages
           echo 'CONFIG_PACKAGE_xl2tpd=y' >> ../config-k3
           echo 'CONFIG_PACKAGE_strongswan=y' >> ../config-k3
-          
-          
+          echo 'CONFIG_PACKAGE_luci-app-strongswan-swanctl=m' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-charon=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-charon-cmd=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-ipsec=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-libtls=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-addrblock=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-aes=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-agent=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-attr=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-attr-sql=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-blowfish=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-ccm=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-chapoly=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-cmac=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-connmark=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-constraints=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-coupling=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-ctr=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-curl=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-curve25519=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-des=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-dhcp=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-dnskey=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-drbg=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-duplicheck=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-eap-dynamic=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-eap-identity=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-eap-md5=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-eap-mschapv2=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-eap-radius=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-eap-tls=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-farp=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-fips-prf=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-forecast=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-gcm=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-gcrypt=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-gmp=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-gmpdh=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-ha=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-hmac=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-kdf=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-kernel-libipsec=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-kernel-netlink=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-ldap=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-led=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-load-tester=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-lookip=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-md4=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-md5=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-mgf1=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-mysql=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-openssl=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-pem=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-pgp=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-pkcs1=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-pkcs11=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-pkcs12=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-pkcs7=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-pkcs8=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-pubkey=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-random=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-rc2=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-resolve=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-revocation=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-sha1=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-sha2=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-sha3=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-smp=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-socket-default=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-socket-dynamic=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-sql=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-sqlite=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-sshkey=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-stroke=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-test-vectors=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-unity=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-updown=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-vici=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-whitelist=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-wolfssl=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-x509=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-xauth-eap=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-xauth-generic=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-mod-xcbc=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-swanctl=y' >> ../config-k3
           
           ls -l
       - name: ONLY_K3
@@ -673,7 +756,7 @@ jobs:
           cd lede
           git clone https://github.com/JIANMOP/wss
           cd wss
-          sed -i 's/chunk_size = 2097152/chunk_size = 20480000/g' ./wss.py
+          sed -i 's/chunk_size = 2097152/chunk_size = 204800/g' ./wss.py
           
           python wss.py upload ../$FILETARNAME 2>&1 | tee wenshushu.log
           #sed -i 's/chunk_size = 2097152/chunk_size = 20480000/g' ./wss.py
