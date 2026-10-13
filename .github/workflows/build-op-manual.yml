@@ -410,6 +410,11 @@ jobs:
           
           ./scripts/feeds update -a
           sed -i 's/--set=llvm.download-ci-llvm=true/--set=llvm.download-ci-llvm=false/g' ./feeds/packages/lang/rust/Makefile
+
+          ##  add l2tp packages
+          echo 'CONFIG_PACKAGE_xl2tpd=y' >> ../config-k3
+          echo 'CONFIG_PACKAGE_strongswan-full=y' >> ../config-k3
+          
           
           
           ls -l
