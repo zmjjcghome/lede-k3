@@ -745,12 +745,14 @@ jobs:
     if: always() && needs.build.result == 'success'
     steps:
       - name: 下载前置Job产出的固件Artifacts
+        if: env.UPLOAD_WSS_BY_PY == 'true' || contains(github.event.action, 'ssh')
         uses: actions/download-artifact@v4
         with:
           name: op-k3.tar.gz
           path: ./lede
 
       - name: Upload firmware to wenshushu by py
+        if: env.UPLOAD_WSS_BY_PY == 'true' || contains(github.event.action, 'ssh')
         run: |
           ls -l
           pip install requests base58 pycryptodomex
