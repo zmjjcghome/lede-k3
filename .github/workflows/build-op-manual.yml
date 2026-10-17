@@ -258,6 +258,10 @@ jobs:
           #sed -i 's/include ..\/..\/luci.mk/include $(TOPDIR)\/feeds\/luci\/luci.mk/g' openwrt/package/lean/luci-app-accesscontrol/Makefile
           
           ########## add luci-app-passwall start
+          
+          sed -i 's/.*v2ray/#replaced-v2ray/g' ./config-k3
+          sed -i 's/.*V2ray/#replaced-V2ray/g' ./config-k3
+          
           cp -arf kwrt-packages/geoview openwrt/package/lean/
           #cp -arf kwrt-packages/trojan-plus openwrt/package/lean/
           cp -arf kwrt-packages/luci-app-passwall openwrt/package/lean/
@@ -415,8 +419,6 @@ jobs:
           #sed -i 's#CONFIG_PACKAGE_default-settings=y#CONFIG_PACKAGE_default-settings=m#g' ./config-k3
           echo 'CONFIG_PACKAGE_my-op-default-settings=y' >> ./config-k3
           sed -i 's/.*k3screenctrll/#/g' ./config-k3
-          #sed -i 's/.*v2ray/#replaced-v2ray/g' ./config-k3
-          #sed -i 's/.*V2ray/#replaced-V2ray/g' ./config-k3
 
           sed -i 's/CONFIG_PACKAGE_transfer/#replaced-CONFIG_PACKAGE_transfer/g' ./config-k3
           cd lede
