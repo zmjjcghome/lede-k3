@@ -307,7 +307,7 @@ jobs:
           # CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_Simple_Obfs is not set
           echo 'CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_V2ray_Plugin is not set' >> ./config-k3
           # end of Configuration
-          sed -i 's/CONFIG_PACKAGE_v2ray-plugin=y/#CONFIG_PACKAGE_v2ray-plugin=y/g' ./config-k3
+          sed -i 's/CONFIG_PACKAGE_v2ray-plugin=y/#CONFIG_PACKAGE_v2ray-plugin=m/g' ./config-k3
           
           # rm ssr-plus
           sed -i 's/.*luci-app-ssr-plus.*/#/g' ./config-k3
@@ -415,8 +415,8 @@ jobs:
           #sed -i 's#CONFIG_PACKAGE_default-settings=y#CONFIG_PACKAGE_default-settings=m#g' ./config-k3
           echo 'CONFIG_PACKAGE_my-op-default-settings=y' >> ./config-k3
           sed -i 's/.*k3screenctrll/#/g' ./config-k3
-          sed -i 's/.*v2ray/#replaced-v2ray/g' ./config-k3
-          sed -i 's/.*V2ray/#replaced-V2ray/g' ./config-k3
+          #sed -i 's/.*v2ray/#replaced-v2ray/g' ./config-k3
+          #sed -i 's/.*V2ray/#replaced-V2ray/g' ./config-k3
 
           sed -i 's/CONFIG_PACKAGE_transfer/#replaced-CONFIG_PACKAGE_transfer/g' ./config-k3
           cd lede
