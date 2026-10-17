@@ -814,11 +814,12 @@ jobs:
           ####### type 2 ###########
           cargo install --git https://github.com/trumank/wormhole-cli.git
           wget https://github.com/trumank/wormhole-cli/releases/download/v0.1.0/wormhole-cli-x86_64-unknown-linux-gnu.tar.xz
+          mkdir wormhole-cli-x86_64-unknown-linux-gnu
           tar -xf wormhole-cli-x86_64-unknown-linux-gnu.tar.xz
-          ll
+          ls -l
           cd wormhole-cli-x86_64-unknown-linux-gnu
           
-          ./wormhole-cli upload ../$FILETARNAME 2>&1 | tee wormhole.app.log
+          wormhole-cli upload ../$FILETARNAME 2>&1 | tee wormhole.app.log
           
           echo "::warning file=wormhole.app::$(cat wormhole.app.log | grep https://wormhole.app)"
           
