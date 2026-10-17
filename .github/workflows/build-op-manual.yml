@@ -416,8 +416,8 @@ jobs:
           #sed -i 's#CONFIG_PACKAGE_default-settings=y#CONFIG_PACKAGE_default-settings=m#g' ./config-k3
           echo 'CONFIG_PACKAGE_my-op-default-settings=y' >> ./config-k3
           sed -i 's/.*k3screenctrll/#/g' ./config-k3
-          sed -i 's/.*v2ray/#replaced-v2ray/g' ./config-k3
-          sed -i 's/.*V2ray/#replaced-V2ray/g' ./config-k3
+          #sed -i 's/.*v2ray/#replaced-v2ray/g' ./config-k3
+          #sed -i 's/.*V2ray/#replaced-V2ray/g' ./config-k3
 
           sed -i 's/CONFIG_PACKAGE_transfer/#replaced-CONFIG_PACKAGE_transfer/g' ./config-k3
           cd lede
